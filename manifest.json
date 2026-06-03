@@ -1,0 +1,19 @@
+{
+  "name": "영어 문장 퀴즈",
+  "short_name": "영어퀴즈",
+  "description": "단어로 영어 문장을 만들고 듣기 순서 퀴즈를 연습하는 학습 앱",
+  "start_url": "./app.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f0f4ff",
+  "theme_color": "#4f7cff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

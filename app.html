@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4f7cff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="영어 문장 퀴즈">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icon.svg">
+<title>사진 단어 랜덤 문장 생성기</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Nunito',Arial,sans-serif;background:#f0f4ff;color:#222}
+header{background:linear-gradient(135deg,#4f7cff,#7b5ea7);color:white;padding:22px 14px;text-align:center}
+header h1{margin:0;font-size:26px;font-weight:900}
+header p{margin:8px 0 0;font-size:14px;opacity:.85}
+main{max-width:900px;margin:20px auto;padding:0 14px 60px}
+.panel{background:white;border-radius:20px;padding:20px;margin-bottom:16px;box-shadow:0 4px 18px rgba(0,0,0,.08)}
+
+.grade-label{font-size:13px;font-weight:800;color:#888;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em}
+.grade-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.grade-btn{
+  border:2.5px solid #e0e0e0;border-radius:14px;padding:10px 4px;
+  font-size:14px;font-weight:800;cursor:pointer;
+  background:white;color:#888;transition:.15s;
+  -webkit-appearance:none;appearance:none;touch-action:manipulation;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  user-select:none;-webkit-user-select:none;font-family:inherit;
+}
+.grade-btn .g-num{font-size:22px;font-weight:900;line-height:1}
+.grade-btn .g-txt{font-size:11px}
+.grade-btn:active{transform:scale(.95)}
+.g1{color:#ff6b6b}.g1.active{background:#ff6b6b;border-color:#ff6b6b;color:white}
+.g2{color:#ff9f43}.g2.active{background:#ff9f43;border-color:#ff9f43;color:white}
+.g3{color:#e6ac00}.g3.active{background:#ffd43b;border-color:#ffd43b;color:#333}
+.g4{color:#2f9e44}.g4.active{background:#51cf66;border-color:#51cf66;color:white}
+.g5{color:#1971c2}.g5.active{background:#339af0;border-color:#339af0;color:white}
+.g6{color:#6741d9}.g6.active{background:#7950f2;border-color:#7950f2;color:white}
+
+.grade-desc{margin-top:10px;font-size:13px;font-weight:700;padding:8px 14px;border-radius:10px;background:#f8f9fa;color:#555;text-align:center}
+
+.sentence-box{min-height:130px;border:3px dashed #c5d3ff;border-radius:18px;background:linear-gradient(135deg,#f8faff,#f0f4ff);display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;margin-bottom:14px}
+#sentence{font-size:30px;font-weight:900;line-height:1.4;color:#2d3a8c}
+.used-words{font-size:14px;min-height:34px}
+.word-chip{display:inline-block;background:#fff0b3;padding:4px 10px;border-radius:999px;margin:3px;font-weight:800;font-size:13px;border:1.5px solid #f0c000}
+.quiz-prompt{min-height:74px;border:3px solid #d6f5df;border-radius:18px;background:#f3fff6;display:flex;align-items:center;justify-content:center;padding:18px;text-align:center;font-size:20px;font-weight:900;color:#1f7a3a;margin-bottom:12px}
+.quiz-words,.quiz-answer{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;padding:10px;border-radius:14px;background:#f8f9fa;margin-bottom:10px}
+.quiz-answer{background:#fff7d6;border:1.5px dashed #f0c000}
+.quiz-word{background:white;color:#2d3a8c;border:2px solid #c5d3ff;margin:0;padding:10px 14px}
+.quiz-word.used{opacity:.35;pointer-events:none}
+.quiz-status{min-height:26px;font-size:16px;font-weight:900;color:#555;margin-top:8px}
+
+.buttons{display:flex;flex-wrap:wrap;margin-top:10px}
+button{border:0;border-radius:12px;padding:12px 15px;font-size:15px;font-weight:800;cursor:pointer;margin:5px;-webkit-appearance:none;appearance:none;touch-action:manipulation;user-select:none;-webkit-user-select:none;font-family:inherit}
+button:active{opacity:.8;transform:scale(.97)}
+.speed-wrap{display:flex;gap:4px;margin:5px;align-items:center}
+.speed-btn{
+  border:2px solid #ddd;border-radius:10px;padding:8px 13px;font-size:14px;
+  font-weight:800;cursor:pointer;background:white;color:#888;
+  -webkit-appearance:none;appearance:none;touch-action:manipulation;
+  user-select:none;-webkit-user-select:none;font-family:inherit;transition:.15s;
+}
+.speed-btn:active{transform:scale(.95)}
+.s-slow.active{background:#74c0fc;border-color:#74c0fc;color:white}
+.s-normal.active{background:#51cf66;border-color:#51cf66;color:white}
+.s-fast.active{background:#ff6b6b;border-color:#ff6b6b;color:white}
+.primary{background:#4f7cff;color:white;font-size:18px;padding:15px 22px}
+.secondary{background:#eee;color:#333}
+.danger{background:#ff6b6b;color:white}
+
+textarea{width:100%;min-height:130px;border:1.5px solid #ddd;border-radius:14px;padding:12px;font-size:14px;line-height:1.6;font-family:inherit;-webkit-appearance:none;appearance:none}
+.history-list{font-size:18px;line-height:2;font-weight:700}
+.notice{background:#fff7d6;border:1.5px solid #f3d56b;border-radius:12px;padding:12px;margin-bottom:14px;font-size:13px}
+h2{margin-top:0;font-size:18px}h3{font-size:15px;margin-bottom:8px}
+@media print{header,.control-panel,.buttons,.sentence-box,.used-words,.notice,.print-hide,.grade-label,.grade-grid,.grade-desc{display:none}body{background:white}main{margin:0;padding:0}.panel{box-shadow:none;padding:0}.history-list{font-size:18px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>📸 사진 단어 문장 만들기</h1>
+  <p>학년을 선택하고 버튼을 눌러 문장을 만들어 보세요</p>
+</header>
+<main>
+<section class="panel">
+  <div class="grade-label">학년 선택</div>
+  <div class="grade-grid">
+    <button class="grade-btn g1 active" data-grade="1" type="button"><span class="g-num">1</span><span class="g-txt">학년</span></button>
+    <button class="grade-btn g2" data-grade="2" type="button"><span class="g-num">2</span><span class="g-txt">학년</span></button>
+    <button class="grade-btn g3" data-grade="3" type="button"><span class="g-num">3</span><span class="g-txt">학년</span></button>
+    <button class="grade-btn g4" data-grade="4" type="button"><span class="g-num">4</span><span class="g-txt">학년</span></button>
+    <button class="grade-btn g5" data-grade="5" type="button"><span class="g-num">5</span><span class="g-txt">학년</span></button>
+    <button class="grade-btn g6" data-grade="6" type="button"><span class="g-num">6</span><span class="g-txt">학년</span></button>
+  </div>
+  <div class="grade-desc" id="gradeDesc">⭐ 주어 + 동사 기초 (3~4단어)</div>
+</section>
+
+<section class="panel">
+  <div class="sentence-box"><div id="sentence">버튼을 눌러 문장을 만들어 보세요.</div></div>
+  <div class="used-words" id="usedWords"></div>
+  <div class="buttons">
+    <button class="primary" id="makeBtn" type="button">🎲 문장 만들기</button>
+    <div class="speed-wrap">
+      <button class="speed-btn s-slow" data-speed="slow" type="button">🐢 천천히</button>
+      <button class="speed-btn s-normal active" data-speed="normal" type="button">🚶 보통</button>
+      <button class="speed-btn s-fast" data-speed="fast" type="button">🐇 빠르게</button>
+    </div>
+    <button class="secondary" id="speakBtn" type="button">🔊 읽기</button>
+    <button class="secondary" id="saveBtn" type="button">➕ 저장</button>
+    <button class="secondary" id="printBtn" type="button">🖨️ 프린트</button>
+  </div>
+</section>
+
+<section class="panel">
+  <h2 class="print-hide">듣기 순서 퀴즈</h2>
+  <div class="quiz-prompt" id="quizPrompt">퀴즈 시작을 누르고 들은 문장을 단어 순서대로 맞춰 보세요.</div>
+  <div class="buttons">
+    <button class="primary" id="quizStartBtn" type="button">퀴즈 시작</button>
+    <button class="secondary" id="quizListenBtn" type="button">다시 듣기</button>
+    <button class="secondary" id="quizResetBtn" type="button">다시 맞추기</button>
+    <button class="secondary" id="quizCheckBtn" type="button">정답 확인</button>
+  </div>
+  <h3>섞인 단어</h3>
+  <div class="quiz-words" id="quizWords"></div>
+  <h3>내가 맞춘 순서</h3>
+  <div class="quiz-answer" id="quizAnswer"></div>
+  <div class="quiz-status" id="quizStatus"></div>
+</section>
+
+<section class="panel control-panel">
+  <h2>⚙️ 설정</h2>
+
+  <h3>📸 OCR로 단어 추출</h3>
+  <div class="notice">사진에서 텍스트를 인식해서 단어를 추가합니다.</div>
+  <div class="buttons">
+    <input type="file" id="ocrFile" accept="image/*" style="display:none">
+    <button class="secondary" id="ocrBtn" type="button">🖼️ 파일 선택</button>
+    <button class="secondary" id="cameraBtn" type="button">📷 카메라</button>
+  </div>
+  <div id="ocrStatus" style="margin-top:10px;font-size:13px;min-height:20px;color:#666;"></div>
+  <video id="cameraPreview" style="width:100%;border-radius:10px;margin:10px 0;display:none;max-height:300px;"></video>
+  <div class="buttons" id="cameraControls" style="display:none;">
+    <button class="secondary" id="captureBtn" type="button">✓ 촬영</button>
+    <button class="secondary" id="cancelCameraBtn" type="button">✕ 취소</button>
+  </div>
+
+  <hr style="margin:20px 0;border:none;border-top:1px solid #eee;">
+
+  <h3>사진 속 단어 목록</h3>
+  <div class="notice"><strong>📋 단어 추가 규칙:</strong><br>
+  • 쉼표로 구분 (예: apple, book, cat)<br>
+  • 영어만 가능 (한글 불가)<br>
+  • books, pencils, likes, goes 같은 변화형도 허용<br>
+  • 2글자 이상 단어만 인식 (a, I 같은 1글자는 제외)<br>
+  • 중복 자동 제거<br>
+  • 특수문자 제거 (알파벳만 추출)</div>
+  <textarea id="wordList" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">a, me, go, am, and, which, now, big, one, school,
+the, we, come, are, but, how, today, small, two, teacher,
+I, he, see, can, or, what, tomorrow, good, three, class,
+you, she, look, do, so, who, yesterday, bad, many, friend,
+is, they, like, want, for, yes, always, hot, much, book,
+it, this, play, need, with, no, often, cold, more, desk,
+to, that, have, know, from, please, sometimes, fast, most, home,
+in, your, make, think, of, student, again, slow, all, family,
+on, his, get, use, at, when, then, happy, some, time,
+my, her, help, take, about, where, soon, sad, every, pencil</textarea>
+  <div class="buttons"><button class="secondary" id="resetBtn" type="button">단어 목록 초기화</button></div>
+</section>
+
+<section class="panel">
+  <h2 class="print-hide">📝 저장한 문장</h2>
+  <ol class="history-list" id="history"></ol>
+  <div class="buttons"><button class="danger" id="clearBtn" type="button">저장 문장 지우기</button></div>
+</section>
+</main>
+<script>
+const API_URL = "http://localhost:8000";
+var originalWords = document.getElementById("wordList").value;
+var currentGrade = 1;
+var currentSentence = "";
+var speedMap = {slow:0.4, normal:0.75, fast:1.2};
+var currentSpeed = "normal";
+var cameraStream = null;
+var recentAddedWords = [];  // 새로 추가된 단어 추적
+var originalAllowedWords = null;
+var quizSentence = "";
+var quizWords = [];
+var quizAnswerWords = [];
+var quizUsedIndexes = [];
+
+var gradeInfo = {
+  1:"⭐ 3단어 기초 문장",
+  2:"⭐⭐ 4단어 문장",
+  3:"⭐⭐⭐ 5단어 문장",
+  4:"⭐⭐⭐⭐ 6단어 문장",
+  5:"⭐⭐⭐⭐⭐ 7단어 문장",
+  6:"⭐⭐⭐⭐⭐⭐ 8단어 이상 문장"
+};
+
+var gradePatterns = {
+  1:[
+    ["I","am","happy"],["I","am","sad"],["I","am","good"],["I","like","books"],["I","like","you"],
+    ["I","can","go"],["I","see","you"],["I","go","home"],["I","want","this"],["It","is","hot"],
+    ["It","is","cold"],["This","is","big"],["This","is","good"],["That","is","bad"],["That","is","small"],
+    ["You","are","good"],["We","can","play"],["Look","at","me"],["Come","to","me"],["I","see","it"],
+    ["He","is","good"],["She","is","sad"],["We","are","good"],["I","want","it"],
+    ["Are","you","good"],["Are","you","happy"],["Is","it","big"],["Is","it","hot"],["Is","it","cold"],
+    ["Is","this","good"],["Is","that","bad"],["Can","you","go"],["Can","you","see"]
+  ],
+  2:[
+    ["I","am","at","home"],["I","go","to","school"],["I","want","one","book"],["I","want","two","books"],
+    ["I","want","three","pencils"],["We","play","at","school"],["I","like","this","book"],
+    ["You","are","my","friend"],["I","see","your","book"],["I","have","a","pencil"],
+    ["Look","at","this","book"],["I","need","a","book"],["We","go","home","soon"],
+    ["She","likes","this","book"],["He","likes","that","book"],["I","am","happy","today"],
+    ["I","get","a","book"],["He","is","my","friend"],["She","is","a","student"],
+    ["This","is","my","book"],["That","is","your","pencil"],["This","desk","is","big"],
+    ["That","desk","is","small"],["Do","you","like","this"],["Do","you","want","this"],
+    ["Do","you","see","me"],["Can","you","help","me"],["Where","is","my","book"],
+    ["What","is","this","book"],["Who","is","your","teacher"],["Is","this","book","good"],
+    ["Is","that","desk","big"],["Are","you","my","friend"],["Do","you","go","home"]
+  ],
+  3:[
+    ["I","go","to","school","today"],["We","are","at","school","now"],["I","like","this","good","book"],
+    ["She","is","in","my","class"],["He","is","a","good","student"],["He","goes","to","school","today"],
+    ["She","goes","to","school","tomorrow"],["We","go","home","with","family"],["I","go","home","with","you"],
+    ["I","see","your","pencil","now"],["Please","help","me","with","this"],["The","teacher","helps","me","now"],
+    ["I","want","to","go","home"],["Take","this","book","to","school"],["She","can","help","my","friend"],
+    ["Look","at","that","big","book"],["I","need","some","books","today"],["We","play","at","school","today"],
+    ["Every","student","has","a","book"],["I","know","your","good","friend"],["I","go","to","my","class"],
+    ["We","have","many","books","now"],["Do","you","like","this","book"],["Is","this","your","good","book"],
+    ["Do","you","have","some","books"],["Can","she","help","my","friend"],["Is","he","a","good","student"],
+    ["Can","you","come","to","school"],["Where","is","my","good","book"],["What","do","you","want"],
+    ["Who","is","your","good","friend"],["Do","you","need","a","pencil"],["I","make","a","good","book"]
+  ],
+  4:[
+    ["I","go","to","school","with","you"],["Please","take","some","books","for","me"],
+    ["I","go","home","with","my","family"],["I","think","this","book","is","good"],
+    ["I","get","a","book","from","her"],["We","use","a","pencil","at","school"],
+    ["They","come","to","school","with","me"],["I","want","to","play","at","school"],
+    ["We","often","play","at","school","now"],["He","always","goes","home","with","family"],
+    ["They","need","some","time","to","play"],["I","know","much","about","my","school"],
+    ["She","can","help","his","good","friend"],["I","see","many","books","at","school"],
+    ["She","likes","to","go","home","soon"],["I","need","to","take","my","book"],
+    ["All","students","come","from","my","school"],["I","want","more","time","to","play"],
+    ["Do","you","know","your","good","friend"],["Can","you","take","some","books","for","me"],
+    ["How","are","you","at","school","today"],["Where","is","my","book","at","school"],
+    ["What","do","you","want","from","school"],["When","do","we","go","to","school"],
+    ["Do","you","often","play","at","school"],["Can","she","help","your","good","friend"],
+    ["Do","they","come","to","school","today"],["How","do","you","go","to","school"],
+    ["I","use","a","pencil","at","school"],["Do","we","play","at","school","today"]
+  ],
+  5:[
+    ["I","go","to","school","with","my","friend"],["I","want","to","go","home","with","you"],
+    ["Please","help","me","with","my","book","today"],["She","can","help","his","friend","at","school"],
+    ["I","need","some","time","to","play","today"],["We","often","play","at","school","with","friends"],
+    ["He","always","comes","home","with","his","family"],["I","think","you","are","my","good","friend"],
+    ["I","want","to","take","some","books","home"],["We","sometimes","play","at","home","with","family"],
+    ["I","know","much","about","my","good","school"],["I","get","my","book","from","the","teacher"],
+    ["He","likes","to","play","at","school","today"],["I","think","she","is","a","good","student"],
+    ["They","need","some","books","from","my","school"],["We","use","a","pencil","to","make","books"],
+    ["Can","you","help","me","with","my","book"],["Do","you","know","where","my","book","is"],
+    ["What","do","you","want","to","play","today"],["Who","is","your","good","teacher","at","school"],
+    ["How","do","you","know","my","good","teacher"],["Where","do","you","go","after","school","today"],
+    ["Can","she","help","my","friend","at","school"],["What","do","you","need","from","my","good","teacher"]
+  ],
+  6:[
+    ["This","book","is","good","but","that","book","is","bad"],
+    ["I","like","your","book","and","I","want","it","now"],
+    ["She","goes","to","school","and","he","goes","home","today"],
+    ["I","think","this","is","good","but","that","is","bad"],
+    ["We","often","play","at","school","but","today","we","go","home"],
+    ["I","want","to","play","fast","but","she","is","slow"],
+    ["He","always","comes","to","school","with","his","good","friend"],
+    ["Please","help","me","take","some","books","to","my","class"],
+    ["I","know","she","is","my","good","friend","at","school"],
+    ["I","like","this","book","and","you","like","that","book"],
+    ["I","want","some","books","but","you","need","a","pencil"],
+    ["I","think","she","is","good","so","I","like","her"],
+    ["He","is","fast","but","she","is","slow","at","school"],
+    ["We","sometimes","play","at","home","and","often","go","to","school"],
+    ["I","go","to","school","today","and","play","at","home","soon"],
+    ["She","likes","this","book","and","he","likes","that","pencil"],
+    ["We","always","come","to","school","and","go","home","with","family"],
+    ["I","think","this","teacher","is","good","and","I","like","school"],
+    ["Please","take","some","books","and","pencils","to","my","class","today"],
+    ["This","is","my","good","book","and","that","is","your","pencil"],
+    ["I","want","to","go","home","but","I","need","to","help","you"],
+    ["Which","book","do","you","want","to","take","home","today"],
+    ["Do","you","know","what","I","need","from","school","today"],
+    ["Can","you","help","me","take","some","books","to","my","class"],
+    ["Do","you","think","this","book","is","good","or","bad"],
+    ["What","do","you","want","and","what","do","you","need"],
+    ["Where","do","you","go","and","what","do","you","do","today"],
+    ["Do","you","often","play","at","school","or","go","home","soon"],
+    ["Who","do","you","go","to","school","with","today"],
+    ["Can","she","help","you","and","can","you","help","me"]
+  ]
+};
+
+var wordForms = {
+  "books":"book","pencils":"pencil","students":"student","friends":"friend",
+  "likes":"like","helps":"help","goes":"go","comes":"come",
+  "has":"have","was":"is","not":"no","wants":"want"
+};
+
+function cleanWord(w){return String(w).toLowerCase().replace(/[^a-z]/g,"")}
+function baseWord(w){var c=cleanWord(w);return wordForms[c]||c}
+
+var dynamicVerbWords = [
+  "go","come","play","run","walk","read","write","eat","drink","sleep","sit","stand",
+  "look","see","watch","help","make","take","use","get","give","open","close","sing",
+  "dance","jump","swim","study","learn","draw","paint","cook","clean","wash","buy"
+];
+
+var dynamicRoleWords = [
+  "cop","police","officer","teacher","doctor","nurse","student","friend","chef",
+  "driver","pilot","farmer","singer","dancer","artist","writer","worker","player",
+  "firefighter","vet","dentist","scientist","engineer"
+];
+
+var extraDictionaryWords = [
+  "apple","banana","orange","grape","lemon","melon","peach","pear","car","bus",
+  "train","bike","ball","toy","robot","dog","cat","bird","fish","tree","flower",
+  "house","room","bed","chair","table","door","window","bag","box","cup","cake",
+  "pizza","milk","water","rice","egg","bread","park","store","zoo","farm","library"
+];
+
+var functionWords = [
+  "a","an","the","and","but","or","so","for","with","to","from","at","in","on","of",
+  "not","no","yes","this","that","these","those","it","me","you","he","she","we","they",
+  "my","your","his","her","our","their","who","what","where","when","why","how","which"
+];
+
+function isFunctionWord(w){
+  return functionWords.indexOf(cleanWord(w))!==-1;
+}
+
+function isDynamicContentWord(w){
+  return isKnownEnglishWord(w)&&!isFunctionWord(w);
+}
+
+function getDictionaryWords(){
+  var words=getWordsFromText(originalWords)
+    .concat(dynamicVerbWords)
+    .concat(dynamicRoleWords)
+    .concat(extraDictionaryWords);
+  var dict=[];
+  for(var i=0;i<words.length;i++){
+    var w=baseWord(words[i]);
+    if(w&&dict.indexOf(w)===-1)dict.push(w);
+  }
+  return dict;
+}
+
+function isKnownEnglishWord(w){
+  var c=baseWord(w);
+  return getDictionaryWords().indexOf(c)!==-1;
+}
+
+function sanitizeAddedWords(){
+  if(originalAllowedWords===null)originalAllowedWords=getWordsFromText(originalWords);
+  var textarea=document.getElementById("wordList");
+  var current=getWordsFromText(textarea.value),kept=[];
+  for(var i=0;i<current.length;i++){
+    var w=current[i];
+    if(originalAllowedWords.indexOf(w)!==-1||(isKnownEnglishWord(w)&&!isFunctionWord(w))){
+      if(kept.indexOf(w)===-1)kept.push(w);
+    }
+  }
+  textarea.value=kept.join(", ");
+  return kept;
+}
+
+function startsWithVowelSound(w){
+  return /^[aeiou]/.test(cleanWord(w));
+}
+
+function isPluralWord(w){
+  var c=cleanWord(w);
+  return c.length>2&&/s$/.test(c)&&!/ss$/.test(c);
+}
+
+function nounPhrase(w){
+  var c=cleanWord(w);
+  if(!c)return "";
+  if(isPluralWord(c))return c;
+  return (startsWithVowelSound(c)?"an ":"a ")+c;
+}
+
+function pluralWord(w){
+  var c=cleanWord(w);
+  if(!c)return "";
+  if(isPluralWord(c))return c;
+  if(/[^aeiou]y$/.test(c))return c.slice(0,-1)+"ies";
+  if(/(s|x|z|ch|sh)$/.test(c))return c+"es";
+  return c+"s";
+}
+
+function isLikelyVerb(w){
+  return dynamicVerbWords.indexOf(cleanWord(w))!==-1;
+}
+
+function isRoleWord(w){
+  return dynamicRoleWords.indexOf(cleanWord(w))!==-1;
+}
+
+function buildDynamicTemplates(wordToUse){
+  var w=cleanWord(wordToUse);
+  if(isLikelyVerb(w)){
+    return [
+      ["I","want","to",w],
+      ["We","want","to",w],
+      ["You","can",w],
+      ["We","can",w],
+      ["Please",w],
+      ["Do","you","want","to",w]
+    ];
+  }
+  if(isRoleWord(w)){
+    var role=nounPhrase(w);
+    return [
+      ["I","want","to","be",role],
+      ["We","want","to","be",role],
+      ["He","is",role],
+      ["She","is",role],
+      ["Can","you","be",role]
+    ];
+  }
+  var np=nounPhrase(w);
+  var plural=pluralWord(w);
+  return [
+    ["This","is",np],
+    ["I","like",plural],
+    ["We","like",plural],
+    ["You","like",plural],
+    ["Look","at",np],
+    ["I","see",np],
+    ["I","want",np]
+  ];
+}
+
+function getWordsFromText(raw){
+  raw=String(raw||"").replace(/[''""]/g,"").replace(/[  ]/g," ");
+  var parts=raw.split(/[,\n;\s]+/),arr=[];
+  for(var i=0;i<parts.length;i++){
+    var w=cleanWord(parts[i]);
+    if(w&&arr.indexOf(w)===-1)arr.push(w);
+  }
+  return arr;
+}
+
+function getAllowedWords(){
+  sanitizeAddedWords();
+  return getWordsFromText(document.getElementById("wordList").value);
+}
+
+function syncRecentAddedWords(){
+  if(originalAllowedWords===null)originalAllowedWords=getWordsFromText(originalWords);
+  var current=getAllowedWords(),added=[];
+  for(var i=0;i<current.length;i++){
+    if(originalAllowedWords.indexOf(current[i])===-1&&isDynamicContentWord(current[i]))added.push(current[i]);
+  }
+  recentAddedWords=added.slice(-20);
+  return recentAddedWords;
+}
+
+function isAllowedPattern(p,a){
+  for(var i=0;i<p.length;i++){if(a.indexOf(baseWord(p[i]))===-1)return false;}
+  return true;
+}
+
+function makeSentence(){
+  try{
+    var a=getAllowedWords(),customWords=syncRecentAddedWords(),ps=gradePatterns[currentGrade],ok=[],okRecent=[];
+    for(var i=0;i<ps.length;i++){if(isAllowedPattern(ps[i],a))ok.push(ps[i]);}
+
+    // 추가된 단어를 포함하는 패턴 우선 찾기
+    if(customWords.length>0){
+      for(var r=0;r<ok.length;r++){
+        var patternStr=ok[r].join(",").toLowerCase();
+        for(var w=0;w<customWords.length;w++){
+          if(patternStr.indexOf(customWords[w])!==-1){
+            okRecent.push(ok[r]);
+            break;
+          }
+        }
+      }
+      if(okRecent.length>0)ok=ok.concat(okRecent);
+      for(var cw=0;cw<customWords.length;cw++){
+        var customTemplates=buildDynamicTemplates(customWords[cw]);
+        for(var ct=0;ct<customTemplates.length;ct++)ok.push(customTemplates[ct]);
+      }
+    }
+
+    // 기본 패턴에 매칭 안 되거나 추가 단어 없으면 동적 문장 생성
+    if(!ok.length && a.length>0){
+      var sourceWords=customWords.length>0?customWords:a;
+      var wordToUse=sourceWords[Math.floor(Math.random()*sourceWords.length)];
+      var dynamicTemplates=buildDynamicTemplates(wordToUse);
+      ok=[dynamicTemplates[Math.floor(Math.random()*dynamicTemplates.length)]];
+    }
+
+    if(!ok.length){
+      document.getElementById("sentence").innerHTML="조건에 맞는 문장이 없습니다.<br>단어 목록을 확인하세요.";
+      document.getElementById("usedWords").innerHTML="";currentSentence="";return;
+    }
+    var p=ok[Math.floor(Math.random()*ok.length)];
+    var s=p.join(" ");
+    var f=p[0];
+    s+=["Which","What","Who","How","Where","When","Can","Do","Is","Are"].indexOf(f)!==-1?"?":".";
+    currentSentence=s;
+    document.getElementById("sentence").innerText=s;
+    var used=[];
+    for(var j=0;j<p.length;j++){
+      var tokens=String(p[j]).split(/\s+/);
+      for(var t=0;t<tokens.length;t++){
+        var bw=baseWord(tokens[t]);
+        if(bw&&used.indexOf(bw)===-1)used.push(bw);
+      }
+    }
+    var html="사용 단어: ";
+    for(var k=0;k<used.length;k++)html+='<span class="word-chip">'+used[k]+'</span>';
+    document.getElementById("usedWords").innerHTML=html;
+  }catch(e){document.getElementById("sentence").innerText="오류: "+e.message;}
+}
+
+function speakSentence(){
+  if(!currentSentence||!window.speechSynthesis)return;
+  var u=new SpeechSynthesisUtterance(currentSentence);
+  u.lang="en-US";u.rate=speedMap[currentSpeed]||0.75;
+  window.speechSynthesis.cancel();window.speechSynthesis.speak(u);
+}
+
+function speakText(text){
+  if(!text||!window.speechSynthesis)return;
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US";u.rate=speedMap[currentSpeed]||0.75;
+  window.speechSynthesis.cancel();window.speechSynthesis.speak(u);
+}
+
+function normalizeSentenceTokens(sentence){
+  var cleaned=String(sentence||"").replace(/[?.!]/g,"").trim();
+  if(!cleaned)return [];
+  return cleaned.split(/\s+/);
+}
+
+function shuffleTokens(tokens){
+  var arr=tokens.slice();
+  for(var i=arr.length-1;i>0;i--){
+    var j=Math.floor(Math.random()*(i+1));
+    var temp=arr[i];arr[i]=arr[j];arr[j]=temp;
+  }
+  if(arr.length>1&&arr.join(" ")===tokens.join(" ")){
+    var first=arr[0];arr[0]=arr[1];arr[1]=first;
+  }
+  return arr;
+}
+
+function renderQuiz(){
+  var wordBox=document.getElementById("quizWords");
+  var answerBox=document.getElementById("quizAnswer");
+  wordBox.innerHTML="";
+  answerBox.innerHTML="";
+  for(var i=0;i<quizWords.length;i++){
+    var btn=document.createElement("button");
+    btn.type="button";
+    btn.className="quiz-word"+(quizUsedIndexes.indexOf(i)!==-1?" used":"");
+    btn.innerText=quizWords[i];
+    btn.setAttribute("data-index",i);
+    btn.addEventListener("click",function(){
+      selectQuizWord(parseInt(this.getAttribute("data-index"),10));
+    });
+    wordBox.appendChild(btn);
+  }
+  for(var j=0;j<quizAnswerWords.length;j++){
+    var chip=document.createElement("span");
+    chip.className="word-chip";
+    chip.innerText=quizAnswerWords[j];
+    answerBox.appendChild(chip);
+  }
+}
+
+function startQuiz(){
+  makeSentence();
+  quizSentence=currentSentence;
+  document.getElementById("sentence").innerText="퀴즈 문장을 듣고 아래 단어를 순서대로 눌러 보세요.";
+  document.getElementById("usedWords").innerHTML="";
+  quizWords=shuffleTokens(normalizeSentenceTokens(quizSentence));
+  quizAnswerWords=[];
+  quizUsedIndexes=[];
+  document.getElementById("quizPrompt").innerText="들은 문장을 단어 순서대로 맞춰 보세요.";
+  document.getElementById("quizStatus").innerText="";
+  renderQuiz();
+  speakText(quizSentence);
+}
+
+function selectQuizWord(index){
+  if(index<0||index>=quizWords.length||quizUsedIndexes.indexOf(index)!==-1)return;
+  quizUsedIndexes.push(index);
+  quizAnswerWords.push(quizWords[index]);
+  document.getElementById("quizStatus").innerText="";
+  renderQuiz();
+  autoCheckQuizIfComplete();
+}
+
+function resetQuizAnswer(){
+  quizAnswerWords=[];
+  quizUsedIndexes=[];
+  document.getElementById("quizStatus").innerText="";
+  renderQuiz();
+}
+
+function playTone(frequency,duration,type,delay){
+  try{
+    var AudioCtx=window.AudioContext||window.webkitAudioContext||AudioContext||webkitAudioContext;
+    if(!AudioCtx)return;
+    var ctx=new AudioCtx();
+    var osc=ctx.createOscillator();
+    var gain=ctx.createGain();
+    var start=ctx.currentTime+(delay||0);
+    osc.type=type||"sine";
+    osc.frequency.value=frequency;
+    gain.gain.setValueAtTime(0.001,start);
+    gain.gain.exponentialRampToValueAtTime(0.18,start+0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001,start+duration);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(start);
+    osc.stop(start+duration+0.02);
+  }catch(e){}
+}
+
+function playCorrectSound(){
+  playTone(660,0.12,"sine",0);
+  playTone(880,0.16,"sine",0.12);
+}
+
+function playWrongSound(){
+  playTone(220,0.18,"sawtooth",0);
+  playTone(160,0.22,"sawtooth",0.15);
+}
+
+function checkQuizAnswer(){
+  if(!quizSentence){
+    document.getElementById("quizStatus").innerText="먼저 퀴즈 시작을 눌러 주세요.";
+    return false;
+  }
+  var correct=normalizeSentenceTokens(quizSentence).join(" ").toLowerCase();
+  var answer=quizAnswerWords.join(" ").toLowerCase();
+  if(answer===correct){
+    document.getElementById("quizStatus").innerText="정답입니다!";
+    playCorrectSound();
+    return true;
+  }
+  document.getElementById("quizStatus").innerText="다시 맞춰 보세요.";
+  playWrongSound();
+  return false;
+}
+
+function autoCheckQuizIfComplete(){
+  if(quizSentence&&quizAnswerWords.length===normalizeSentenceTokens(quizSentence).length){
+    checkQuizAnswer();
+  }
+}
+
+function replayQuiz(){
+  if(!quizSentence){
+    document.getElementById("quizStatus").innerText="먼저 퀴즈 시작을 눌러 주세요.";
+    return;
+  }
+  speakText(quizSentence);
+}
+
+// OCR 함수
+async function processOCR(file){
+  var status=document.getElementById("ocrStatus");
+  status.innerHTML="처리 중...";
+
+  var formData=new FormData();
+  formData.append("file",file);
+
+  try{
+    var resp=await fetch(API_URL+"/ocr",{method:"POST",body:formData});
+    var data=await resp.json();
+
+    if(data.success){
+      status.innerHTML="✓ "+data.count+"개 단어 인식됨";
+      addWordsToList(data.words);
+    }else{
+      status.innerHTML="✗ "+data.message;
+    }
+  }catch(e){
+    status.innerHTML="✗ 연결 오류: "+e.message;
+  }
+}
+
+function addWordsToList(words){
+  var textarea=document.getElementById("wordList");
+  var current=textarea.value.trim();
+  var existing=getWordsFromText(current);
+
+  var newWords=[];
+  for(var i=0;i<words.length;i++){
+    var w=cleanWord(words[i]);
+    if(w&&existing.indexOf(w)===-1&&newWords.indexOf(w)===-1){
+      newWords.push(w);
+    }
+  }
+
+  if(newWords.length>0){
+    textarea.value=current+", "+newWords.join(", ");
+    // 새로 추가된 단어 추적 (최대 20개 유지)
+    syncRecentAddedWords();
+  }
+}
+
+// 이벤트 리스너
+document.getElementById("ocrBtn").addEventListener("click",function(){
+  document.getElementById("ocrFile").click();
+});
+
+document.getElementById("ocrFile").addEventListener("change",function(){
+  if(this.files.length>0){
+    processOCR(this.files[0]);
+  }
+});
+
+document.getElementById("cameraBtn").addEventListener("click",async function(){
+  try{
+    cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"environment"}});
+    document.getElementById("cameraPreview").srcObject=cameraStream;
+    document.getElementById("cameraPreview").style.display="block";
+    document.getElementById("cameraControls").style.display="flex";
+  }catch(e){
+    document.getElementById("ocrStatus").innerHTML="✗ 카메라 접근 불가: "+e.message;
+  }
+});
+
+document.getElementById("captureBtn").addEventListener("click",function(){
+  var video=document.getElementById("cameraPreview");
+  var canvas=document.createElement("canvas");
+  canvas.width=video.videoWidth;
+  canvas.height=video.videoHeight;
+  canvas.getContext("2d").drawImage(video,0,0);
+
+  canvas.toBlob(function(blob){
+    var file=new File([blob],"camera.jpg",{type:"image/jpeg"});
+    processOCR(file);
+
+    if(cameraStream){
+      cameraStream.getTracks().forEach(t=>t.stop());
+      cameraStream=null;
+    }
+    document.getElementById("cameraPreview").style.display="none";
+    document.getElementById("cameraControls").style.display="none";
+  },"image/jpeg");
+});
+
+document.getElementById("cancelCameraBtn").addEventListener("click",function(){
+  if(cameraStream){
+    cameraStream.getTracks().forEach(t=>t.stop());
+    cameraStream=null;
+  }
+  document.getElementById("cameraPreview").style.display="none";
+  document.getElementById("cameraControls").style.display="none";
+});
+
+// 기존 이벤트 리스너들
+var speedBtns=document.querySelectorAll(".speed-btn");
+for(var si=0;si<speedBtns.length;si++){
+  speedBtns[si].addEventListener("click",function(){
+    currentSpeed=this.getAttribute("data-speed");
+    for(var sj=0;sj<speedBtns.length;sj++)speedBtns[sj].classList.remove("active");
+    this.classList.add("active");
+  });
+}
+var gradeBtns=document.querySelectorAll(".grade-btn");
+for(var i=0;i<gradeBtns.length;i++){
+  gradeBtns[i].addEventListener("click",function(){
+    currentGrade=parseInt(this.getAttribute("data-grade"),10);
+    for(var j=0;j<gradeBtns.length;j++)gradeBtns[j].classList.remove("active");
+    this.classList.add("active");
+    document.getElementById("gradeDesc").innerText=gradeInfo[currentGrade];
+    document.getElementById("sentence").innerText="버튼을 눌러 문장을 만들어 보세요.";
+    document.getElementById("usedWords").innerHTML="";
+    currentSentence="";
+    quizSentence="";
+    resetQuizAnswer();
+    document.getElementById("quizPrompt").innerText="퀴즈 시작을 누르고 들은 문장을 단어 순서대로 맞춰 보세요.";
+  });
+}
+
+document.getElementById("makeBtn").addEventListener("click",makeSentence);
+document.getElementById("speakBtn").addEventListener("click",speakSentence);
+document.getElementById("quizStartBtn").addEventListener("click",startQuiz);
+document.getElementById("quizListenBtn").addEventListener("click",replayQuiz);
+document.getElementById("quizResetBtn").addEventListener("click",resetQuizAnswer);
+document.getElementById("quizCheckBtn").addEventListener("click",checkQuizAnswer);
+document.getElementById("saveBtn").addEventListener("click",function(){
+  if(!currentSentence)return;
+  var li=document.createElement("li");
+  li.innerText="["+currentGrade+"학년] "+currentSentence;
+  document.getElementById("history").appendChild(li);
+});
+document.getElementById("printBtn").addEventListener("click",function(){window.print();});
+document.getElementById("resetBtn").addEventListener("click",function(){
+  document.getElementById("wordList").value=originalWords;
+  document.getElementById("sentence").innerText="버튼을 눌러 문장을 만들어 보세요.";
+  document.getElementById("usedWords").innerHTML="";
+  recentAddedWords=[];  // 새 단어 목록도 초기화
+  quizSentence="";
+  quizWords=[];
+  quizAnswerWords=[];
+  quizUsedIndexes=[];
+  document.getElementById("quizPrompt").innerText="퀴즈 시작을 누르고 들은 문장을 단어 순서대로 맞춰 보세요.";
+  document.getElementById("quizWords").innerHTML="";
+  document.getElementById("quizAnswer").innerHTML="";
+  document.getElementById("quizStatus").innerText="";
+});
+document.getElementById("clearBtn").addEventListener("click",function(){document.getElementById("history").innerHTML="";});
+
+if("serviceWorker" in navigator){
+  window.addEventListener("load",function(){
+    navigator.serviceWorker.register("./service-worker.js").catch(function(){});
+  });
+}
+</script>
+</body>
+</html>
