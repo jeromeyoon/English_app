@@ -1,4 +1,4 @@
-const CACHE_NAME = "english-sentence-quiz-v1";
+const CACHE_NAME = "english-sentence-quiz-v2";
 const APP_ASSETS = [
   "./",
   "./index.html",

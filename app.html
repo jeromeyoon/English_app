@@ -52,6 +52,7 @@ main{max-width:900px;margin:20px auto;padding:0 14px 60px}
 .quiz-answer{background:#fff7d6;border:1.5px dashed #f0c000}
 .quiz-word{background:white;color:#2d3a8c;border:2px solid #c5d3ff;margin:0;padding:10px 14px}
 .quiz-word.used{opacity:.35;pointer-events:none}
+.quiz-answer-word{cursor:pointer}
 .quiz-status{min-height:26px;font-size:16px;font-weight:900;color:#555;margin-top:8px}
 
 .buttons{display:flex;flex-wrap:wrap;margin-top:10px}
@@ -189,6 +190,7 @@ var originalAllowedWords = null;
 var quizSentence = "";
 var quizWords = [];
 var quizAnswerWords = [];
+var quizAnswerIndexes = [];
 var quizUsedIndexes = [];
 
 var gradeInfo = {
@@ -578,8 +580,12 @@ function renderQuiz(){
   }
   for(var j=0;j<quizAnswerWords.length;j++){
     var chip=document.createElement("span");
-    chip.className="word-chip";
+    chip.className="word-chip quiz-answer-word";
     chip.innerText=quizAnswerWords[j];
+    chip.setAttribute("data-answer-index",j);
+    chip.addEventListener("click",function(){
+      removeQuizAnswerWord(parseInt(this.getAttribute("data-answer-index"),10));
+    });
     answerBox.appendChild(chip);
   }
 }
@@ -591,6 +597,7 @@ function startQuiz(){
   document.getElementById("usedWords").innerHTML="";
   quizWords=shuffleTokens(normalizeSentenceTokens(quizSentence));
   quizAnswerWords=[];
+  quizAnswerIndexes=[];
   quizUsedIndexes=[];
   document.getElementById("quizPrompt").innerText="들은 문장을 단어 순서대로 맞춰 보세요.";
   document.getElementById("quizStatus").innerText="";
@@ -602,13 +609,26 @@ function selectQuizWord(index){
   if(index<0||index>=quizWords.length||quizUsedIndexes.indexOf(index)!==-1)return;
   quizUsedIndexes.push(index);
   quizAnswerWords.push(quizWords[index]);
+  quizAnswerIndexes.push(index);
   document.getElementById("quizStatus").innerText="";
   renderQuiz();
   autoCheckQuizIfComplete();
 }
 
+function removeQuizAnswerWord(answerIndex){
+  if(answerIndex<0||answerIndex>=quizAnswerWords.length)return;
+  var originalIndex=quizAnswerIndexes[answerIndex];
+  quizAnswerWords.splice(answerIndex,1);
+  quizAnswerIndexes.splice(answerIndex,1);
+  var usedPos=quizUsedIndexes.indexOf(originalIndex);
+  if(usedPos!==-1)quizUsedIndexes.splice(usedPos,1);
+  document.getElementById("quizStatus").innerText="";
+  renderQuiz();
+}
+
 function resetQuizAnswer(){
   quizAnswerWords=[];
+  quizAnswerIndexes=[];
   quizUsedIndexes=[];
   document.getElementById("quizStatus").innerText="";
   renderQuiz();
@@ -815,6 +835,7 @@ document.getElementById("resetBtn").addEventListener("click",function(){
   quizSentence="";
   quizWords=[];
   quizAnswerWords=[];
+  quizAnswerIndexes=[];
   quizUsedIndexes=[];
   document.getElementById("quizPrompt").innerText="퀴즈 시작을 누르고 들은 문장을 단어 순서대로 맞춰 보세요.";
   document.getElementById("quizWords").innerHTML="";
