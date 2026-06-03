@@ -6,7 +6,7 @@ import base64
 import re
 
 # Gemini API 키 설정
-API_KEY = "AIzaSyCp9d2y8Lo3XUrIokAc9YyuInEArYo-VnM"  # ← 여기에 API 키 입력
+API_KEY = "API Key "  # ← 여기에 API 키 입력
 genai.configure(api_key=API_KEY)
 
 app = FastAPI()
