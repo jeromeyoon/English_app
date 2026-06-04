@@ -219,6 +219,7 @@ const API_URL = "http://localhost:8000";
 var originalWords = document.getElementById("wordList").value;
 var currentGrade = 1;
 var currentSentence = "";
+var voiceSentence = "";
 var speedMap = {slow:0.4, normal:0.75, fast:1.2};
 var currentSpeed = "normal";
 var cameraStream = null;
@@ -515,7 +516,7 @@ function isAllowedPattern(p,a){
   return true;
 }
 
-function makeSentence(){
+function generateSentenceData(){
   try{
     var a=getAllowedWords(),customWords=syncRecentAddedWords(),ps=gradePatterns[currentGrade],ok=[],okRecent=[];
     for(var i=0;i<ps.length;i++){if(isAllowedPattern(ps[i],a))ok.push(ps[i]);}
@@ -547,16 +548,12 @@ function makeSentence(){
     }
 
     if(!ok.length){
-      document.getElementById("sentence").innerHTML="조건에 맞는 문장이 없습니다.<br>단어 목록을 확인하세요.";
-      document.getElementById("usedWords").innerHTML="";currentSentence="";return;
+      return {success:false,message:"조건에 맞는 문장이 없습니다.<br>단어 목록을 확인하세요."};
     }
     var p=ok[Math.floor(Math.random()*ok.length)];
     var s=p.join(" ");
     var f=p[0];
     s+=["Which","What","Who","How","Where","When","Can","Do","Is","Are"].indexOf(f)!==-1?"?":".";
-    currentSentence=s;
-    document.getElementById("sentence").innerText=s;
-    if(document.getElementById("voiceTarget"))resetVoicePractice();
     var used=[];
     for(var j=0;j<p.length;j++){
       var tokens=String(p[j]).split(/\s+/);
@@ -565,10 +562,27 @@ function makeSentence(){
         if(bw&&used.indexOf(bw)===-1)used.push(bw);
       }
     }
-    var html="사용 단어: ";
-    for(var k=0;k<used.length;k++)html+='<span class="word-chip">'+used[k]+'</span>';
-    document.getElementById("usedWords").innerHTML=html;
-  }catch(e){document.getElementById("sentence").innerText="오류: "+e.message;}
+    return {success:true,sentence:s,used:used};
+  }catch(e){return {success:false,message:"오류: "+e.message};}
+}
+
+function renderUsedWords(used){
+  var html="사용 단어: ";
+  for(var k=0;k<used.length;k++)html+='<span class="word-chip">'+used[k]+'</span>';
+  document.getElementById("usedWords").innerHTML=html;
+}
+
+function makeSentence(){
+  var data=generateSentenceData();
+  if(!data.success){
+    document.getElementById("sentence").innerHTML=data.message;
+    document.getElementById("usedWords").innerHTML="";
+    currentSentence="";
+    return;
+  }
+  currentSentence=data.sentence;
+  document.getElementById("sentence").innerText=data.sentence;
+  renderUsedWords(data.used);
 }
 
 function speakSentence(){
@@ -654,7 +668,7 @@ function renderPronunciationResult(result,spokenText){
 }
 
 function resetVoicePractice(){
-  document.getElementById("voiceTarget").innerText=currentSentence||"문장을 만든 뒤 따라 말해 보세요.";
+  document.getElementById("voiceTarget").innerText=voiceSentence||"발음 연습을 누르면 새 문장이 만들어집니다.";
   document.getElementById("voiceHeard").innerText="아직 녹음하지 않았어요.";
   document.getElementById("voiceScore").innerText="";
   document.getElementById("voiceFeedback").innerText="";
@@ -697,18 +711,33 @@ async function ensureMicrophonePermission(){
 }
 
 function checkManualVoiceInput(){
-  if(!currentSentence)makeSentence();
-  if(!currentSentence)return;
+  if(!voiceSentence)prepareVoiceSentence();
+  if(!voiceSentence)return;
   var spoken=document.getElementById("voiceManualText").value.trim();
-  var result=buildPronunciationFeedback(currentSentence,spoken);
+  var result=buildPronunciationFeedback(voiceSentence,spoken);
   renderPronunciationResult(result,spoken);
   if(result.score===result.total&&result.total>0)playCorrectSound();else playWrongSound();
 }
 
+function prepareVoiceSentence(){
+  var data=generateSentenceData();
+  if(!data.success){
+    document.getElementById("voiceTarget").innerHTML=data.message;
+    voiceSentence="";
+    return false;
+  }
+  voiceSentence=data.sentence;
+  document.getElementById("voiceTarget").innerText=voiceSentence;
+  document.getElementById("voiceHeard").innerText="아직 녹음하지 않았어요.";
+  document.getElementById("voiceScore").innerText="";
+  document.getElementById("voiceFeedback").innerText="";
+  document.getElementById("voiceLine").innerHTML="";
+  document.getElementById("voiceManualText").value="";
+  return true;
+}
+
 async function startVoicePractice(){
-  if(!currentSentence)makeSentence();
-  if(!currentSentence)return;
-  document.getElementById("voiceTarget").innerText=currentSentence;
+  if(!prepareVoiceSentence())return;
   var Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(!Recognition){
     document.getElementById("voiceFeedback").innerText="이 브라우저는 음성 인식을 지원하지 않습니다. 아래 입력칸을 누르고 iPhone 받아쓰기로 말해 보세요.";
@@ -744,7 +773,7 @@ async function startVoicePractice(){
   voiceRecognition.onresult=function(event){
     var spoken="";
     if(event.results&&event.results[0]&&event.results[0][0])spoken=event.results[0][0].transcript;
-    var result=buildPronunciationFeedback(currentSentence,spoken);
+    var result=buildPronunciationFeedback(voiceSentence,spoken);
     renderPronunciationResult(result,spoken);
     if(result.score===result.total)playCorrectSound();else playWrongSound();
   };
@@ -778,9 +807,9 @@ async function startVoicePractice(){
 }
 
 function replayVoiceTarget(){
-  if(!currentSentence)makeSentence();
-  document.getElementById("voiceTarget").innerText=currentSentence||"문장을 먼저 만들어 주세요.";
-  speakText(currentSentence);
+  if(!voiceSentence)prepareVoiceSentence();
+  document.getElementById("voiceTarget").innerText=voiceSentence||"문장을 먼저 만들어 주세요.";
+  speakText(voiceSentence);
 }
 
 function normalizeSentenceTokens(sentence){
@@ -830,10 +859,13 @@ function renderQuiz(){
 }
 
 function startQuiz(){
-  makeSentence();
-  quizSentence=currentSentence;
-  document.getElementById("sentence").innerText="퀴즈 문장을 듣고 아래 단어를 순서대로 눌러 보세요.";
-  document.getElementById("usedWords").innerHTML="";
+  var data=generateSentenceData();
+  if(!data.success){
+    document.getElementById("quizPrompt").innerHTML=data.message;
+    quizSentence="";
+    return;
+  }
+  quizSentence=data.sentence;
   quizWords=shuffleTokens(normalizeSentenceTokens(quizSentence));
   quizAnswerWords=[];
   quizAnswerIndexes=[];
@@ -1047,6 +1079,7 @@ for(var i=0;i<gradeBtns.length;i++){
     document.getElementById("sentence").innerText="버튼을 눌러 문장을 만들어 보세요.";
     document.getElementById("usedWords").innerHTML="";
     currentSentence="";
+    voiceSentence="";
     quizSentence="";
     resetQuizAnswer();
     document.getElementById("quizPrompt").innerText="퀴즈 시작을 누르고 들은 문장을 단어 순서대로 맞춰 보세요.";
@@ -1076,6 +1109,8 @@ document.getElementById("resetBtn").addEventListener("click",function(){
   document.getElementById("sentence").innerText="버튼을 눌러 문장을 만들어 보세요.";
   document.getElementById("usedWords").innerHTML="";
   recentAddedWords=[];  // 새 단어 목록도 초기화
+  currentSentence="";
+  voiceSentence="";
   quizSentence="";
   quizWords=[];
   quizAnswerWords=[];
