@@ -685,7 +685,7 @@ function checkLvUp(prev){
 }
 function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}return b;}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function sceneList(){return SCENES.filter(function(s){return s.grade<=S.grade;});}
+function sceneList(){return SCENES.filter(function(s){return s.grade===S.grade;});}
 function sceneIllustration(id){
   var map={
     park_dog:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><rect width="360" height="180" fill="#c7e9ff"/><rect y="118" width="360" height="62" fill="#9ed38a"/><circle cx="292" cy="36" r="20" fill="#ffe27a"/><circle cx="64" cy="95" r="22" fill="#78c27a"/><rect x="58" y="95" width="10" height="38" rx="5" fill="#8b5e3c"/><rect x="178" y="95" width="72" height="16" rx="8" fill="#8a5a44"/><rect x="188" y="110" width="8" height="20" fill="#8a5a44"/><rect x="230" y="110" width="8" height="20" fill="#8a5a44"/><ellipse cx="130" cy="132" rx="28" ry="18" fill="#c98c5a"/><circle cx="154" cy="121" r="12" fill="#c98c5a"/><circle cx="158" cy="118" r="2.5" fill="#2b2b2b"/><path d="M162 124 Q168 126 170 122" stroke="#2b2b2b" stroke-width="2" fill="none"/><path d="M148 110 L140 100 L151 104Z" fill="#b97548"/><rect x="115" y="144" width="6" height="18" rx="3" fill="#8a5a44"/><rect x="131" y="144" width="6" height="18" rx="3" fill="#8a5a44"/><rect x="144" y="144" width="6" height="18" rx="3" fill="#8a5a44"/><rect x="158" y="144" width="6" height="18" rx="3" fill="#8a5a44"/><path d="M104 126 Q93 120 94 107" stroke="#8a5a44" stroke-width="5" fill="none" stroke-linecap="round"/></svg>',
@@ -779,7 +779,7 @@ function renderHome(){
     var b=document.createElement('button');
     b.className='gc g'+i+(S.grade===i?' sel':'');b.dataset.g=i;
     b.innerHTML='<span class="gc-num">'+i+'</span><span class="gc-txt">학년</span>';
-    b.addEventListener('click',function(){S.grade=parseInt(this.dataset.g);saveS();renderHome();});
+    b.addEventListener('click',function(){S.grade=parseInt(this.dataset.g);S.sceneIdx=0;saveS();renderHome();});
     row.appendChild(b);
   }
   renderVocabCard();
