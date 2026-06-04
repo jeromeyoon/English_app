@@ -1,21 +1,22 @@
-from fastapi import FastAPI, UploadFile, File
+from __future__ import annotations
+
+import json
+import os
+import re
+import urllib.error
+import urllib.request
+from typing import Any
+
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
-import google.generativeai as genai
-import os
-import base64
-import re
-import json
 
-# Gemini API 키 설정
-API_KEY = os.getenv("GEMINI_API_KEY", "")
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
-if API_KEY:
-    genai.configure(api_key=API_KEY)
 
-app = FastAPI()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
-# CORS 설정
+app = FastAPI(title="English Conversation Backend")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -50,7 +51,7 @@ def clean_word(word: str) -> str:
 
 
 def normalize_words(words: list[str]) -> list[str]:
-    out = []
+    out: list[str] = []
     for word in words:
         cleaned = clean_word(word)
         if cleaned and cleaned not in out:
@@ -69,12 +70,13 @@ def capitalize_sentence(text: str, question: bool = False) -> str:
 
 def correct_question(text: str) -> str:
     value = re.sub(r"[?.!]", "", text.lower()).strip()
-    value = {
+    replacements = {
         "what is dog doing": "what is the dog doing",
         "what is boy doing": "what is the boy doing",
         "where is dog": "where is the dog",
         "where is boy": "where is the boy",
-    }.get(value, value)
+    }
+    value = replacements.get(value, value)
     value = re.sub(r"\bwhat is ([a-z]+) doing\b", r"what is the \1 doing", value)
     value = re.sub(r"\bwhere is ([a-z]+)\b", r"where is the \1", value)
     if not re.match(r"^(what|where|who|is|are|do|does|can|how|why|when|which)\b", value):
@@ -84,14 +86,15 @@ def correct_question(text: str) -> str:
 
 def correct_answer(text: str) -> str:
     value = re.sub(r"[?.!]", "", text.lower()).strip()
-    value = {
+    replacements = {
         "the boy play ball": "the boy is playing with a ball",
         "boy play ball": "the boy is playing with a ball",
         "dog play ball": "the dog is playing with a ball",
         "i see dog": "i see a dog",
         "i like dog": "i like dogs",
         "i like apple": "i like apples",
-    }.get(value, value)
+    }
+    value = replacements.get(value, value)
     value = re.sub(r"\bi see ([a-z]+)\b", r"i see a \1", value)
     value = re.sub(r"\b([a-z]+) play ([a-z]+)\b", r"the \1 is playing with a \2", value)
     return capitalize_sentence(value)
@@ -150,153 +153,109 @@ def next_question(turn_count: int, parts: dict[str, str]) -> str:
     return questions[turn_count % len(questions)]
 
 
-def local_conversation_response(payload: ConversationRequest) -> ConversationResponse:
+def make_tip(original: str, corrected: str, mode: str) -> str:
+    if original.strip() == corrected.strip():
+        return "좋아요. 자연스러운 문장입니다."
+    if mode == "question":
+        return "질문에서는 명사 앞에 the/a를 넣으면 더 자연스럽습니다."
+    if " is playing " in corrected.lower():
+        return "동작을 말할 때는 be동사 + ing 형태를 쓰면 자연스럽습니다."
+    return "명사 앞의 a/the와 동사 형태를 확인해 보세요."
+
+
+def local_response(payload: ConversationRequest) -> ConversationResponse:
     words = normalize_words(payload.words)
     parts = infer_scene_parts(words)
     mode = "answer" if payload.mode == "answer" else "question"
     corrected = correct_question(payload.input) if mode == "question" else correct_answer(payload.input)
     reply = answer_question(corrected, parts) if mode == "question" else f"Good. {corrected}"
-    if payload.input.strip() == corrected.strip():
-        tip = "좋아요. 자연스러운 문장입니다."
-    elif mode == "question":
-        tip = "질문에서는 명사 앞에 the/a를 넣으면 더 자연스럽습니다."
-    elif " is playing " in corrected.lower():
-        tip = "동작을 말할 때는 be동사 + ing 형태를 쓰면 자연스럽습니다."
-    else:
-        tip = "명사 앞의 a/the와 동사 형태를 확인해 보세요."
     used_words = [word for word in re.findall(r"[a-z]+", corrected.lower()) if word in words]
     return ConversationResponse(
         source="local",
         corrected=corrected,
         reply=reply,
         nextQuestion=next_question(payload.turns, parts),
-        tip=tip,
+        tip=make_tip(payload.input, corrected, mode),
         usedWords=list(dict.fromkeys(used_words)),
     )
 
 
-def parse_json_from_text(text: str) -> dict:
-    cleaned = text.strip()
-    cleaned = re.sub(r"^```(?:json)?", "", cleaned).strip()
-    cleaned = re.sub(r"```$", "", cleaned).strip()
-    match = re.search(r"\{[\s\S]*\}", cleaned)
-    if match:
-        cleaned = match.group(0)
-    return json.loads(cleaned)
+def extract_output_text(data: dict[str, Any]) -> str:
+    if isinstance(data.get("output_text"), str):
+        return data["output_text"]
+    chunks: list[str] = []
+    for item in data.get("output", []):
+        for content in item.get("content", []):
+            if content.get("type") == "output_text" and isinstance(content.get("text"), str):
+                chunks.append(content["text"])
+    return "\n".join(chunks).strip()
 
 
-def gemini_conversation_response(payload: ConversationRequest) -> ConversationResponse | None:
-    if not API_KEY:
+def openai_response(payload: ConversationRequest) -> ConversationResponse | None:
+    if not OPENAI_API_KEY:
         return None
-    fallback = local_conversation_response(payload)
-    prompt = {
-        "instruction": (
-            "You are an English tutor for an elementary learner. "
-            "The learner may ask a question or answer a question. "
-            "Use short natural English. Correct grammar gently. "
-            "Reply based only on the scene and words. "
-            "Return only JSON with keys corrected, reply, nextQuestion, tip, usedWords. "
-            "tip must be concise Korean."
-        ),
+
+    local = local_response(payload)
+    system_prompt = (
+        "You are an English tutor for an elementary learner. "
+        "Use only short, natural English. The learner may ask a question or answer a question. "
+        "Correct grammar gently, answer based on the scene, and ask one next question. "
+        "Return only JSON with keys: corrected, reply, nextQuestion, tip, usedWords. "
+        "tip must be Korean and concise. usedWords must be a JSON array."
+    )
+    user_prompt = {
         "words": normalize_words(payload.words),
         "scene": payload.scene,
         "mode": payload.mode,
         "learnerInput": payload.input,
         "grade": payload.grade,
-        "turns": payload.turns,
         "history": payload.history[-8:],
-        "fallbackExample": fallback.model_dump(),
+        "fallbackExample": local.model_dump(),
     }
+    body = {
+        "model": OPENAI_MODEL,
+        "instructions": system_prompt,
+        "input": json.dumps(user_prompt, ensure_ascii=False),
+        "text": {"format": {"type": "json_object"}},
+    }
+    request = urllib.request.Request(
+        "https://api.openai.com/v1/responses",
+        data=json.dumps(body).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {OPENAI_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
     try:
-        model = genai.GenerativeModel(GEMINI_MODEL)
-        response = model.generate_content(
-            json.dumps(prompt, ensure_ascii=False),
-            generation_config={
-                "temperature": 0.4,
-                "response_mime_type": "application/json",
-            },
-        )
-        parsed = parse_json_from_text(response.text)
+        with urllib.request.urlopen(request, timeout=20) as response:
+            raw = response.read().decode("utf-8")
+        text = extract_output_text(json.loads(raw))
+        parsed = json.loads(text)
         return ConversationResponse(
-            source="gemini",
-            corrected=str(parsed.get("corrected") or fallback.corrected),
-            reply=str(parsed.get("reply") or fallback.reply),
-            nextQuestion=str(parsed.get("nextQuestion") or fallback.nextQuestion),
-            tip=str(parsed.get("tip") or fallback.tip),
-            usedWords=normalize_words(parsed.get("usedWords") or fallback.usedWords),
+            source="openai",
+            corrected=str(parsed.get("corrected") or local.corrected),
+            reply=str(parsed.get("reply") or local.reply),
+            nextQuestion=str(parsed.get("nextQuestion") or local.nextQuestion),
+            tip=str(parsed.get("tip") or local.tip),
+            usedWords=normalize_words(parsed.get("usedWords") or local.usedWords),
         )
-    except Exception:
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, KeyError, TypeError):
         return None
-
-@app.post("/ocr")
-async def ocr_image(file: UploadFile = File(...)):
-    """
-    이미지 파일을 받아서 Gemini로 텍스트 인식
-    """
-    try:
-        # 파일 읽기
-        image_data = await file.read()
-
-        # base64로 인코딩
-        image_base64 = base64.standard_b64encode(image_data).decode("utf-8")
-
-        # 파일 타입 결정
-        file_ext = file.filename.lower().split('.')[-1]
-        mime_type_map = {
-            'jpg': 'image/jpeg',
-            'jpeg': 'image/jpeg',
-            'png': 'image/png',
-            'gif': 'image/gif',
-            'webp': 'image/webp'
-        }
-        mime_type = mime_type_map.get(file_ext, 'image/jpeg')
-
-        # Gemini 모델로 텍스트 추출
-        model = genai.GenerativeModel('gemini-2.5-flash')
-
-        message = model.generate_content([
-            "이미지에서 보이는 모든 영어 단어를 추출해줘. 쉼표로 구분된 단어 목록으로만 응답해줘. 예: apple, book, cat, dog",
-            {
-                "mime_type": mime_type,
-                "data": image_base64
-            }
-        ])
-
-        response_text = message.text.strip()
-
-        # 응답에서 단어 파싱 (쉼표 또는 공백으로 분리)
-        words = re.split(r'[,\s]+', response_text)
-        words = [w.lower().strip() for w in words if w.strip() and len(w) > 1]
-
-        # 중복 제거, 영어 단어만 필터링
-        seen = set()
-        filtered_words = []
-        for word in words:
-            clean_word = re.sub(r'[^a-z]', '', word.lower())
-            if clean_word and clean_word not in seen:
-                filtered_words.append(clean_word)
-                seen.add(clean_word)
-
-        return {
-            "success": True,
-            "fullText": response_text,
-            "words": filtered_words,
-            "count": len(filtered_words)
-        }
-
-    except Exception as e:
-        return {"success": False, "message": f"오류: {str(e)}"}
 
 
 @app.post("/conversation", response_model=ConversationResponse)
 def conversation(payload: ConversationRequest) -> ConversationResponse:
-    gemini_result = gemini_conversation_response(payload)
-    if gemini_result:
-        return gemini_result
-    return local_conversation_response(payload)
+    ai_result = openai_response(payload)
+    if ai_result:
+        return ai_result
+    return local_response(payload)
 
 
 @app.get("/health")
-def health():
-    """헬스 체크"""
-    return {"status": "ok", "geminiConfigured": bool(API_KEY), "model": GEMINI_MODEL}
+def health() -> dict[str, str | bool]:
+    return {
+        "status": "ok",
+        "openaiConfigured": bool(OPENAI_API_KEY),
+        "model": OPENAI_MODEL,
+    }
