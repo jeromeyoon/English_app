@@ -1,8 +1,10 @@
-const CACHE_NAME = "english-sentence-quiz-v2";
+const CACHE_NAME = "english-sentence-quiz-v6";
 const APP_ASSETS = [
   "./",
   "./index.html",
   "./app.html",
+  "./app_voice.html",
+  "./app_conversation.html",
   "./manifest.json",
   "./icon.svg"
 ];

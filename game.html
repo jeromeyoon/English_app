@@ -182,6 +182,42 @@ textarea#wordList:focus{outline:2px solid var(--purple);outline-offset:-2px}
 /* CONFETTI */
 .cfp{position:fixed;top:10%;width:10px;height:10px;border-radius:2px;z-index:9999;pointer-events:none;animation:cff linear forwards}
 @keyframes cff{0%{opacity:1;transform:rotate(0) translateX(0)}100%{top:108%;opacity:0;transform:rotate(720deg) translateX(var(--tx,0px))}}
+
+@media (min-width: 768px) {
+  :root{--nav:76px}
+  #app,#nav,.roverlay{max-width:720px}
+  .scr{padding:24px 28px calc(var(--nav) + env(safe-area-inset-bottom,0px) + 24px)}
+  .topbar{padding:14px 0 18px}
+  .appname{font-size:24px}
+  .hero{padding:30px;margin-bottom:20px}
+  .hero-em{font-size:92px}
+  .grade-row{gap:12px}
+  .gc{width:96px;padding:14px 10px}
+  .gc .gn{font-size:30px}
+  .btn-play,.btn-startq{font-size:22px;padding:20px}
+  .qtop{margin-bottom:18px}
+  .qmon{font-size:68px}
+  .qinstr{font-size:16px}
+  .qhint{font-size:14px}
+  .ans-area{min-height:82px;padding:14px;gap:10px}
+  .pool{gap:10px;min-height:60px}
+  .achip,.pchip{font-size:17px;padding:11px 17px}
+  .bsm{font-size:15px;padding:14px}
+  .spchip{font-size:14px;padding:9px 18px}
+  .rcard{max-width:440px;padding:34px 28px}
+  .mgrid{grid-template-columns:repeat(4,1fr);gap:12px}
+  .mcem{font-size:46px}
+  textarea#wordList{font-size:15px;min-height:180px}
+}
+
+@media (min-width: 1024px) and (orientation: landscape) {
+  #app,#nav,.roverlay{max-width:860px}
+  .scr{padding-left:36px;padding-right:36px}
+  .hero{padding:34px}
+  .grade-row{flex-wrap:wrap;overflow:visible}
+  .gc{flex:1;min-width:112px}
+  .mgrid{grid-template-columns:repeat(6,1fr)}
+}
 </style>
 </head>
 <body>

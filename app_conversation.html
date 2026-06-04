@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4f7cff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="영어 회화 연습">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icon.svg">
+<title>단어 기반 영어 회화 연습</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Nunito',Arial,sans-serif;background:#eef4ff;color:#20242d}
+header{background:linear-gradient(135deg,#4f7cff,#44b67a);color:white;padding:22px 14px;text-align:center}
+header h1{margin:0;font-size:26px;font-weight:900}
+header p{margin:8px 0 0;font-size:14px;opacity:.9}
+main{max-width:980px;margin:18px auto;padding:0 14px 70px}
+.panel{background:white;border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:0 4px 18px rgba(29,45,86,.08)}
+.layout{display:grid;grid-template-columns:330px 1fr;gap:14px;align-items:start}
+h2{font-size:18px;margin:0 0 12px}h3{font-size:14px;margin:14px 0 8px;color:#596174}
+.notice{background:#fff7d6;border:1.5px solid #f3d56b;border-radius:12px;padding:11px;font-size:13px;line-height:1.45;color:#5d4a00}
+textarea,input{width:100%;border:1.5px solid #d8deee;border-radius:14px;padding:12px;font-size:15px;line-height:1.55;font-family:inherit;-webkit-appearance:none;appearance:none}
+textarea{min-height:118px;resize:vertical}
+.short-input{min-height:64px}
+.buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+button{border:0;border-radius:12px;padding:12px 15px;font-size:15px;font-weight:900;cursor:pointer;-webkit-appearance:none;appearance:none;touch-action:manipulation;font-family:inherit}
+button:active{opacity:.85;transform:scale(.98)}
+.primary{background:#4f7cff;color:white;font-size:17px;padding:14px 18px}
+.secondary{background:#eef1f7;color:#303846}
+.danger{background:#ff6b6b;color:white}
+.mode-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.mode-btn{background:#f1f5ff;color:#4f5d7a;border:2px solid #dce6ff}
+.mode-btn.active{background:#4f7cff;color:white;border-color:#4f7cff}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px;min-height:34px}
+.chip{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;background:#fff0b3;border:1.5px solid #f0c000;font-size:13px;font-weight:900;color:#5d4a00}
+.scene{border:2px dashed #c8d6ff;border-radius:18px;background:#f8fbff;padding:16px;font-size:20px;font-weight:900;line-height:1.4;color:#243287;min-height:92px}
+.chat-log{display:flex;flex-direction:column;gap:10px;min-height:320px;max-height:560px;overflow:auto;padding:4px}
+.msg{border-radius:16px;padding:13px 14px;line-height:1.5}
+.ai{align-self:flex-start;background:#f3fff6;border:1.5px solid #cdeed8;max-width:88%}
+.user{align-self:flex-end;background:#f2f5ff;border:1.5px solid #cfdaff;max-width:88%}
+.role{font-size:12px;font-weight:900;color:#687083;margin-bottom:4px;text-transform:uppercase}
+.text{font-size:16px;font-weight:800;color:#222}
+.tip{margin-top:8px;background:white;border-radius:12px;padding:9px;font-size:14px;font-weight:800;color:#4c5568}
+.correction{margin-top:8px;background:#fff7d6;border-radius:12px;padding:9px;font-size:14px;font-weight:900;color:#6a4b00}
+.scorebar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.score{background:#f8f9fa;border-radius:14px;padding:12px;text-align:center}
+.score b{display:block;font-size:22px;color:#2f7a4a}
+.score span{font-size:12px;font-weight:900;color:#70788c}
+.footer-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.status{font-size:13px;color:#697086;font-weight:800;min-height:18px}
+@media (max-width:780px){
+  .layout{grid-template-columns:1fr}
+  header h1{font-size:23px}
+  .scene{font-size:18px}
+  .chat-log{max-height:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>그림 상황 영어 회화</h1>
+  <p>단어를 바탕으로 질문하거나 대답하면서 짧은 회화를 연습하세요</p>
+</header>
+<main>
+<div class="layout">
+  <section class="panel">
+    <h2>회화 준비</h2>
+    <div class="notice">단어를 입력하고 상황을 만들면, 사용자가 질문하거나 대답할 수 있습니다. 현재 버전은 GitHub Pages에서 바로 실행되는 로컬 회화 엔진입니다.</div>
+    <h3>제공 단어</h3>
+    <textarea id="wordList" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false">dog, park, ball, boy, play</textarea>
+    <div class="buttons">
+      <button class="primary" id="startBtn" type="button">회화 시작</button>
+      <button class="secondary" id="sampleBtn" type="button">예시 단어</button>
+      <button class="secondary" id="clearBtn" type="button">초기화</button>
+    </div>
+    <h3>사용 단어</h3>
+    <div class="chips" id="wordChips"></div>
+    <h3>학습 기록</h3>
+    <div class="scorebar">
+      <div class="score"><b id="turnCount">0</b><span>턴</span></div>
+      <div class="score"><b id="usedCount">0</b><span>사용 단어</span></div>
+      <div class="score"><b id="fixCount">0</b><span>교정</span></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>회화</h2>
+    <div class="scene" id="sceneBox">회화 시작을 누르면 단어 기반 상황이 만들어집니다.</div>
+    <div class="buttons">
+      <button class="secondary" id="listenSceneBtn" type="button">상황 듣기</button>
+      <button class="secondary" id="nextQuestionBtn" type="button">다음 질문</button>
+    </div>
+    <div class="chat-log" id="chatLog"></div>
+    <h3>내 문장</h3>
+    <div class="mode-row">
+      <button class="mode-btn active" data-mode="question" type="button">질문하기</button>
+      <button class="mode-btn" data-mode="answer" type="button">대답하기</button>
+    </div>
+    <textarea class="short-input" id="userInput" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="예: What is the dog doing? 또는 The boy is playing with a ball."></textarea>
+    <div class="footer-actions">
+      <div class="buttons">
+        <button class="primary" id="sendBtn" type="button">확인</button>
+        <button class="secondary" id="speakInputBtn" type="button">내 문장 듣기</button>
+      </div>
+      <div class="status" id="status">Safari에서는 입력칸에서 iOS 받아쓰기를 사용할 수 있습니다.</div>
+    </div>
+  </section>
+</div>
+</main>
+<script>
+const CONVERSATION_API_URL = "";
+var conversationState = {
+  words: [],
+  scene: "",
+  subject: "boy",
+  object: "ball",
+  place: "park",
+  animal: "dog",
+  action: "playing",
+  turns: 0,
+  fixes: 0,
+  usedWords: []
+};
+var currentMode = "question";
+
+function cleanWord(word){
+  return String(word||"").toLowerCase().replace(/[^a-z]/g,"").trim();
+}
+
+function getWordsFromText(text){
+  var parts=String(text||"").split(/[,\n;\s]+/),out=[];
+  for(var i=0;i<parts.length;i++){
+    var word=cleanWord(parts[i]);
+    if(word&&out.indexOf(word)===-1)out.push(word);
+  }
+  return out;
+}
+
+function pick(words,candidates,fallback){
+  for(var i=0;i<candidates.length;i++){
+    if(words.indexOf(candidates[i])!==-1)return candidates[i];
+  }
+  return words[0]||fallback;
+}
+
+function inferScene(words){
+  var animals=["dog","cat","bird","fish"];
+  var people=["boy","girl","student","teacher","friend","he","she"];
+  var places=["park","school","home","class","room","zoo","farm","library"];
+  var objects=["ball","book","apple","pencil","toy","desk","bag","cup","cake"];
+  var actions=["play","run","eat","read","write","look","see","go","make","take"];
+  var subject=pick(words,people,"boy");
+  var animal=pick(words,animals,"dog");
+  var place=pick(words,places,"park");
+  var object=pick(words,objects,"ball");
+  var action=pick(words,actions,"play");
+  var actionIng={play:"playing",run:"running",eat:"eating",read:"reading",write:"writing",look:"looking",see:"looking",go:"going",make:"making",take:"taking"}[action]||"playing";
+  conversationState.subject=subject;
+  conversationState.animal=animal;
+  conversationState.place=place;
+  conversationState.object=object;
+  conversationState.action=actionIng;
+  return "A "+subject+" is "+actionIng+" with a "+animal+" and a "+object+" in the "+place+".";
+}
+
+function renderChips(){
+  var box=document.getElementById("wordChips");
+  box.innerHTML="";
+  for(var i=0;i<conversationState.words.length;i++){
+    var chip=document.createElement("span");
+    chip.className="chip";
+    chip.innerText=conversationState.words[i];
+    box.appendChild(chip);
+  }
+}
+
+function addMessage(role,text,detail){
+  var log=document.getElementById("chatLog");
+  var wrap=document.createElement("div");
+  wrap.className="msg "+(role==="user"?"user":"ai");
+  var roleEl=document.createElement("div");
+  roleEl.className="role";
+  roleEl.innerText=role==="user"?"You":"AI";
+  var textEl=document.createElement("div");
+  textEl.className="text";
+  textEl.innerText=text;
+  wrap.appendChild(roleEl);
+  wrap.appendChild(textEl);
+  if(detail&&detail.corrected&&detail.corrected!==text){
+    var corr=document.createElement("div");
+    corr.className="correction";
+    corr.innerText="자연스럽게: "+detail.corrected;
+    wrap.appendChild(corr);
+  }
+  if(detail&&detail.tip){
+    var tip=document.createElement("div");
+    tip.className="tip";
+    tip.innerText=detail.tip;
+    wrap.appendChild(tip);
+  }
+  log.appendChild(wrap);
+  log.scrollTop=log.scrollHeight;
+}
+
+function updateStats(){
+  document.getElementById("turnCount").innerText=conversationState.turns;
+  document.getElementById("usedCount").innerText=conversationState.usedWords.length;
+  document.getElementById("fixCount").innerText=conversationState.fixes;
+}
+
+function trackUsedWords(text){
+  var tokens=getWordsFromText(text);
+  for(var i=0;i<tokens.length;i++){
+    if(conversationState.words.indexOf(tokens[i])!==-1&&conversationState.usedWords.indexOf(tokens[i])===-1){
+      conversationState.usedWords.push(tokens[i]);
+    }
+  }
+}
+
+function nextQuestion(){
+  var questions=[
+    "What is the "+conversationState.subject+" doing?",
+    "Where is the "+conversationState.animal+"?",
+    "What do you see in the "+conversationState.place+"?",
+    "Do you like the "+conversationState.object+"?",
+    "Can you ask me one question about the picture?"
+  ];
+  return questions[conversationState.turns%questions.length];
+}
+
+function capitalizeSentence(text){
+  text=String(text||"").trim();
+  if(!text)return "";
+  text=text.charAt(0).toUpperCase()+text.slice(1);
+  if(!/[?.!]$/.test(text))text+=".";
+  return text;
+}
+
+function correctQuestion(input){
+  var text=String(input||"").toLowerCase().replace(/[?.!]/g,"").trim();
+  text=text.replace(/\bwhat is dog doing\b/g,"what is the dog doing");
+  text=text.replace(/\bwhat is boy doing\b/g,"what is the boy doing");
+  text=text.replace(/\bwhere is dog\b/g,"where is the dog");
+  text=text.replace(/\bwhere is boy\b/g,"where is the boy");
+  text=text.replace(/\bwhat is ([a-z]+) doing\b/g,"what is the $1 doing");
+  text=text.replace(/\bwhere is ([a-z]+)\b/g,"where is the $1");
+  if(!/^(what|where|who|is|are|do|does|can|how|why|when|which)\b/.test(text)){
+    text="What do you see?";
+  }
+  return capitalizeSentence(text).replace(/\.$/,"?");
+}
+
+function correctAnswer(input){
+  var text=String(input||"").toLowerCase().replace(/[?.!]/g,"").trim();
+  text=text.replace(/\bthe boy play ball\b/g,"the boy is playing with a ball");
+  text=text.replace(/\bboy play ball\b/g,"the boy is playing with a ball");
+  text=text.replace(/\bdog play ball\b/g,"the dog is playing with a ball");
+  text=text.replace(/\bi see dog\b/g,"i see a dog");
+  text=text.replace(/\bi see ([a-z]+)\b/g,"i see a $1");
+  text=text.replace(/\bi like dog\b/g,"i like dogs");
+  text=text.replace(/\bi like apple\b/g,"i like apples");
+  text=text.replace(/\b([a-z]+) play ([a-z]+)\b/g,"the $1 is playing with a $2");
+  return capitalizeSentence(text);
+}
+
+function answerQuestion(corrected){
+  var lower=corrected.toLowerCase();
+  if(lower.indexOf("doing")!==-1&&lower.indexOf(conversationState.animal)!==-1)return "The "+conversationState.animal+" is "+conversationState.action+" with a "+conversationState.object+".";
+  if(lower.indexOf("doing")!==-1)return "The "+conversationState.subject+" is "+conversationState.action+" with a "+conversationState.object+".";
+  if(lower.indexOf("where")!==-1)return "The "+conversationState.animal+" is in the "+conversationState.place+".";
+  if(lower.indexOf("what do you see")!==-1)return "I see a "+conversationState.animal+", a "+conversationState.subject+", and a "+conversationState.object+".";
+  if(lower.indexOf("do you like")!==-1)return "Yes, I like the "+conversationState.object+".";
+  return "Good question. I see a "+conversationState.animal+" in the "+conversationState.place+".";
+}
+
+function makeTip(input,corrected,mode){
+  if(input.trim()===corrected.trim())return "좋아요. 자연스러운 문장입니다.";
+  if(mode==="question")return "질문에서는 보통 명사 앞에 the/a를 넣으면 더 자연스럽습니다.";
+  if(/ is playing /.test(corrected.toLowerCase()))return "동작을 말할 때는 be동사 + ing 형태를 쓰면 자연스럽습니다.";
+  return "명사 앞의 a/the와 동사 형태를 확인해 보세요.";
+}
+
+function respondLocally(input){
+  var corrected=currentMode==="question"?correctQuestion(input):correctAnswer(input);
+  var reply=currentMode==="question"?answerQuestion(corrected):"Good. "+corrected;
+  var tip=makeTip(input,corrected,currentMode);
+  var next=nextQuestion();
+  return {
+    corrected: corrected,
+    reply: reply,
+    nextQuestion: next,
+    tip: tip,
+    usedWords: getWordsFromText(corrected).filter(function(word){return conversationState.words.indexOf(word)!==-1;})
+  };
+}
+
+async function sendToBackend(input){
+  if(!CONVERSATION_API_URL)return null;
+  try{
+    var resp=await fetch(CONVERSATION_API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
+      words:conversationState.words,
+      scene:conversationState.scene,
+      mode:currentMode,
+      input:input
+    })});
+    if(!resp.ok)return null;
+    return await resp.json();
+  }catch(e){return null;}
+}
+
+function speakText(text){
+  if(!text||!window.speechSynthesis)return;
+  var utterance=new SpeechSynthesisUtterance(text);
+  utterance.lang="en-US";
+  utterance.rate=.82;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utterance);
+}
+
+function startConversation(){
+  var words=getWordsFromText(document.getElementById("wordList").value);
+  if(!words.length)words=["dog","park","ball","boy","play"];
+  conversationState.words=words.slice(0,16);
+  conversationState.scene=inferScene(conversationState.words);
+  conversationState.turns=0;
+  conversationState.fixes=0;
+  conversationState.usedWords=[];
+  document.getElementById("sceneBox").innerText=conversationState.scene;
+  document.getElementById("chatLog").innerHTML="";
+  renderChips();
+  addMessage("ai",conversationState.scene,{tip:"이 상황을 보고 질문하거나 대답해 보세요."});
+  addMessage("ai",nextQuestion(),{tip:"질문하기 또는 대답하기를 선택한 뒤 문장을 입력하세요."});
+  updateStats();
+  speakText(nextQuestion());
+}
+
+async function sendTurn(){
+  var input=document.getElementById("userInput").value.trim();
+  if(!input){
+    document.getElementById("status").innerText="문장을 먼저 입력해 주세요.";
+    return;
+  }
+  if(!conversationState.scene)startConversation();
+  addMessage("user",input);
+  var result=await sendToBackend(input);
+  if(!result)result=respondLocally(input);
+  conversationState.turns++;
+  if(result.corrected&&result.corrected!==input)conversationState.fixes++;
+  trackUsedWords(result.corrected||input);
+  addMessage("ai",result.reply||"Good.",{corrected:result.corrected,tip:result.tip});
+  if(result.nextQuestion)addMessage("ai",result.nextQuestion,{tip:"다음에는 이 문장에 답하거나, 다시 질문해도 됩니다."});
+  document.getElementById("userInput").value="";
+  document.getElementById("status").innerText="계속 질문하거나 대답해 보세요.";
+  updateStats();
+  speakText(result.reply||result.nextQuestion||"Good.");
+}
+
+function setMode(mode){
+  currentMode=mode;
+  var buttons=document.querySelectorAll(".mode-btn");
+  for(var i=0;i<buttons.length;i++){
+    buttons[i].classList.toggle("active",buttons[i].getAttribute("data-mode")===mode);
+  }
+  document.getElementById("status").innerText=mode==="question"?"그림에 대해 질문해 보세요.":"AI 질문에 대답해 보세요.";
+}
+
+document.getElementById("startBtn").addEventListener("click",startConversation);
+document.getElementById("sampleBtn").addEventListener("click",function(){
+  document.getElementById("wordList").value="apple, table, boy, eat, dog, kitchen, red, like";
+  startConversation();
+});
+document.getElementById("clearBtn").addEventListener("click",function(){
+  document.getElementById("chatLog").innerHTML="";
+  document.getElementById("sceneBox").innerText="회화 시작을 누르면 단어 기반 상황이 만들어집니다.";
+  document.getElementById("userInput").value="";
+  conversationState.turns=0;conversationState.fixes=0;conversationState.usedWords=[];
+  updateStats();
+});
+document.getElementById("sendBtn").addEventListener("click",sendTurn);
+document.getElementById("listenSceneBtn").addEventListener("click",function(){speakText(conversationState.scene);});
+document.getElementById("nextQuestionBtn").addEventListener("click",function(){
+  if(!conversationState.scene)startConversation();
+  var q=nextQuestion();
+  addMessage("ai",q,{tip:"이 질문에 답하거나, 비슷한 질문을 직접 만들어 보세요."});
+  speakText(q);
+});
+document.getElementById("speakInputBtn").addEventListener("click",function(){speakText(document.getElementById("userInput").value);});
+var modeButtons=document.querySelectorAll(".mode-btn");
+for(var i=0;i<modeButtons.length;i++){
+  modeButtons[i].addEventListener("click",function(){setMode(this.getAttribute("data-mode"));});
+}
+document.getElementById("userInput").addEventListener("keydown",function(e){
+  if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendTurn();}
+});
+if("serviceWorker" in navigator){
+  window.addEventListener("load",function(){
+    navigator.serviceWorker.register("./service-worker.js").catch(function(){});
+  });
+}
+</script>
+</body>
+</html>
