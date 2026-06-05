@@ -66,6 +66,13 @@ body{font-family:'Nunito',system-ui,sans-serif;color:#1e2940;max-width:430px;mar
 .vocab-cats{display:flex;flex-direction:column;gap:10px;margin-top:12px}
 .vocab-cat{display:flex;flex-direction:column;gap:6px}
 .vocab-cat-label{font-size:11px;font-weight:900;color:#6366f1;text-transform:uppercase;letter-spacing:.05em}
+.vocab-panel{border:1.5px solid #e0e7ff;border-radius:14px;background:#fafbff;overflow:hidden}
+.vocab-panel summary{list-style:none;cursor:pointer;padding:11px 12px;display:flex;align-items:center;justify-content:space-between}
+.vocab-panel summary::-webkit-details-marker{display:none}
+.vocab-panel summary::after{content:'＋';font-size:16px;font-weight:900;color:#6366f1}
+.vocab-panel[open] summary::after{content:'－'}
+.vocab-panel[open]{background:#ffffff;box-shadow:0 6px 16px rgba(99,102,241,.07)}
+.vocab-panel .vocab-chips{padding:0 12px 12px}
 .vocab-chips{display:flex;flex-wrap:wrap;gap:7px}
 .vocab-chip{border:none;background:#eef2ff;color:#4338ca;border-radius:14px;padding:8px 11px;font-size:12px;font-weight:900;display:flex;flex-direction:column;align-items:flex-start;gap:2px;cursor:pointer;font-family:inherit;text-align:left}
 .vocab-chip:active{transform:scale(.97)}
@@ -107,8 +114,22 @@ body{font-family:'Nunito',system-ui,sans-serif;color:#1e2940;max-width:430px;mar
 .scene-ill{position:relative;width:100%;height:190px;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#dbeafe 0%,#e9f7ff 45%,#fff1c9 100%);box-shadow:0 10px 24px rgba(99,102,241,.10), inset 0 0 0 2px rgba(255,255,255,.75)}
 .scene-ill::before{content:'';position:absolute;inset:10px;border-radius:16px;border:1.5px solid rgba(255,255,255,.55);pointer-events:none}
 .scene-ill svg{display:block;width:100%;height:100%}
+.scene-ill img{display:block;width:100%;height:100%;object-fit:cover}
+.scene-stack{position:relative;width:100%;height:100%}
+.scene-layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.scene-layer.bg{object-fit:cover}
+.scene-layer.main,.scene-layer.prop{object-fit:contain}
 .scene-tags{display:flex;flex-wrap:wrap;gap:8px;padding:0 14px 12px}
 .scene-tag{background:linear-gradient(135deg,#f5f3ff,#eef2ff);color:#5b21b6;border:1px solid #ddd6fe;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:900;box-shadow:0 4px 10px rgba(99,102,241,.08)}
+.used-vocab-box{margin:0 14px 12px;border:1.5px solid #dbeafe;background:#f8fbff;border-radius:14px;overflow:hidden}
+.used-vocab-toggle{list-style:none;cursor:pointer;padding:11px 13px;font-size:12px;font-weight:900;color:#1d4ed8;display:flex;align-items:center;justify-content:space-between}
+.used-vocab-toggle::-webkit-details-marker{display:none}
+.used-vocab-toggle::after{content:'보기';font-size:11px;color:#6366f1}
+.used-vocab-box[open] .used-vocab-toggle::after{content:'닫기'}
+.used-vocab-list{display:flex;flex-wrap:wrap;gap:8px;padding:0 13px 13px}
+.used-vocab-chip{display:flex;flex-direction:column;gap:2px;background:white;border:1.5px solid #dbeafe;border-radius:12px;padding:8px 10px}
+.used-vocab-chip .vocab-en{font-size:12px}
+.used-vocab-chip .vocab-ko{font-size:11px}
 
 /* Korean hint */
 .ko-hint{margin:0 14px 14px;background:#fffbeb;border:1.5px solid #fde68a;border-radius:12px;padding:9px 13px;font-size:13px;font-weight:800;color:#92400e;line-height:1.45}
@@ -688,11 +709,11 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 function sceneList(){return SCENES.filter(function(s){return s.grade===S.grade;});}
 function sceneIllustration(id){
   var map={
-    park_dog:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><rect width="360" height="180" fill="#c7e9ff"/><rect y="118" width="360" height="62" fill="#9ed38a"/><circle cx="292" cy="36" r="20" fill="#ffe27a"/><circle cx="64" cy="95" r="22" fill="#78c27a"/><rect x="58" y="95" width="10" height="38" rx="5" fill="#8b5e3c"/><rect x="178" y="95" width="72" height="16" rx="8" fill="#8a5a44"/><rect x="188" y="110" width="8" height="20" fill="#8a5a44"/><rect x="230" y="110" width="8" height="20" fill="#8a5a44"/><ellipse cx="130" cy="132" rx="28" ry="18" fill="#c98c5a"/><circle cx="154" cy="121" r="12" fill="#c98c5a"/><circle cx="158" cy="118" r="2.5" fill="#2b2b2b"/><path d="M162 124 Q168 126 170 122" stroke="#2b2b2b" stroke-width="2" fill="none"/><path d="M148 110 L140 100 L151 104Z" fill="#b97548"/><rect x="115" y="144" width="6" height="18" rx="3" fill="#8a5a44"/><rect x="131" y="144" width="6" height="18" rx="3" fill="#8a5a44"/><rect x="144" y="144" width="6" height="18" rx="3" fill="#8a5a44"/><rect x="158" y="144" width="6" height="18" rx="3" fill="#8a5a44"/><path d="M104 126 Q93 120 94 107" stroke="#8a5a44" stroke-width="5" fill="none" stroke-linecap="round"/></svg>',
-    home_cat:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><rect width="360" height="180" fill="#f8e8ef"/><rect y="126" width="360" height="54" fill="#d8c0a8"/><rect x="38" y="64" width="132" height="56" rx="10" fill="#f2b8c6"/><rect x="54" y="74" width="90" height="34" rx="8" fill="#fff5f7"/><circle cx="110" cy="92" r="11" fill="#ffffff"/><rect x="198" y="36" width="86" height="56" rx="8" fill="#d7ecff"/><rect x="206" y="44" width="70" height="40" fill="#bfe3ff"/><path d="M241 92 V126" stroke="#e5d4c2" stroke-width="5"/><ellipse cx="130" cy="103" rx="30" ry="16" fill="#8d99ae"/><circle cx="152" cy="96" r="11" fill="#8d99ae"/><path d="M144 87 L138 79 L147 82Z" fill="#6b7280"/><path d="M158 87 L164 79 L155 82Z" fill="#6b7280"/><path d="M125 102 q6 8 12 0 q6 8 12 0" stroke="#ffffff" stroke-width="2" fill="none"/><path d="M104 106 q-10 0 -14 9" stroke="#8d99ae" stroke-width="5" fill="none" stroke-linecap="round"/></svg>',
-    eating_apple:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><rect width="360" height="180" fill="#fff3d6"/><rect y="125" width="360" height="55" fill="#a8d08d"/><circle cx="76" cy="44" r="20" fill="#ffe07a"/><ellipse cx="184" cy="92" rx="36" ry="42" fill="#ffd4b8"/><circle cx="184" cy="72" r="22" fill="#5b4636"/><rect x="164" y="114" width="40" height="32" rx="12" fill="#93c5fd"/><rect x="143" y="116" width="22" height="12" rx="6" fill="#93c5fd"/><rect x="203" y="116" width="22" height="12" rx="6" fill="#93c5fd"/><circle cx="184" cy="93" r="18" fill="#ffd9bf"/><circle cx="177" cy="90" r="2.5" fill="#2b2b2b"/><circle cx="191" cy="90" r="2.5" fill="#2b2b2b"/><path d="M178 99 Q184 105 190 99" stroke="#d97706" stroke-width="2" fill="none"/><circle cx="222" cy="105" r="14" fill="#ef4444"/><rect x="220" y="89" width="3" height="8" rx="1.5" fill="#6b4f2d"/><path d="M221 90 Q229 84 234 90" stroke="#16a34a" stroke-width="4" fill="none" stroke-linecap="round"/></svg>',
-    reading_school:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><rect width="360" height="180" fill="#dceeff"/><rect y="124" width="360" height="56" fill="#c8b59b"/><rect x="40" y="32" width="102" height="72" rx="8" fill="#fff7ed"/><rect x="50" y="42" width="28" height="24" fill="#bfe3ff"/><rect x="84" y="42" width="28" height="24" fill="#bfe3ff"/><rect x="67" y="72" width="40" height="32" rx="4" fill="#d97706"/><polygon points="34,36 91,8 148,36" fill="#ef8f7a"/><circle cx="236" cy="80" r="24" fill="#ffd8bf"/><circle cx="236" cy="58" r="20" fill="#4b5563"/><rect x="211" y="103" width="50" height="34" rx="12" fill="#86efac"/><rect x="180" y="102" width="64" height="12" rx="6" fill="#8b5e3c"/><rect x="185" y="114" width="6" height="22" fill="#8b5e3c"/><rect x="233" y="114" width="6" height="22" fill="#8b5e3c"/><rect x="196" y="84" width="34" height="22" rx="3" fill="#60a5fa"/><line x1="213" y1="84" x2="213" y2="106" stroke="#ffffff" stroke-width="2"/></svg>',
-    sunny_day:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><rect width="360" height="180" fill="#bfe7ff"/><circle cx="76" cy="42" r="24" fill="#ffd54f"/><g stroke="#ffd54f" stroke-width="4" stroke-linecap="round"><line x1="76" y1="8" x2="76" y2="20"/><line x1="76" y1="64" x2="76" y2="76"/><line x1="42" y1="42" x2="54" y2="42"/><line x1="98" y1="42" x2="110" y2="42"/><line x1="52" y1="18" x2="60" y2="26"/><line x1="92" y1="58" x2="100" y2="66"/><line x1="52" y1="66" x2="60" y2="58"/><line x1="92" y1="26" x2="100" y2="18"/></g><path d="M0 118 Q90 80 180 118 T360 118 V180 H0Z" fill="#8fd08a"/><path d="M0 138 Q110 104 220 138 T360 138 V180 H0Z" fill="#75bf75"/><circle cx="218" cy="96" r="24" fill="#ffd9bf"/><circle cx="218" cy="74" r="19" fill="#6b4f3a"/><rect x="194" y="117" width="48" height="32" rx="12" fill="#f9a8d4"/><circle cx="210" cy="95" r="2.5" fill="#2b2b2b"/><circle cx="226" cy="95" r="2.5" fill="#2b2b2b"/><path d="M208 104 Q218 112 228 104" stroke="#ef4444" stroke-width="2.5" fill="none"/></svg>',
+    park_dog:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gsky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#bfe8ff"/><stop offset="100%" stop-color="#eef9ff"/></linearGradient><linearGradient id="ggrass1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a8d98f"/><stop offset="100%" stop-color="#84c874"/></linearGradient></defs><rect width="360" height="180" fill="url(#gsky1)"/><ellipse cx="298" cy="34" rx="26" ry="24" fill="#ffe48b"/><g fill="#ffffff" opacity=".9"><ellipse cx="60" cy="36" rx="18" ry="10"/><ellipse cx="78" cy="36" rx="14" ry="9"/><ellipse cx="69" cy="29" rx="13" ry="8"/><ellipse cx="124" cy="52" rx="22" ry="12"/><ellipse cx="145" cy="52" rx="16" ry="10"/><ellipse cx="135" cy="44" rx="15" ry="9"/></g><path d="M0 118 C68 100 112 110 182 118 C242 126 304 104 360 118 L360 180 L0 180 Z" fill="url(#ggrass1)"/><path d="M0 136 C82 122 144 130 232 136 C292 140 328 128 360 136 L360 180 L0 180 Z" fill="#74bf6a" opacity=".55"/><g opacity=".98"><circle cx="74" cy="94" r="28" fill="#7cc97d"/><rect x="67" y="92" width="14" height="43" rx="7" fill="#8b5a3c"/><circle cx="108" cy="88" r="18" fill="#91d58f"/><rect x="103" y="88" width="9" height="30" rx="4.5" fill="#8b5a3c"/></g><g opacity=".96"><rect x="236" y="92" width="76" height="16" rx="8" fill="#9a6a4f"/><rect x="246" y="108" width="10" height="26" rx="4" fill="#9a6a4f"/><rect x="291" y="108" width="10" height="26" rx="4" fill="#9a6a4f"/></g><ellipse cx="150" cy="137" rx="40" ry="9" fill="#67a85b" opacity=".25"/><g><ellipse cx="144" cy="127" rx="34" ry="21" fill="#d1935f"/><circle cx="173" cy="118" r="16" fill="#d1935f"/><ellipse cx="180" cy="121" rx="8" ry="6" fill="#f4d6bf"/><circle cx="178" cy="116" r="2.8" fill="#243042"/><path d="M182 123 Q189 126 194 121" stroke="#243042" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M167 106 L156 95 L170 99 Z" fill="#b77749"/><path d="M131 106 Q117 100 113 86" stroke="#9a5f3d" stroke-width="7" fill="none" stroke-linecap="round"/><rect x="126" y="144" width="8" height="23" rx="4" fill="#9a5f3d"/><rect x="145" y="145" width="8" height="22" rx="4" fill="#9a5f3d"/><rect x="162" y="144" width="8" height="22" rx="4" fill="#9a5f3d"/><rect x="178" y="142" width="8" height="24" rx="4" fill="#9a5f3d"/></g><g opacity=".18"><circle cx="158" cy="52" r="22" fill="#ffffff"/><circle cx="318" cy="74" r="16" fill="#ffffff"/></g></svg>',
+    home_cat:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ghome1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff0f5"/><stop offset="100%" stop-color="#fff9fb"/></linearGradient></defs><rect width="360" height="180" fill="url(#ghome1)"/><rect y="128" width="360" height="52" fill="#e5cfbb"/><rect x="30" y="54" width="154" height="70" rx="22" fill="#f7bfd0"/><rect x="48" y="70" width="92" height="26" rx="13" fill="#fff7fa"/><rect x="200" y="30" width="92" height="62" rx="14" fill="#dbeeff"/><rect x="210" y="40" width="72" height="42" rx="10" fill="#bfe4ff"/><circle cx="226" cy="54" r="5" fill="#fff7b8"/><path d="M246 92 V128" stroke="#dfc8b2" stroke-width="6" stroke-linecap="round"/><ellipse cx="138" cy="136" rx="42" ry="8" fill="#d9c6b4" opacity=".5"/><g><ellipse cx="134" cy="105" rx="36" ry="22" fill="#98a5b5"/><circle cx="161" cy="97" r="14" fill="#98a5b5"/><path d="M151 87 L144 76 L156 80 Z" fill="#7e8a99"/><path d="M166 87 L173 76 L161 80 Z" fill="#7e8a99"/><ellipse cx="164" cy="100" rx="9" ry="7" fill="#f6f0f4"/><circle cx="160" cy="96" r="2.2" fill="#243042"/><path d="M166 101 Q172 104 176 100" stroke="#243042" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M125 108 q8 10 16 0 q8 10 16 0" stroke="#ffffff" stroke-width="2.4" fill="none"/><path d="M103 110 q-12 4 -18 16" stroke="#98a5b5" stroke-width="6" fill="none" stroke-linecap="round"/></g><g opacity=".18"><circle cx="63" cy="33" r="24" fill="#ffffff"/><circle cx="300" cy="114" r="15" fill="#ffffff"/></g></svg>',
+    eating_apple:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gapple1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff6dc"/><stop offset="100%" stop-color="#fffdf2"/></linearGradient></defs><rect width="360" height="180" fill="url(#gapple1)"/><path d="M0 128 C66 116 124 126 184 128 C247 130 301 118 360 126 L360 180 L0 180 Z" fill="#abd88f"/><circle cx="70" cy="38" r="24" fill="#ffe589"/><g fill="#ffffff" opacity=".85"><ellipse cx="110" cy="34" rx="18" ry="10"/><ellipse cx="128" cy="34" rx="14" ry="9"/><ellipse cx="200" cy="48" rx="16" ry="10"/><ellipse cx="216" cy="48" rx="13" ry="8"/></g><ellipse cx="186" cy="138" rx="46" ry="8" fill="#93c97f" opacity=".35"/><g><circle cx="186" cy="76" r="24" fill="#584537"/><path d="M164 79 q22 -24 44 0 v20 h-44z" fill="#6a5340"/><ellipse cx="186" cy="98" rx="36" ry="38" fill="#ffd9bf"/><circle cx="176" cy="95" r="2.8" fill="#253042"/><circle cx="192" cy="95" r="2.8" fill="#253042"/><path d="M176 105 Q184 112 192 105" stroke="#d5815a" stroke-width="2.5" fill="none" stroke-linecap="round"/><rect x="162" y="119" width="48" height="30" rx="14" fill="#8bc5ff"/><rect x="138" y="118" width="26" height="13" rx="6.5" fill="#8bc5ff"/><rect x="208" y="118" width="26" height="13" rx="6.5" fill="#8bc5ff"/></g><g><circle cx="229" cy="104" r="18" fill="#f24f49"/><ellipse cx="221" cy="95" rx="5" ry="3" fill="#ffb8b8" opacity=".6"/><rect x="227" y="86" width="4" height="10" rx="2" fill="#6d4d2e"/><path d="M229 88 Q238 80 246 88" stroke="#4caf50" stroke-width="4" fill="none" stroke-linecap="round"/></g></svg>',
+    reading_school:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gread1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#dff2ff"/><stop offset="100%" stop-color="#f6fbff"/></linearGradient></defs><rect width="360" height="180" fill="url(#gread1)"/><path d="M0 126 C82 118 150 126 214 126 C277 126 315 118 360 124 L360 180 L0 180 Z" fill="#d8c6af"/><g><rect x="28" y="38" width="120" height="74" rx="12" fill="#fff7ef"/><polygon points="20,42 88,12 156,42" fill="#f29a84"/><rect x="46" y="54" width="28" height="22" rx="4" fill="#bfe2ff"/><rect x="82" y="54" width="28" height="22" rx="4" fill="#bfe2ff"/><rect x="66" y="82" width="44" height="30" rx="6" fill="#d68a4e"/></g><ellipse cx="234" cy="138" rx="46" ry="8" fill="#cab59f" opacity=".4"/><g><circle cx="236" cy="62" r="21" fill="#544236"/><ellipse cx="236" cy="92" rx="30" ry="34" fill="#ffd9bf"/><circle cx="227" cy="90" r="2.5" fill="#243042"/><circle cx="243" cy="90" r="2.5" fill="#243042"/><path d="M228 100 Q236 106 244 100" stroke="#d07d58" stroke-width="2.4" fill="none"/><rect x="212" y="112" width="48" height="30" rx="14" fill="#88ecb0"/><rect x="188" y="108" width="52" height="30" rx="5" fill="#60a5fa"/><line x1="214" y1="110" x2="214" y2="136" stroke="#ffffff" stroke-width="2"/><line x1="194" y1="116" x2="208" y2="116" stroke="#dbeafe" stroke-width="2"/><line x1="194" y1="122" x2="208" y2="122" stroke="#dbeafe" stroke-width="2"/></g></svg>',
+    sunny_day:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gsun1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#bfe9ff"/><stop offset="100%" stop-color="#eefaff"/></linearGradient></defs><rect width="360" height="180" fill="url(#gsun1)"/><circle cx="72" cy="38" r="25" fill="#ffd95f"/><g stroke="#ffd95f" stroke-width="4" stroke-linecap="round"><line x1="72" y1="4" x2="72" y2="18"/><line x1="72" y1="58" x2="72" y2="72"/><line x1="38" y1="38" x2="52" y2="38"/><line x1="92" y1="38" x2="106" y2="38"/><line x1="48" y1="14" x2="58" y2="24"/><line x1="86" y1="52" x2="96" y2="62"/><line x1="48" y1="62" x2="58" y2="52"/><line x1="86" y1="24" x2="96" y2="14"/></g><g fill="#ffffff" opacity=".88"><ellipse cx="146" cy="42" rx="22" ry="12"/><ellipse cx="167" cy="42" rx="16" ry="10"/><ellipse cx="248" cy="34" rx="20" ry="10"/><ellipse cx="266" cy="34" rx="14" ry="9"/></g><path d="M0 118 C62 94 125 102 182 118 C234 132 301 96 360 118 L360 180 L0 180 Z" fill="#97d889"/><path d="M0 140 C88 126 152 132 216 140 C278 148 326 132 360 138 L360 180 L0 180 Z" fill="#78c56e"/><ellipse cx="224" cy="139" rx="44" ry="8" fill="#6fb366" opacity=".3"/><g><circle cx="224" cy="74" r="20" fill="#614b39"/><ellipse cx="224" cy="98" rx="30" ry="35" fill="#ffd9bf"/><circle cx="215" cy="96" r="2.5" fill="#243042"/><circle cx="231" cy="96" r="2.5" fill="#243042"/><path d="M214 105 Q223 114 232 105" stroke="#e57d6d" stroke-width="2.5" fill="none"/><rect x="200" y="119" width="48" height="30" rx="13" fill="#f7a8d0"/></g><g opacity=".16"><circle cx="300" cy="80" r="22" fill="#ffffff"/></g></svg>',
     pizza_dinner:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><rect width="360" height="180" fill="#ffe4d6"/><rect y="124" width="360" height="56" fill="#d9b99b"/><ellipse cx="180" cy="118" rx="86" ry="18" fill="#a16207"/><circle cx="180" cy="106" r="48" fill="#fbbf24"/><circle cx="180" cy="106" r="40" fill="#f59e0b"/><circle cx="164" cy="96" r="6" fill="#ef4444"/><circle cx="197" cy="99" r="6" fill="#ef4444"/><circle cx="176" cy="116" r="6" fill="#ef4444"/><circle cx="202" cy="122" r="6" fill="#ef4444"/><circle cx="154" cy="118" r="6" fill="#ef4444"/><path d="M146 78 Q180 56 214 78" stroke="#fff7ed" stroke-width="7" fill="none"/><rect x="58" y="48" width="44" height="68" rx="10" fill="#fff7ed"/><rect x="260" y="42" width="56" height="74" rx="10" fill="#fde68a"/></svg>',
     soccer_won:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><rect width="360" height="180" fill="#b7e3ff"/><rect y="108" width="360" height="72" fill="#72c472"/><rect x="42" y="64" width="276" height="78" rx="10" fill="none" stroke="#ffffff" stroke-width="3"/><circle cx="180" cy="103" r="20" fill="none" stroke="#ffffff" stroke-width="3"/><circle cx="134" cy="120" r="20" fill="#ffffff"/><polygon points="134,106 140,116 134,126 122,126 116,116 122,106" fill="#111827"/><circle cx="250" cy="48" r="10" fill="#facc15"/><path d="M236 58 L244 82 H256 L264 58" fill="#facc15"/><rect x="246" y="82" width="8" height="18" fill="#b45309"/></svg>',
     rained_home:'<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"><rect width="360" height="180" fill="#cbd5e1"/><rect y="126" width="360" height="54" fill="#8fb58a"/><g fill="#94a3b8"><ellipse cx="96" cy="50" rx="32" ry="18"/><ellipse cx="126" cy="52" rx="28" ry="16"/><ellipse cx="230" cy="44" rx="36" ry="18"/><ellipse cx="260" cy="46" rx="28" ry="15"/></g><g stroke="#7dd3fc" stroke-width="3" stroke-linecap="round"><line x1="86" y1="72" x2="80" y2="88"/><line x1="106" y1="72" x2="100" y2="88"/><line x1="126" y1="72" x2="120" y2="88"/><line x1="222" y1="66" x2="216" y2="82"/><line x1="242" y1="66" x2="236" y2="82"/><line x1="262" y1="66" x2="256" y2="82"/></g><rect x="132" y="78" width="96" height="62" rx="8" fill="#fff7ed"/><polygon points="120,86 180,42 240,86" fill="#ef8f7a"/><rect x="168" y="104" width="24" height="36" fill="#8b5e3c"/><rect x="144" y="92" width="18" height="18" fill="#bfe3ff"/><rect x="198" y="92" width="18" height="18" fill="#bfe3ff"/></svg>',
@@ -707,6 +728,39 @@ function sceneIllustration(id){
 }
 function showScr(id){document.querySelectorAll('.scr').forEach(function(s){s.classList.remove('on');});document.getElementById(id).classList.add('on');window.scrollTo(0,0);}
 function gradeVocab(grade){return VOCAB[grade]||null;}
+var AUTO_SCENE_BANK={
+  1:[
+    {id:'park_dog',grade:1,tense:'present',timeBadge:'NOW',tbCls:'tb-present',label:'A Dog in the Park',storyLabels:['dog','run','park'],koreanHint:'1학년 핵심 어휘로 만든 현재 문장입니다.',usedVocab:[['dog','개'],['run','달리다'],['park','공원'],['happy','행복한']],level1:[{tpl:'The dog is ___.',choices:['running','run','ran'],ans:'running',tenseHint:'Present progressive\nUse is + verb-ing for an action happening now.'},{tpl:'The dog looks ___.',choices:['happy','happily','happier'],ans:'happy'}],level2:[{tpl:'The dog is _B0_ in the _B1_.',blanks:[{choices:['running','sleeping','walking'],ans:'running'},{choices:['park','home','school'],ans:'park'}]}],level3:'The dog is running in the park.'},
+    {id:'home_cat',grade:1,tense:'present',timeBadge:'NOW',tbCls:'tb-present',label:'A Cat at Home',storyLabels:['cat','sleep','bed'],koreanHint:'짧고 자연스러운 1학년형 문장입니다.',usedVocab:[['cat','고양이'],['sleep','자다'],['bed','침대'],['soft','부드러운']],level1:[{tpl:'The cat is ___.',choices:['sleeping','sleep','slept'],ans:'sleeping',tenseHint:'Present progressive\nUse is + verb-ing for an action happening now.'},{tpl:'The bed feels ___.',choices:['soft','softly','softer'],ans:'soft'}],level2:[{tpl:'The cat is _B0_ on the _B1_.',blanks:[{choices:['sleeping','running','eating'],ans:'sleeping'},{choices:['bed','desk','floor'],ans:'bed'}]}],level3:'The cat is sleeping on the bed.'},
+    {id:'eating_apple',grade:1,tense:'present',timeBadge:'NOW',tbCls:'tb-present',label:'Eating an Apple',storyLabels:['I','eat','apple'],koreanHint:'1학년 어휘를 사용한 일상 표현입니다.',usedVocab:[['I','나'],['eat','먹다'],['apple','사과'],['red','빨간']],level1:[{tpl:'I am ___ an apple.',choices:['eating','eat','ate'],ans:'eating',tenseHint:'Present progressive\nUse am + verb-ing for what you are doing now.'},{tpl:'The apple is ___.',choices:['red','redly','reds'],ans:'red'}],level2:[{tpl:'I am _B0_ a _B1_ apple.',blanks:[{choices:['eating','washing','drawing'],ans:'eating'},{choices:['red','small','cold'],ans:'red'}]}],level3:'I am eating a red apple.'}
+  ],
+  2:[
+    {id:'reading_school',grade:2,tense:'present',timeBadge:'EVERY DAY',tbCls:'tb-present',label:'Reading After School',storyLabels:['she','read','story'],koreanHint:'2학년에서는 반복되는 습관을 자연스럽게 말합니다.',usedVocab:[['read','읽다'],['story','이야기'],['school','학교'],['after','~후에']],level1:[{tpl:'She ___ a story after school.',choices:['reads','read','is reading'],ans:'reads',tenseHint:'Simple present\nUse the simple present for routines and habits.'},{tpl:'She reads ___ school.',choices:['after','under','without'],ans:'after'}],level2:[{tpl:'She _B0_ a story after _B1_.',blanks:[{choices:['reads','read','reading'],ans:'reads'},{choices:['school','dinner','bed'],ans:'school'}]}],level3:'She reads a story after school.'},
+    {id:'sunny_day',grade:2,tense:'present',timeBadge:'TODAY',tbCls:'tb-present',label:'A Sunny Day',storyLabels:['sunny','play','outside'],koreanHint:'원어민이 자주 쓰는 자연스러운 짧은 문장입니다.',usedVocab:[['sunny','화창한'],['play','놀다'],['outside','밖에서'],['friend','친구']],level1:[{tpl:'It is ___ today.',choices:['sunny','sun','sunniest'],ans:'sunny',tenseHint:'Simple present\nUse It is + adjective to describe today’s weather.'},{tpl:'We ___ outside.',choices:['play','plays','played'],ans:'play'}],level2:[{tpl:'It is _B0_, so we _B1_ outside.',blanks:[{choices:['sunny','rainy','cloudy'],ans:'sunny'},{choices:['play','played','playing'],ans:'play'}]}],level3:'It is sunny, so we play outside.'},
+    {id:'homework_done',grade:2,tense:'present',timeBadge:'EVERY NIGHT',tbCls:'tb-present',label:'Homework Time',storyLabels:['I','write','homework'],koreanHint:'2학년 어휘와 생활 표현을 함께 묶었습니다.',usedVocab:[['write','쓰다'],['homework','숙제'],['quiet','조용한'],['night','밤']],level1:[{tpl:'I ___ my homework at night.',choices:['write','writes','wrote'],ans:'write',tenseHint:'Simple present\nUse the base verb with I for routines.'},{tpl:'My room is ___.',choices:['quiet','quietly','quieter'],ans:'quiet'}],level2:[{tpl:'I _B0_ my homework in a _B1_ room.',blanks:[{choices:['write','wrote','am writing'],ans:'write'},{choices:['quiet','loud','late'],ans:'quiet'}]}],level3:'I write my homework in a quiet room.'}
+  ],
+  3:[
+    {id:'pizza_dinner',grade:3,tense:'past',timeBadge:'YESTERDAY',tbCls:'tb-past',label:'Dinner Last Night',storyLabels:['she','ate','pizza'],koreanHint:'3학년부터는 자연스러운 과거 표현을 연습합니다.',usedVocab:[['ate','먹었다'],['pizza','피자'],['dinner','저녁'],['hungry','배고픈']],level1:[{tpl:'She ___ pizza for dinner.',choices:['ate','eats','is eating'],ans:'ate',tenseHint:'Simple past\nUse the past form for something that happened yesterday.'},{tpl:'She was very ___.',choices:['hungry','hungrily','hunger'],ans:'hungry'}],level2:[{tpl:'She _B0_ pizza because she was _B1_.',blanks:[{choices:['ate','eats','eat'],ans:'ate'},{choices:['hungry','happy','quiet'],ans:'hungry'}]}],level3:'She ate pizza for dinner because she was hungry.'},
+    {id:'soccer_won',grade:3,tense:'past',timeBadge:'LAST WEEK',tbCls:'tb-past',label:'A Soccer Game',storyLabels:['we','played','won'],koreanHint:'실제로 많이 쓰는 we won 표현을 사용했습니다.',usedVocab:[['played','경기했다'],['won','이겼다'],['team','팀'],['together','함께']],level1:[{tpl:'We ___ soccer after school.',choices:['played','play','playing'],ans:'played',tenseHint:'Simple past\nUse played for a finished action in the past.'},{tpl:'Our team ___.',choices:['won','wins','winning'],ans:'won'}],level2:[{tpl:'We _B0_ soccer, and our team _B1_.',blanks:[{choices:['played','play','plays'],ans:'played'},{choices:['won','wins','win'],ans:'won'}]}],level3:'We played soccer, and our team won.'},
+    {id:'rained_home',grade:3,tense:'past',timeBadge:'THIS MORNING',tbCls:'tb-past',label:'Rainy Morning',storyLabels:['rain','walk','home'],koreanHint:'because를 넣어 자연스럽게 이유를 말하게 했습니다.',usedVocab:[['rain','비'],['walked','걸었다'],['home','집'],['because of','~때문에']],level1:[{tpl:'It ___ this morning.',choices:['rained','rains','is raining'],ans:'rained',tenseHint:'Simple past\nUse rained for weather in the past.'},{tpl:'We walked home ___ the rain.',choices:['because of','after','under'],ans:'because of'}],level2:[{tpl:'It _B0_, so we walked _B1_.',blanks:[{choices:['rained','rains','rain'],ans:'rained'},{choices:['home','inside','around'],ans:'home'}]}],level3:'It rained this morning, so we walked home.'}
+  ],
+  4:[
+    {id:'birthday_party',grade:4,tense:'past',timeBadge:'LAST SATURDAY',tbCls:'tb-past',label:'A Birthday Party',storyLabels:['party','friends','laughed'],koreanHint:'4학년에서는 조금 더 긴 과거 문장을 사용합니다.',usedVocab:[['birthday','생일'],['party','파티'],['friends','친구들'],['laughed','웃었다']],level1:[{tpl:'We ___ at the birthday party.',choices:['laughed','laugh','are laughing'],ans:'laughed',tenseHint:'Simple past\nUse laughed for a completed action.'},{tpl:'My friends brought a ___ cake.',choices:['special','especially','specials'],ans:'special'}],level2:[{tpl:'My friends _B0_ a special cake, and we _B1_ a lot.',blanks:[{choices:['brought','bring','brings'],ans:'brought'},{choices:['laughed','laugh','laughs'],ans:'laughed'}]}],level3:'My friends brought a special cake, and we laughed a lot.'},
+    {id:'zoo_lion',grade:4,tense:'past',timeBadge:'ON MONDAY',tbCls:'tb-past',label:'A Trip to the Zoo',storyLabels:['zoo','lion','observed'],koreanHint:'교과 스타일 어휘 observe를 자연스러운 문장에 넣었습니다.',usedVocab:[['zoo','동물원'],['lion','사자'],['observed','관찰했다'],['slowly','천천히']],level1:[{tpl:'We ___ a lion at the zoo.',choices:['observed','observe','observing'],ans:'observed',tenseHint:'Simple past\nUse observed for a completed school trip activity.'},{tpl:'The lion moved very ___.',choices:['slowly','slow','slower'],ans:'slowly'}],level2:[{tpl:'We _B0_ a lion, and it moved _B1_.',blanks:[{choices:['observed','observe','observes'],ans:'observed'},{choices:['slowly','careful','quiet'],ans:'slowly'}]}],level3:'We observed a lion at the zoo, and it moved slowly.'},
+    {id:'cleaned_room',grade:4,tense:'past',timeBadge:'YESTERDAY',tbCls:'tb-past',label:'Cleaning My Room',storyLabels:['cleaned','room','finished'],koreanHint:'자주 쓰는 finish early 표현으로 다듬었습니다.',usedVocab:[['cleaned','청소했다'],['room','방'],['finished','끝냈다'],['early','일찍']],level1:[{tpl:'I ___ my room yesterday.',choices:['cleaned','clean','am cleaning'],ans:'cleaned',tenseHint:'Simple past\nUse cleaned for a finished action yesterday.'},{tpl:'I finished ___.',choices:['early','earlier','earliest'],ans:'early'}],level2:[{tpl:'I _B0_ my room and finished _B1_.',blanks:[{choices:['cleaned','clean','cleans'],ans:'cleaned'},{choices:['early','quiet','late'],ans:'early'}]}],level3:'I cleaned my room and finished early.'}
+  ],
+  5:[
+    {id:'homework_done',grade:5,tense:'perfect',timeBadge:'ALREADY',tbCls:'tb-perfect',label:'Homework Is Finished',storyLabels:['she','has finished','homework'],koreanHint:'5학년은 현재완료를 짧고 정확하게 연습합니다.',usedVocab:[['has finished','끝냈다'],['homework','숙제'],['already','이미'],['ready','준비된']],level1:[{tpl:'She has ___ her homework.',choices:['finished','finish','finishing'],ans:'finished',tenseHint:'Present perfect\nUse has + past participle for a completed action with a present result.'},{tpl:'She is ___ for class now.',choices:['ready','readily','readier'],ans:'ready'}],level2:[{tpl:'She has _B0_ her homework, so she is _B1_ for class.',blanks:[{choices:['finished','finish','finishes'],ans:'finished'},{choices:['ready','quiet','late'],ans:'ready'}]}],level3:'She has already finished her homework.'},
+    {id:'eaten_lunch',grade:5,tense:'perfect',timeBadge:'JUST',tbCls:'tb-perfect',label:'Lunch Is Over',storyLabels:['they','have eaten','lunch'],koreanHint:'원어민이 자주 쓰는 have just eaten 패턴입니다.',usedVocab:[['have eaten','먹었다'],['lunch','점심'],['just','방금'],['hungry','배고픈']],level1:[{tpl:'They have just ___ lunch.',choices:['eaten','eat','ate'],ans:'eaten',tenseHint:'Present perfect\nUse have just + past participle for a very recent action.'},{tpl:'They are not ___ now.',choices:['hungry','hungrily','hungrier'],ans:'hungry'}],level2:[{tpl:'They have just _B0_ lunch, so they are not _B1_.',blanks:[{choices:['eaten','eat','eats'],ans:'eaten'},{choices:['hungry','quiet','ready'],ans:'hungry'}]}],level3:'They have just eaten lunch, so they are not hungry.'},
+    {id:'visited_london',grade:5,tense:'perfect',timeBadge:'BEFORE',tbCls:'tb-perfect',label:'A Trip Before Now',storyLabels:['I','have visited','London'],koreanHint:'경험을 말할 때 쓰는 현재완료 문장입니다.',usedVocab:[['have visited','방문한 적이 있다'],['London','런던'],['before','전에'],['twice','두 번']],level1:[{tpl:'I have ___ London before.',choices:['visited','visit','visiting'],ans:'visited',tenseHint:'Present perfect\nUse have visited to talk about life experience.'},{tpl:'I have been there ___.',choices:['twice','two','second'],ans:'twice'}],level2:[{tpl:'I have _B0_ London _B1_.',blanks:[{choices:['visited','visit','visits'],ans:'visited'},{choices:['before','yesterday','now'],ans:'before'}]}],level3:'I have visited London before.'}
+  ],
+  6:[
+    {id:'visited_london',grade:6,tense:'perfect',timeBadge:'RECENTLY',tbCls:'tb-perfect',label:'Learning From Travel',storyLabels:['we','have visited','museum'],koreanHint:'6학년은 조금 더 확장된 현재완료 문장을 씁니다.',usedVocab:[['have visited','방문했다'],['museum','박물관'],['recently','최근에'],['learned','배웠다']],level1:[{tpl:'We have ___ the museum recently.',choices:['visited','visit','visiting'],ans:'visited',tenseHint:'Present perfect\nUse have visited for a recent experience connected to now.'},{tpl:'We have ___ a lot from the trip.',choices:['learned','learn','learning'],ans:'learned'}],level2:[{tpl:'We have _B0_ the museum and _B1_ a lot.',blanks:[{choices:['visited','visit','visits'],ans:'visited'},{choices:['learned','learn','learning'],ans:'learned'}]}],level3:'We have visited the museum recently and learned a lot.'},
+    {id:'cleaned_room',grade:6,tense:'perfect',timeBadge:'ALREADY',tbCls:'tb-perfect',label:'Everything Is Ready',storyLabels:['I','have cleaned','room'],koreanHint:'already와 now를 연결한 자연스러운 완성 문장입니다.',usedVocab:[['have cleaned','청소했다'],['room','방'],['already','이미'],['ready','준비된']],level1:[{tpl:'I have already ___ my room.',choices:['cleaned','clean','cleaning'],ans:'cleaned',tenseHint:'Present perfect\nUse have already + past participle for something completed sooner than expected.'},{tpl:'Now I am ___ to go out.',choices:['ready','readily','readier'],ans:'ready'}],level2:[{tpl:'I have already _B0_ my room, so I am _B1_ to go out.',blanks:[{choices:['cleaned','clean','cleans'],ans:'cleaned'},{choices:['ready','late','busy'],ans:'ready'}]}],level3:'I have already cleaned my room, so I am ready to go out.'},
+    {id:'eaten_lunch',grade:6,tense:'perfect',timeBadge:'JUST',tbCls:'tb-perfect',label:'Just Finished Lunch',storyLabels:['she','has eaten','lunch'],koreanHint:'대화에서 실제로 많이 쓰는 막 끝난 상황 표현입니다.',usedVocab:[['has eaten','먹었다'],['lunch','점심'],['just','방금'],['back','돌아온']],level1:[{tpl:'She has just ___ lunch.',choices:['eaten','eat','ate'],ans:'eaten',tenseHint:'Present perfect\nUse has just + past participle for an action that finished moments ago.'},{tpl:'She is ___ in class now.',choices:['back','backed','backing'],ans:'back'}],level2:[{tpl:'She has just _B0_ lunch, and she is _B1_ in class now.',blanks:[{choices:['eaten','eat','eats'],ans:'eaten'},{choices:['back','ready','early'],ans:'back'}]}],level3:'She has just eaten lunch, and she is back in class now.'}
+  ]
+};
+function gradeScenes(grade){return AUTO_SCENE_BANK[grade]||[];}
 function sceneTitle(sc){
   if(sc.label)return sc.label;
   if(sc.storyLabels&&sc.storyLabels.length)return sc.storyLabels.join(' · ');
@@ -842,6 +896,64 @@ function renderSceneCard(){
   });
   html+='</div>'+
     '<div class="ko-hint"><span class="ko-icon">💡</span>'+esc(sc.koreanHint)+'</div>';
+  document.getElementById('scene-card').innerHTML=html;
+}
+
+function sceneList(){return gradeScenes(S.grade);}
+
+function renderVocabCard(){
+  var card=document.getElementById('vocab-card');
+  var data=gradeVocab(S.grade);
+  if(!card)return;
+  if(!data){
+    card.innerHTML='<div class="vocab-title">Grade Vocabulary</div><div class="vocab-sub">No vocabulary data.</div>';
+    return;
+  }
+  var total=0;
+  Object.keys(data.categories).forEach(function(cat){total+=data.categories[cat].length;});
+  var html='<div class="vocab-title">'+esc(data.title)+'</div>'+
+    '<div class="vocab-sub">학년별 핵심 어휘입니다. 탭하면 펼쳐지고, 단어를 누르면 발음됩니다.</div>'+
+    '<div class="vocab-meta">총 '+total+'개 어휘 · 카테고리를 눌러서 보기</div>'+
+    '<div class="vocab-cats">';
+  Object.keys(data.categories).forEach(function(cat){
+    html+='<details class="vocab-panel vocab-cat"><summary class="vocab-cat-label">'+esc(cat.replace(/_/g,' '))+'</summary><div class="vocab-chips">';
+    data.categories[cat].forEach(function(word){
+      var en=word.w||word.word||String(word);
+      var ko=word.m||word.meaning||'';
+      html+='<button class="vocab-chip" data-word="'+esc(en)+'"><span class="vocab-en">'+esc(en)+'</span><span class="vocab-ko">'+esc(ko)+'</span></button>';
+    });
+    html+='</div></details>';
+  });
+  html+='</div>';
+  card.innerHTML=html;
+  card.querySelectorAll('.vocab-chip').forEach(function(btn){
+    btn.addEventListener('click',function(){speak(this.dataset.word);});
+  });
+}
+
+function renderSceneCard(){
+  var sc=G.scene;
+  var tbCls=sc.tbCls||'tb-present';
+  var title=sceneTitle(sc);
+  var html=
+    '<div class="sc-head">'+
+      '<span class="time-badge '+tbCls+'">'+esc(sc.timeBadge)+'</span>'+
+      '<span class="sc-label">'+esc(title)+'</span>'+
+    '</div>'+
+    '<div class="scene-ill-wrap"><div class="scene-ill">'+sceneIllustration(sc.id)+'</div></div>'+
+    '<div class="scene-tags">';
+  (sc.storyLabels||[]).forEach(function(lbl){
+    html+='<span class="scene-tag">'+esc(lbl)+'</span>';
+  });
+  html+='</div>';
+  if(sc.usedVocab&&sc.usedVocab.length){
+    html+='<details class="used-vocab-box"><summary class="used-vocab-toggle">사용 어휘 보기</summary><div class="used-vocab-list">';
+    sc.usedVocab.forEach(function(item){
+      html+='<div class="used-vocab-chip"><span class="vocab-en">'+esc(item[0])+'</span><span class="vocab-ko">'+esc(item[1]||'')+'</span></div>';
+    });
+    html+='</div></details>';
+  }
+  html+='<div class="ko-hint"><span class="ko-icon">💡</span>'+esc(sc.koreanHint)+'</div>';
   document.getElementById('scene-card').innerHTML=html;
 }
 
@@ -1096,6 +1208,432 @@ function showDone(){
 }
 
 // ── INIT ───────────────────────────────────────
+// ===== WebP scenes + random sentence generation =====
+var WEBP_SCENE_VER='20260605c';
+var RANDOM_SCENE_CACHE={};
+var SCENE_COMPONENTS={
+  park_dog:{bg:'park_day',main:'dog_run'},
+  home_cat:{bg:'bedroom',main:'cat_sleep'},
+  eating_apple:{bg:'sunny_field',main:'child_apple',props:['apple']},
+  reading_school:{bg:'schoolroom',main:'child_read',props:['book']},
+  sunny_day:{bg:'sunny_field',main:'child_smile'},
+  pizza_dinner:{bg:'dinner_room',main:'pizza_plate'},
+  soccer_won:{bg:'soccer_field',main:'soccer_ball',props:['trophy']},
+  rained_home:{bg:'rainy_house'},
+  birthday_party:{bg:'party_room',main:'cake'},
+  zoo_lion:{bg:'zoo',main:'lion'},
+  homework_done:{bg:'study_room',main:'check'},
+  eaten_lunch:{bg:'lunch_room',main:'tray_child'},
+  cleaned_room:{bg:'clean_room',main:'broom'},
+  visited_london:{bg:'london',main:'traveler'}
+};
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function shuffled(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function sceneIllustration(id){
+  var c=SCENE_COMPONENTS[id];
+  if(!c) return '<img src="./scene_webp/'+encodeURIComponent(id)+'.webp?v='+WEBP_SCENE_VER+'" alt="'+esc(id)+'">';
+  var html='<div class="scene-stack">';
+  if(c.bg) html+='<img class="scene-layer bg" src="./layer_assets/bg/'+encodeURIComponent(c.bg)+'.webp?v='+WEBP_SCENE_VER+'" alt="">';
+  if(c.main) html+='<img class="scene-layer main" src="./layer_assets/main/'+encodeURIComponent(c.main)+'.webp?v='+WEBP_SCENE_VER+'" alt="">';
+  (c.props||[]).forEach(function(p){ html+='<img class="scene-layer prop" src="./layer_assets/prop/'+encodeURIComponent(p)+'.webp?v='+WEBP_SCENE_VER+'" alt="">'; });
+  html+='</div>';
+  return html;
+}
+function makeScene(base, variants){
+  var v=pick(variants);
+  return {
+    id:base.id,grade:base.grade,tense:base.tense,timeBadge:base.timeBadge,tbCls:base.tbCls,
+    label:base.label,storyLabels:base.storyLabels,koreanHint:v.koreanHint||base.koreanHint,
+    usedVocab:v.usedVocab||base.usedVocab,level1:v.level1,level2:v.level2,level3:v.level3
+  };
+}
+function buildGradeScenes(grade){
+  var defs={
+    1:[
+      function(){return makeScene({id:'park_dog',grade:1,tense:'present',timeBadge:'NOW',tbCls:'tb-present',label:'A Dog in the Park',storyLabels:['dog','run','park'],koreanHint:'1학년용 쉬운 현재 문장입니다.'},[
+        {koreanHint:'개가 공원에서 뛰고 있는 장면입니다.',usedVocab:[['dog','개'],['run','달리다'],['park','공원'],['happy','행복한']],level1:[{tpl:'The dog is ___.',choices:['running','run','ran'],ans:'running',tenseHint:'Present progressive\nUse is + verb-ing for an action happening now.'},{tpl:'The dog looks ___.',choices:['happy','happily','happier'],ans:'happy'}],level2:[{tpl:'The dog is _B0_ in the _B1_.',blanks:[{choices:['running','walking','sleeping'],ans:'running'},{choices:['park','house','school'],ans:'park'}]}],level3:'The dog is running in the park.'},
+        {koreanHint:'개가 나무 옆을 걷는 장면입니다.',usedVocab:[['dog','개'],['walk','걷다'],['tree','나무'],['near','가까이']],level1:[{tpl:'The dog is ___.',choices:['walking','walk','walked'],ans:'walking',tenseHint:'Present progressive\nUse is + verb-ing for an action happening now.'},{tpl:'The dog is near the ___.',choices:['tree','apple','book'],ans:'tree'}],level2:[{tpl:'The dog is _B0_ near the _B1_.',blanks:[{choices:['walking','running','sleeping'],ans:'walking'},{choices:['tree','table','bed'],ans:'tree'}]}],level3:'The dog is walking near the tree.'}
+      ]);},
+      function(){return makeScene({id:'home_cat',grade:1,tense:'present',timeBadge:'NOW',tbCls:'tb-present',label:'A Cat at Home',storyLabels:['cat','sleep','bed'],koreanHint:'1학년용 쉬운 현재 문장입니다.'},[
+        {usedVocab:[['cat','고양이'],['sleep','자다'],['bed','침대'],['soft','부드러운']],level1:[{tpl:'The cat is ___.',choices:['sleeping','sleep','slept'],ans:'sleeping',tenseHint:'Present progressive\nUse is + verb-ing for an action happening now.'},{tpl:'The bed feels ___.',choices:['soft','softly','softer'],ans:'soft'}],level2:[{tpl:'The cat is _B0_ on the _B1_.',blanks:[{choices:['sleeping','jumping','running'],ans:'sleeping'},{choices:['bed','desk','chair'],ans:'bed'}]}],level3:'The cat is sleeping on the bed.'},
+        {usedVocab:[['cat','고양이'],['rest','쉬다'],['pink','분홍색'],['bed','침대']],level1:[{tpl:'The cat is ___.',choices:['resting','rest','rested'],ans:'resting',tenseHint:'Present progressive\nUse is + verb-ing for an action happening now.'},{tpl:'The bed is ___.',choices:['pink','quickly','pinkly'],ans:'pink'}],level2:[{tpl:'The cat is _B0_ on the pink _B1_.',blanks:[{choices:['resting','rests','rested'],ans:'resting'},{choices:['bed','apple','tree'],ans:'bed'}]}],level3:'The cat is resting on the pink bed.'}
+      ]);},
+      function(){return makeScene({id:'eating_apple',grade:1,tense:'present',timeBadge:'NOW',tbCls:'tb-present',label:'Eating an Apple',storyLabels:['I','eat','apple'],koreanHint:'1학년용 쉬운 현재 문장입니다.'},[
+        {usedVocab:[['I','나'],['eat','먹다'],['apple','사과'],['red','빨간']],level1:[{tpl:'I am ___ an apple.',choices:['eating','eat','ate'],ans:'eating',tenseHint:'Present progressive\nUse am + verb-ing for what you are doing now.'},{tpl:'The apple is ___.',choices:['red','reds','redly'],ans:'red'}],level2:[{tpl:'I am _B0_ a _B1_ apple.',blanks:[{choices:['eating','holding','washing'],ans:'eating'},{choices:['red','blue','cold'],ans:'red'}]}],level3:'I am eating a red apple.'},
+        {usedVocab:[['I','나'],['hold','들다'],['apple','사과'],['big','큰']],level1:[{tpl:'I am ___ an apple.',choices:['holding','hold','held'],ans:'holding',tenseHint:'Present progressive\nUse am + verb-ing for what you are doing now.'},{tpl:'The apple looks ___.',choices:['big','bigger','bigly'],ans:'big'}],level2:[{tpl:'I am _B0_ a _B1_ apple.',blanks:[{choices:['holding','eating','drawing'],ans:'holding'},{choices:['big','small','late'],ans:'big'}]}],level3:'I am holding a big apple.'}
+      ]);}
+    ],
+    2:[
+      function(){return makeScene({id:'reading_school',grade:2,tense:'present',timeBadge:'EVERY DAY',tbCls:'tb-present',label:'Reading After School',storyLabels:['read','story','school'],koreanHint:'반복되는 습관을 말하는 문장입니다.'},[
+        {usedVocab:[['read','읽다'],['story','이야기'],['school','학교'],['after','~후에']],level1:[{tpl:'She ___ a story after school.',choices:['reads','read','is reading'],ans:'reads',tenseHint:'Simple present\nUse the simple present for routines and habits.'},{tpl:'She reads after ___.',choices:['school','pizza','sleep'],ans:'school'}],level2:[{tpl:'She _B0_ a story after _B1_.',blanks:[{choices:['reads','read','reading'],ans:'reads'},{choices:['school','dinner','bed'],ans:'school'}]}],level3:'She reads a story after school.'},
+        {usedVocab:[['read','읽다'],['book','책'],['class','수업'],['every day','매일']],level1:[{tpl:'She ___ a book in class.',choices:['reads','read','reading'],ans:'reads',tenseHint:'Simple present\nUse the simple present for routines and habits.'},{tpl:'She does this ___.',choices:['every day','yesterday','now'],ans:'every day'}],level2:[{tpl:'She _B0_ a book in class _B1_.',blanks:[{choices:['reads','read','is reading'],ans:'reads'},{choices:['every day','last night','right now'],ans:'every day'}]}],level3:'She reads a book in class every day.'}
+      ]);},
+      function(){return makeScene({id:'sunny_day',grade:2,tense:'present',timeBadge:'TODAY',tbCls:'tb-present',label:'A Sunny Day',storyLabels:['sunny','play','outside'],koreanHint:'날씨와 기분을 연결하는 자연스러운 문장입니다.'},[
+        {usedVocab:[['sunny','화창한'],['play','놀다'],['outside','밖에서'],['we','우리']],level1:[{tpl:'It is ___ today.',choices:['sunny','sun','sunniest'],ans:'sunny',tenseHint:'Simple present\nUse It is + adjective to describe the weather.'},{tpl:'We ___ outside.',choices:['play','plays','played'],ans:'play'}],level2:[{tpl:'It is _B0_, so we _B1_ outside.',blanks:[{choices:['sunny','rainy','cloudy'],ans:'sunny'},{choices:['play','played','playing'],ans:'play'}]}],level3:'It is sunny, so we play outside.'},
+        {usedVocab:[['sunny','화창한'],['smile','웃다'],['today','오늘'],['happy','행복한']],level1:[{tpl:'I ___ on sunny days.',choices:['smile','smiles','smiled'],ans:'smile',tenseHint:'Simple present\nUse the base verb with I for habits and feelings.'},{tpl:'I feel ___.',choices:['happy','happily','happier'],ans:'happy'}],level2:[{tpl:'I _B0_ today because the sky is _B1_.',blanks:[{choices:['smile','smiled','smiling'],ans:'smile'},{choices:['sunny','noisy','late'],ans:'sunny'}]}],level3:'I smile today because the sky is sunny.'}
+      ]);},
+      function(){return makeScene({id:'homework_done',grade:2,tense:'present',timeBadge:'EVERY NIGHT',tbCls:'tb-present',label:'Homework Time',storyLabels:['write','homework','room'],koreanHint:'학교생활에 가까운 랜덤 문장입니다.'},[
+        {usedVocab:[['write','쓰다'],['homework','숙제'],['quiet','조용한'],['room','방']],level1:[{tpl:'I ___ my homework at night.',choices:['write','writes','wrote'],ans:'write',tenseHint:'Simple present\nUse the base verb with I for routines.'},{tpl:'My room is ___.',choices:['quiet','quietly','quieter'],ans:'quiet'}],level2:[{tpl:'I _B0_ my homework in a _B1_ room.',blanks:[{choices:['write','wrote','am writing'],ans:'write'},{choices:['quiet','loud','late'],ans:'quiet'}]}],level3:'I write my homework in a quiet room.'},
+        {usedVocab:[['finish','끝내다'],['homework','숙제'],['early','일찍'],['night','밤']],level1:[{tpl:'I ___ my homework early.',choices:['finish','finishes','finished'],ans:'finish',tenseHint:'Simple present\nUse the base verb with I for routines.'},{tpl:'I do it at ___.',choices:['night','tree','lunch'],ans:'night'}],level2:[{tpl:'I _B0_ my homework early at _B1_.',blanks:[{choices:['finish','finished','finishing'],ans:'finish'},{choices:['night','school','rain'],ans:'night'}]}],level3:'I finish my homework early at night.'}
+      ]);}
+    ],
+    3:[
+      function(){return makeScene({id:'pizza_dinner',grade:3,tense:'past',timeBadge:'YESTERDAY',tbCls:'tb-past',label:'Dinner Last Night',storyLabels:['ate','pizza','dinner'],koreanHint:'3학년은 자연스러운 과거형을 연습합니다.'},[
+        {usedVocab:[['ate','먹었다'],['pizza','피자'],['dinner','저녁'],['hungry','배고픈']],level1:[{tpl:'She ___ pizza for dinner.',choices:['ate','eats','is eating'],ans:'ate',tenseHint:'Simple past\nUse the past form for something that happened yesterday.'},{tpl:'She was very ___.',choices:['hungry','hungrily','hunger'],ans:'hungry'}],level2:[{tpl:'She _B0_ pizza because she was _B1_.',blanks:[{choices:['ate','eats','eat'],ans:'ate'},{choices:['hungry','quiet','careful'],ans:'hungry'}]}],level3:'She ate pizza for dinner because she was hungry.'},
+        {usedVocab:[['ate','먹었다'],['pizza','피자'],['cheese','치즈'],['last night','어젯밤']],level1:[{tpl:'She ___ pizza last night.',choices:['ate','eat','eating'],ans:'ate',tenseHint:'Simple past\nUse the past form for a finished action.'},{tpl:'The pizza had extra ___.',choices:['cheese','book','rain'],ans:'cheese'}],level2:[{tpl:'She _B0_ pizza with extra _B1_.',blanks:[{choices:['ate','eats','eat'],ans:'ate'},{choices:['cheese','clouds','homework'],ans:'cheese'}]}],level3:'She ate pizza with extra cheese last night.'}
+      ]);},
+      function(){return makeScene({id:'soccer_won',grade:3,tense:'past',timeBadge:'LAST WEEK',tbCls:'tb-past',label:'A Soccer Game',storyLabels:['played','soccer','won'],koreanHint:'실제로 많이 쓰는 we won 문장입니다.'},[
+        {usedVocab:[['played','경기했다'],['won','이겼다'],['team','팀'],['soccer','축구']],level1:[{tpl:'We ___ soccer after school.',choices:['played','play','playing'],ans:'played',tenseHint:'Simple past\nUse played for a finished action in the past.'},{tpl:'Our team ___.',choices:['won','wins','winning'],ans:'won'}],level2:[{tpl:'We _B0_ soccer, and our team _B1_.',blanks:[{choices:['played','play','plays'],ans:'played'},{choices:['won','wins','win'],ans:'won'}]}],level3:'We played soccer, and our team won.'},
+        {usedVocab:[['kicked','찼다'],['ball','공'],['goal','골'],['cheered','환호했다']],level1:[{tpl:'We ___ the ball hard.',choices:['kicked','kick','kicking'],ans:'kicked',tenseHint:'Simple past\nUse kicked for a finished action in the game.'},{tpl:'Then we ___.',choices:['cheered','cheer','cheers'],ans:'cheered'}],level2:[{tpl:'We _B0_ the ball and _B1_ loudly.',blanks:[{choices:['kicked','kick','kicks'],ans:'kicked'},{choices:['cheered','cheer','cheers'],ans:'cheered'}]}],level3:'We kicked the ball and cheered loudly.'}
+      ]);},
+      function(){return makeScene({id:'rained_home',grade:3,tense:'past',timeBadge:'THIS MORNING',tbCls:'tb-past',label:'Rainy Morning',storyLabels:['rain','walk','home'],koreanHint:'이유를 설명하는 과거 문장입니다.'},[
+        {usedVocab:[['rained','비가 왔다'],['walked','걸었다'],['home','집'],['so','그래서']],level1:[{tpl:'It ___ this morning.',choices:['rained','rains','is raining'],ans:'rained',tenseHint:'Simple past\nUse rained for weather in the past.'},{tpl:'We walked ___.',choices:['home','lunch','sunny'],ans:'home'}],level2:[{tpl:'It _B0_, so we walked _B1_.',blanks:[{choices:['rained','rains','rain'],ans:'rained'},{choices:['home','inside','tree'],ans:'home'}]}],level3:'It rained this morning, so we walked home.'},
+        {usedVocab:[['stayed','머물렀다'],['inside','안에서'],['rain','비'],['morning','아침']],level1:[{tpl:'We ___ inside because of the rain.',choices:['stayed','stay','stays'],ans:'stayed',tenseHint:'Simple past\nUse stayed for a finished action in the past.'},{tpl:'The rain started this ___.',choices:['morning','apple','book'],ans:'morning'}],level2:[{tpl:'We _B0_ inside because the rain started this _B1_.',blanks:[{choices:['stayed','stay','stays'],ans:'stayed'},{choices:['morning','park','cat'],ans:'morning'}]}],level3:'We stayed inside because the rain started this morning.'}
+      ]);}
+    ],
+    4:[
+      function(){return makeScene({id:'birthday_party',grade:4,tense:'past',timeBadge:'LAST SATURDAY',tbCls:'tb-past',label:'A Birthday Party',storyLabels:['party','friends','cake'],koreanHint:'조금 더 긴 과거 문장입니다.'},[
+        {usedVocab:[['friends','친구들'],['brought','가져왔다'],['cake','케이크'],['laughed','웃었다']],level1:[{tpl:'My friends ___ a special cake.',choices:['brought','bring','brings'],ans:'brought',tenseHint:'Simple past\nUse brought for a completed action in the past.'},{tpl:'We ___ a lot.',choices:['laughed','laugh','laughs'],ans:'laughed'}],level2:[{tpl:'My friends _B0_ a cake, and we _B1_ a lot.',blanks:[{choices:['brought','bring','brings'],ans:'brought'},{choices:['laughed','laugh','laughs'],ans:'laughed'}]}],level3:'My friends brought a special cake, and we laughed a lot.'},
+        {usedVocab:[['party','파티'],['sang','노래했다'],['birthday song','생일 노래'],['together','함께']],level1:[{tpl:'We ___ the birthday song.',choices:['sang','sing','sings'],ans:'sang',tenseHint:'Simple past\nUse sang for a completed action in the past.'},{tpl:'We sang it ___.',choices:['together','under','yesterdayly'],ans:'together'}],level2:[{tpl:'We _B0_ the birthday song _B1_.',blanks:[{choices:['sang','sing','sings'],ans:'sang'},{choices:['together','late','inside'],ans:'together'}]}],level3:'We sang the birthday song together.'}
+      ]);},
+      function(){return makeScene({id:'zoo_lion',grade:4,tense:'past',timeBadge:'ON MONDAY',tbCls:'tb-past',label:'A Trip to the Zoo',storyLabels:['zoo','lion','observed'],koreanHint:'교과 스타일 어휘를 넣은 과거 문장입니다.'},[
+        {usedVocab:[['observed','관찰했다'],['lion','사자'],['moved','움직였다'],['slowly','천천히']],level1:[{tpl:'We ___ a lion at the zoo.',choices:['observed','observe','observing'],ans:'observed',tenseHint:'Simple past\nUse observed for a completed school trip action.'},{tpl:'It moved very ___.',choices:['slowly','slow','slower'],ans:'slowly'}],level2:[{tpl:'We _B0_ a lion, and it moved _B1_.',blanks:[{choices:['observed','observe','observes'],ans:'observed'},{choices:['slowly','careful','loud'],ans:'slowly'}]}],level3:'We observed a lion at the zoo, and it moved slowly.'},
+        {usedVocab:[['lion','사자'],['rested','쉬었다'],['shade','그늘'],['quietly','조용히']],level1:[{tpl:'The lion ___ in the shade.',choices:['rested','rest','rests'],ans:'rested',tenseHint:'Simple past\nUse rested for a completed action in the past.'},{tpl:'It stayed very ___.',choices:['quietly','quiet','quieter'],ans:'quietly'}],level2:[{tpl:'The lion _B0_ in the shade and stayed _B1_.',blanks:[{choices:['rested','rest','rests'],ans:'rested'},{choices:['quietly','warm','slow'],ans:'quietly'}]}],level3:'The lion rested in the shade and stayed quietly.'}
+      ]);},
+      function(){return makeScene({id:'cleaned_room',grade:4,tense:'past',timeBadge:'YESTERDAY',tbCls:'tb-past',label:'Cleaning My Room',storyLabels:['cleaned','room','finished'],koreanHint:'생활 속 과거 문장을 랜덤으로 만듭니다.'},[
+        {usedVocab:[['cleaned','청소했다'],['room','방'],['finished','끝냈다'],['early','일찍']],level1:[{tpl:'I ___ my room yesterday.',choices:['cleaned','clean','cleans'],ans:'cleaned',tenseHint:'Simple past\nUse cleaned for a finished action yesterday.'},{tpl:'I finished ___.',choices:['early','earlier','earliest'],ans:'early'}],level2:[{tpl:'I _B0_ my room and finished _B1_.',blanks:[{choices:['cleaned','clean','cleans'],ans:'cleaned'},{choices:['early','loud','slow'],ans:'early'}]}],level3:'I cleaned my room and finished early.'},
+        {usedVocab:[['swept','쓸었다'],['floor','바닥'],['sparkled','반짝였다'],['afterward','그 후에']],level1:[{tpl:'I ___ the floor first.',choices:['swept','sweep','sweeps'],ans:'swept',tenseHint:'Simple past\nUse swept for a completed action in the past.'},{tpl:'The room ___.',choices:['sparkled','sparkle','sparkles'],ans:'sparkled'}],level2:[{tpl:'I _B0_ the floor, and the room _B1_ afterward.',blanks:[{choices:['swept','sweep','sweeps'],ans:'swept'},{choices:['sparkled','sparkle','sparkles'],ans:'sparkled'}]}],level3:'I swept the floor, and the room sparkled afterward.'}
+      ]);}
+    ],
+    5:[
+      function(){return makeScene({id:'homework_done',grade:5,tense:'perfect',timeBadge:'ALREADY',tbCls:'tb-perfect',label:'Homework Is Finished',storyLabels:['has finished','homework','ready'],koreanHint:'5학년은 현재완료를 자연스럽게 연습합니다.'},[
+        {usedVocab:[['has finished','끝냈다'],['homework','숙제'],['already','이미'],['ready','준비된']],level1:[{tpl:'She has ___ her homework.',choices:['finished','finish','finishing'],ans:'finished',tenseHint:'Present perfect\nUse has + past participle for a completed action with a present result.'},{tpl:'She is ___ for class now.',choices:['ready','readily','readier'],ans:'ready'}],level2:[{tpl:'She has _B0_ her homework, so she is _B1_ for class.',blanks:[{choices:['finished','finish','finishes'],ans:'finished'},{choices:['ready','late','noisy'],ans:'ready'}]}],level3:'She has already finished her homework.'},
+        {usedVocab:[['has completed','완료했다'],['assignment','과제'],['quietly','조용히'],['today','오늘']],level1:[{tpl:'She has ___ her assignment.',choices:['completed','complete','completing'],ans:'completed',tenseHint:'Present perfect\nUse has + past participle for a completed action with a present result.'},{tpl:'She did it ___.',choices:['quietly','quiet','quieter'],ans:'quietly'}],level2:[{tpl:'She has _B0_ her assignment _B1_.',blanks:[{choices:['completed','complete','completes'],ans:'completed'},{choices:['quietly','yellow','slow'],ans:'quietly'}]}],level3:'She has completed her assignment quietly today.'}
+      ]);},
+      function(){return makeScene({id:'eaten_lunch',grade:5,tense:'perfect',timeBadge:'JUST',tbCls:'tb-perfect',label:'Lunch Is Over',storyLabels:['have eaten','lunch','hungry'],koreanHint:'막 끝난 일을 현재완료로 말합니다.'},[
+        {usedVocab:[['have eaten','먹었다'],['lunch','점심'],['just','방금'],['hungry','배고픈']],level1:[{tpl:'They have just ___ lunch.',choices:['eaten','eat','ate'],ans:'eaten',tenseHint:'Present perfect\nUse have just + past participle for a very recent action.'},{tpl:'They are not ___.',choices:['hungry','hungrier','hungrily'],ans:'hungry'}],level2:[{tpl:'They have just _B0_ lunch, so they are not _B1_.',blanks:[{choices:['eaten','eat','eats'],ans:'eaten'},{choices:['hungry','quiet','ready'],ans:'hungry'}]}],level3:'They have just eaten lunch, so they are not hungry.'},
+        {usedVocab:[['have finished','끝냈다'],['lunch','점심'],['already','이미'],['smiling','웃고 있는']],level1:[{tpl:'They have ___ lunch already.',choices:['finished','finish','finishes'],ans:'finished',tenseHint:'Present perfect\nUse have + past participle for a completed action with a present result.'},{tpl:'Now they are ___.',choices:['smiling','smile','smiled'],ans:'smiling'}],level2:[{tpl:'They have _B0_ lunch, and now they are _B1_.',blanks:[{choices:['finished','finish','finishes'],ans:'finished'},{choices:['smiling','smile','smiled'],ans:'smiling'}]}],level3:'They have finished lunch, and now they are smiling.'}
+      ]);},
+      function(){return makeScene({id:'visited_london',grade:5,tense:'perfect',timeBadge:'BEFORE',tbCls:'tb-perfect',label:'A Trip Before Now',storyLabels:['have visited','London','before'],koreanHint:'경험을 말하는 현재완료 문장입니다.'},[
+        {usedVocab:[['have visited','방문한 적이 있다'],['London','런던'],['before','전에'],['twice','두 번']],level1:[{tpl:'I have ___ London before.',choices:['visited','visit','visiting'],ans:'visited',tenseHint:'Present perfect\nUse have visited to talk about life experience.'},{tpl:'I have been there ___.',choices:['twice','two','second'],ans:'twice'}],level2:[{tpl:'I have _B0_ London _B1_.',blanks:[{choices:['visited','visit','visits'],ans:'visited'},{choices:['before','yesterday','now'],ans:'before'}]}],level3:'I have visited London before.'},
+        {usedVocab:[['have seen','보았다'],['clock tower','시계탑'],['city','도시'],['once','한 번']],level1:[{tpl:'I have ___ the clock tower once.',choices:['seen','see','saw'],ans:'seen',tenseHint:'Present perfect\nUse have + past participle to talk about experience.'},{tpl:'It is in the ___.',choices:['city','bed','park'],ans:'city'}],level2:[{tpl:'I have _B0_ the clock tower in the _B1_.',blanks:[{choices:['seen','see','saw'],ans:'seen'},{choices:['city','kitchen','rain'],ans:'city'}]}],level3:'I have seen the clock tower in the city.'}
+      ]);}
+    ],
+    6:[
+      function(){return makeScene({id:'visited_london',grade:6,tense:'perfect',timeBadge:'RECENTLY',tbCls:'tb-perfect',label:'Learning From Travel',storyLabels:['have visited','museum','learned'],koreanHint:'6학년은 조금 더 확장된 현재완료 문장을 씁니다.'},[
+        {usedVocab:[['have visited','방문했다'],['museum','박물관'],['recently','최근에'],['learned','배웠다']],level1:[{tpl:'We have ___ the museum recently.',choices:['visited','visit','visiting'],ans:'visited',tenseHint:'Present perfect\nUse have visited for a recent experience connected to now.'},{tpl:'We have ___ a lot.',choices:['learned','learn','learning'],ans:'learned'}],level2:[{tpl:'We have _B0_ the museum and _B1_ a lot.',blanks:[{choices:['visited','visit','visits'],ans:'visited'},{choices:['learned','learn','learning'],ans:'learned'}]}],level3:'We have visited the museum recently and learned a lot.'},
+        {usedVocab:[['have explored','둘러보았다'],['city','도시'],['together','함께'],['memories','추억']],level1:[{tpl:'We have ___ the city together.',choices:['explored','explore','exploring'],ans:'explored',tenseHint:'Present perfect\nUse have + past participle for experience connected to the present.'},{tpl:'We have made good ___.',choices:['memories','memory','memoried'],ans:'memories'}],level2:[{tpl:'We have _B0_ the city and made good _B1_.',blanks:[{choices:['explored','explore','explores'],ans:'explored'},{choices:['memories','tables','storms'],ans:'memories'}]}],level3:'We have explored the city and made good memories.'}
+      ]);},
+      function(){return makeScene({id:'cleaned_room',grade:6,tense:'perfect',timeBadge:'ALREADY',tbCls:'tb-perfect',label:'Everything Is Ready',storyLabels:['have cleaned','room','ready'],koreanHint:'already를 넣은 자연스러운 현재완료 문장입니다.'},[
+        {usedVocab:[['have cleaned','청소했다'],['already','이미'],['room','방'],['ready','준비된']],level1:[{tpl:'I have already ___ my room.',choices:['cleaned','clean','cleaning'],ans:'cleaned',tenseHint:'Present perfect\nUse have already + past participle for something completed sooner than expected.'},{tpl:'Now I am ___.',choices:['ready','readily','readier'],ans:'ready'}],level2:[{tpl:'I have already _B0_ my room, so I am _B1_.',blanks:[{choices:['cleaned','clean','cleans'],ans:'cleaned'},{choices:['ready','busy','late'],ans:'ready'}]}],level3:'I have already cleaned my room, so I am ready.'},
+        {usedVocab:[['have swept','쓸었다'],['floor','바닥'],['sparkling','반짝이는'],['room','방']],level1:[{tpl:'I have ___ the floor.',choices:['swept','sweep','sweeping'],ans:'swept',tenseHint:'Present perfect\nUse have + past participle for a completed action with a result now.'},{tpl:'The room looks ___.',choices:['sparkling','sparkle','sparkled'],ans:'sparkling'}],level2:[{tpl:'I have _B0_ the floor, and the room looks _B1_.',blanks:[{choices:['swept','sweep','sweeps'],ans:'swept'},{choices:['sparkling','dusty','sleepy'],ans:'sparkling'}]}],level3:'I have swept the floor, and the room looks sparkling.'}
+      ]);},
+      function(){return makeScene({id:'eaten_lunch',grade:6,tense:'perfect',timeBadge:'JUST',tbCls:'tb-perfect',label:'Just Finished Lunch',storyLabels:['has eaten','lunch','back'],koreanHint:'막 끝난 상황을 현재완료로 자연스럽게 표현합니다.'},[
+        {usedVocab:[['has eaten','먹었다'],['lunch','점심'],['just','방금'],['back','돌아온']],level1:[{tpl:'She has just ___ lunch.',choices:['eaten','eat','ate'],ans:'eaten',tenseHint:'Present perfect\nUse has just + past participle for an action that finished moments ago.'},{tpl:'She is ___ in class now.',choices:['back','backed','backing'],ans:'back'}],level2:[{tpl:'She has just _B0_ lunch, and she is _B1_ in class now.',blanks:[{choices:['eaten','eat','eats'],ans:'eaten'},{choices:['back','early','quiet'],ans:'back'}]}],level3:'She has just eaten lunch, and she is back in class now.'},
+        {usedVocab:[['has finished','끝냈다'],['meal','식사'],['ready','준비된'],['study','공부하다']],level1:[{tpl:'She has ___ her meal.',choices:['finished','finish','finishing'],ans:'finished',tenseHint:'Present perfect\nUse has + past participle for a completed action with a present result.'},{tpl:'She is ___ to study.',choices:['ready','readier','readily'],ans:'ready'}],level2:[{tpl:'She has _B0_ her meal, so she is _B1_ to study.',blanks:[{choices:['finished','finish','finishes'],ans:'finished'},{choices:['ready','rainy','slow'],ans:'ready'}]}],level3:'She has finished her meal, so she is ready to study.'}
+      ]);}
+    ]
+  };
+  return shuffled((defs[grade]||[]).map(function(fn){return fn();}));
+}
+function sceneList(){
+  if(!RANDOM_SCENE_CACHE[S.grade]) RANDOM_SCENE_CACHE[S.grade]=buildGradeScenes(S.grade);
+  return RANDOM_SCENE_CACHE[S.grade];
+}
+function startSession(){
+  checkStreak();
+  RANDOM_SCENE_CACHE[S.grade]=buildGradeScenes(S.grade);
+  var sc=sceneList();
+  if(!sc.length){toast('No scenes for this grade.');return;}
+  G.scene=sc[S.sceneIdx%sc.length];
+  G.lv=1;G.step=0;G.blankIdx=0;
+  G.l2ans=[];G.l3words=[];G.l3ans=[];G.l3used=[];
+  G.hints=0;G.wrongs=0;G.sesStars=0;G.sentences=[];
+  document.getElementById('g-streak').textContent=S.streak;
+  document.getElementById('g-stars').textContent=S.stars;
+  var tag=document.getElementById('g-grade-tag');
+  tag.textContent=S.grade+'학년';tag.style.background=GCOL[S.grade-1];
+  renderSceneCard();renderStep();
+  showScr('scr-game');
+}
+function renderSceneCard(){
+  var sc=G.scene;
+  var tbCls=sc.tbCls||'tb-present';
+  var title=sceneTitle(sc);
+  var html='<div class="sc-head"><span class="time-badge '+tbCls+'">'+esc(sc.timeBadge)+'</span><span class="sc-label">'+esc(title)+'</span></div>'+
+    '<div class="scene-ill-wrap"><div class="scene-ill">'+sceneIllustration(sc.id)+'</div></div><div class="scene-tags">';
+  (sc.storyLabels||[]).forEach(function(lbl){html+='<span class="scene-tag">'+esc(lbl)+'</span>';});
+  html+='</div>';
+  if(sc.usedVocab&&sc.usedVocab.length){
+    html+='<details class="used-vocab-box"><summary class="used-vocab-toggle">사용 어휘 보기</summary><div class="used-vocab-list">';
+    sc.usedVocab.forEach(function(item){html+='<div class="used-vocab-chip"><span class="vocab-en">'+esc(item[0])+'</span><span class="vocab-ko">'+esc(item[1]||'')+'</span></div>';});
+    html+='</div></details>';
+  }
+  html+='<div class="ko-hint"><span class="ko-icon">💡</span>'+esc(sc.koreanHint)+'</div>';
+  document.getElementById('scene-card').innerHTML=html;
+}
+
+// ===== Template-based vocabulary scene generator =====
+// This block intentionally overrides the older hard-coded scene bank above.
+// It keeps the existing game UI, but generates playable sentences from
+// controlled vocabulary metadata plus scene-compatible image layers.
+WEBP_SCENE_VER='20260605d';
+RANDOM_SCENE_CACHE={};
+SCENE_COMPONENTS={
+  park_dog:{bg:'park_day',main:'dog_run'},
+  home_cat:{bg:'bedroom',main:'cat_sleep'},
+  eating_apple:{bg:'sunny_field',main:'child_apple',props:['apple']},
+  reading_school:{bg:'schoolroom',main:'child_read',props:['book']},
+  sunny_day:{bg:'sunny_field',main:'child_smile'},
+  pizza_dinner:{bg:'dinner_room',main:'pizza_plate'},
+  soccer_won:{bg:'soccer_field',main:'soccer_ball',props:['trophy']},
+  rained_home:{bg:'rainy_house'},
+  birthday_party:{bg:'party_room',main:'cake'},
+  zoo_lion:{bg:'zoo',main:'lion'},
+  homework_done:{bg:'study_room',main:'check'},
+  eaten_lunch:{bg:'lunch_room',main:'tray_child'},
+  cleaned_room:{bg:'clean_room',main:'broom'},
+  visited_london:{bg:'london',main:'traveler'}
+};
+
+var GEN_WORDS={
+  subjects:[
+    {key:'i',text:'I',ko:'나',type:'person',isFirst:true},
+    {key:'we',text:'We',ko:'우리',type:'people',isPlural:true},
+    {key:'she',text:'She',ko:'그녀',type:'person'},
+    {key:'they',text:'They',ko:'그들',type:'people',isPlural:true},
+    {key:'dog',text:'The dog',ko:'개',type:'animal'},
+    {key:'cat',text:'The cat',ko:'고양이',type:'animal'},
+    {key:'lion',text:'The lion',ko:'사자',type:'animal'}
+  ],
+  actions:[
+    {key:'run',ko:'달리다',base:'run',ing:'running',past:'ran',pp:'run',main:'dog_run',objects:[],places:['park'],subjects:['dog']},
+    {key:'walk',ko:'걷다',base:'walk',ing:'walking',past:'walked',pp:'walked',main:'dog_walk',objects:[],places:['park','rain'],subjects:['dog','we']},
+    {key:'sleep',ko:'자다',base:'sleep',ing:'sleeping',past:'slept',pp:'slept',main:'cat_sleep',objects:[],places:['bedroom'],subjects:['cat']},
+    {key:'eat',ko:'먹다',base:'eat',ing:'eating',past:'ate',pp:'eaten',main:'child_apple',objects:['apple','pizza','lunch'],places:['field','dinner','lunch'],subjects:['i','she','they']},
+    {key:'hold',ko:'들다',base:'hold',ing:'holding',past:'held',pp:'held',main:'child_apple',objects:['apple','book'],places:['field','school'],subjects:['i','she']},
+    {key:'read',ko:'읽다',base:'read',ing:'reading',past:'read',pp:'read',main:'child_read',objects:['book','story'],places:['school'],subjects:['she','i']},
+    {key:'write',ko:'쓰다',base:'write',ing:'writing',past:'wrote',pp:'written',main:'child_read',objects:['homework'],places:['study'],subjects:['i','she']},
+    {key:'play',ko:'놀다',base:'play',ing:'playing',past:'played',pp:'played',main:'soccer_ball',objects:['soccer'],places:['soccer','field'],subjects:['we']},
+    {key:'kick',ko:'차다',base:'kick',ing:'kicking',past:'kicked',pp:'kicked',main:'soccer_ball',objects:['ball'],places:['soccer'],subjects:['we']},
+    {key:'clean',ko:'청소하다',base:'clean',ing:'cleaning',past:'cleaned',pp:'cleaned',main:'broom',objects:['room'],places:['clean_room','study'],subjects:['i','she']},
+    {key:'finish',ko:'끝내다',base:'finish',ing:'finishing',past:'finished',pp:'finished',main:'check',objects:['homework','assignment','meal'],places:['study','lunch'],subjects:['i','she','they']},
+    {key:'visit',ko:'방문하다',base:'visit',ing:'visiting',past:'visited',pp:'visited',main:'traveler',objects:['London','museum','city'],places:['london'],subjects:['i','we']},
+    {key:'observe',ko:'관찰하다',base:'observe',ing:'observing',past:'observed',pp:'observed',main:'lion',objects:['lion'],places:['zoo'],subjects:['we']}
+  ],
+  objects:[
+    {key:'apple',text:'apple',ko:'사과',article:'an',prop:'apple',places:['field','lunch']},
+    {key:'book',text:'book',ko:'책',article:'a',main:'child_read',prop:'book',places:['school','study']},
+    {key:'story',text:'story',ko:'이야기',article:'a',prop:'book',places:['school']},
+    {key:'homework',text:'homework',ko:'숙제',article:'own',places:['study']},
+    {key:'assignment',text:'assignment',ko:'과제',article:'an',places:['study']},
+    {key:'pizza',text:'pizza',ko:'피자',article:'',main:'pizza_plate',places:['dinner']},
+    {key:'lunch',text:'lunch',ko:'점심',article:'',main:'tray_child',places:['lunch']},
+    {key:'ball',text:'ball',ko:'공',article:'the',main:'soccer_ball',places:['soccer']},
+    {key:'soccer',text:'soccer',ko:'축구',article:'',main:'soccer_ball',places:['soccer']},
+    {key:'room',text:'room',ko:'방',article:'my',main:'broom',places:['clean_room','study']},
+    {key:'meal',text:'meal',ko:'식사',article:'her',main:'tray_child',places:['lunch']},
+    {key:'London',text:'London',ko:'런던',article:'',main:'traveler',places:['london']},
+    {key:'museum',text:'museum',ko:'박물관',article:'the',main:'traveler',places:['london']},
+    {key:'city',text:'city',ko:'도시',article:'the',main:'traveler',places:['london']},
+    {key:'lion',text:'lion',ko:'사자',article:'a',main:'lion',places:['zoo']}
+  ],
+  qualities:[
+    {key:'happy',text:'happy',ko:'행복한'},
+    {key:'quiet',text:'quiet',ko:'조용한'},
+    {key:'ready',text:'ready',ko:'준비된'},
+    {key:'hungry',text:'hungry',ko:'배고픈'},
+    {key:'sunny',text:'sunny',ko:'화창한'},
+    {key:'early',text:'early',ko:'일찍'},
+    {key:'slowly',text:'slowly',ko:'천천히'}
+  ],
+  places:{
+    park:{text:'the park',phrase:'in the park',ko:'공원',bg:'park_day',sceneId:'park_dog'},
+    field:{text:'the field',phrase:'in the field',ko:'들판',bg:'sunny_field',sceneId:'eating_apple'},
+    bedroom:{text:'the bed',phrase:'on the bed',ko:'침대',bg:'bedroom',sceneId:'home_cat'},
+    school:{text:'school',phrase:'at school',ko:'학교',bg:'schoolroom',sceneId:'reading_school'},
+    study:{text:'the study room',phrase:'in the study room',ko:'공부방',bg:'study_room',sceneId:'homework_done'},
+    dinner:{text:'dinner',phrase:'at dinner',ko:'저녁',bg:'dinner_room',sceneId:'pizza_dinner'},
+    lunch:{text:'lunch',phrase:'at lunch',ko:'점심',bg:'lunch_room',sceneId:'eaten_lunch'},
+    soccer:{text:'the soccer field',phrase:'on the soccer field',ko:'축구장',bg:'soccer_field',sceneId:'soccer_won'},
+    rain:{text:'home',phrase:'home',ko:'집',bg:'rainy_house',sceneId:'rained_home'},
+    zoo:{text:'the zoo',phrase:'at the zoo',ko:'동물원',bg:'zoo',sceneId:'zoo_lion'},
+    clean_room:{text:'my room',phrase:'in my room',ko:'내 방',bg:'clean_room',sceneId:'cleaned_room'},
+    london:{text:'London',phrase:'in London',ko:'런던',bg:'london',sceneId:'visited_london'}
+  }
+};
+
+function wordByKey(list,key){for(var i=0;i<list.length;i++)if(list[i].key===key)return list[i];return null;}
+function ownerFor(s){return s&&s.key==='i'?'my':(s&&s.key==='we'?'our':(s&&(s.key==='they'||s.isPlural)?'their':'her'));}
+function objectText(o,s){if(o.article==='own')return ownerFor(s)+' '+o.text;return (o.article?o.article+' ':'')+o.text;}
+function placePhrase(p){return p.phrase||('in '+p.text);}
+function subjectVerb(s,v){return s.isFirst||s.isPlural?v.base:(v.base==='go'?'goes':v.base+'s');}
+function beNow(s){return s.isFirst?'am':(s.isPlural?'are':'is');}
+function haveNow(s){return s.isPlural||s.isFirst?'have':'has';}
+function sample(list,n){return shuffled(list).slice(0,n);}
+function sceneAssetId(placeKey,action,obj){
+  var p=GEN_WORDS.places[placeKey]||GEN_WORDS.places.field;
+  return p.sceneId||'sunny_day';
+}
+function setSceneComponent(id,placeKey,action,obj,extraProp){
+  var p=GEN_WORDS.places[placeKey]||GEN_WORDS.places.field;
+  var main=(obj&&obj.main)||action.main||'child_smile';
+  var props=[];
+  if(obj&&obj.prop)props.push(obj.prop);
+  if(extraProp)props.push(extraProp);
+  SCENE_COMPONENTS[id]={bg:p.bg,main:main,props:props};
+}
+function generatedScene(base,variant){
+  var id=base.id+'_'+Math.floor(Math.random()*100000);
+  setSceneComponent(id,base.place,base.action,base.object,base.prop);
+  return {
+    id:id,grade:base.grade,tense:base.tense,timeBadge:base.timeBadge,tbCls:base.tbCls,
+    label:base.label,storyLabels:base.storyLabels,koreanHint:base.koreanHint,
+    usedVocab:base.usedVocab,level1:variant.level1,level2:variant.level2,level3:variant.level3
+  };
+}
+function distractForms(v,correct){
+  var forms=[v.base,v.ing,v.past,v.pp].filter(function(x,i,a){return x&&a.indexOf(x)===i;});
+  return shuffled([correct].concat(forms.filter(function(x){return x!==correct;}))).slice(0,3);
+}
+function distractObjects(correct){
+  return shuffled([correct,'book','apple','homework','pizza','school','room','ball'].filter(function(x,i,a){return x&&a.indexOf(x)===i;})).slice(0,3);
+}
+function makePresentProgressive(grade,subjectKey,verbKey,objKey,placeKey){
+  var s=wordByKey(GEN_WORDS.subjects,subjectKey),v=wordByKey(GEN_WORDS.actions,verbKey),o=objKey?wordByKey(GEN_WORDS.objects,objKey):null,p=GEN_WORDS.places[placeKey];
+  var obj=o?objectText(o,s):'', verb=v.ing, be=beNow(s), place=placePhrase(p);
+  var full=o?s.text+' '+be+' '+verb+' '+obj+'.':s.text+' '+be+' '+verb+' '+place+'.';
+  var l2=o?s.text+' '+be+' _B0_ '+objectText(o,s)+'.':s.text+' '+be+' _B0_ _B1_.';
+  var blanks=o?[{choices:distractForms(v,verb),ans:verb}]:[{choices:distractForms(v,verb),ans:verb},{choices:distractObjects(place),ans:place}];
+  return generatedScene({
+    id:sceneAssetId(placeKey,v,o),grade:grade,tense:'present',timeBadge:'NOW',tbCls:'tb-present',
+    label:'Vocabulary Scene',place:placeKey,action:v,object:o,
+    storyLabels:[s.text.replace('The ',''),v.base,o?o.text:p.text],
+    koreanHint:'어휘에서 고른 단어로 만든 현재진행 문장입니다.',
+    usedVocab:[[s.text,s.ko],[v.base,v.ko]].concat(o?[[o.text,o.ko]]:[[p.text,p.ko]])
+  },{level1:[{tpl:s.text+' '+be+' ___'+(o?' '+obj:'.'),choices:distractForms(v,verb),ans:verb,tenseHint:'Present progressive\nUse '+be+' + verb-ing.'}],level2:[{tpl:l2,blanks:blanks}],level3:full});
+}
+function makeSimplePresent(grade,subjectKey,verbKey,objKey,placeKey){
+  var s=wordByKey(GEN_WORDS.subjects,subjectKey),v=wordByKey(GEN_WORDS.actions,verbKey),o=objKey?wordByKey(GEN_WORDS.objects,objKey):null,p=GEN_WORDS.places[placeKey];
+  var verb=subjectVerb(s,v), place=placePhrase(p), full=o?s.text+' '+verb+' '+objectText(o,s)+' every day.':s.text+' '+verb+' '+place+' every day.';
+  return generatedScene({
+    id:sceneAssetId(placeKey,v,o),grade:grade,tense:'present',timeBadge:'EVERY DAY',tbCls:'tb-present',
+    label:'Daily Vocabulary',place:placeKey,action:v,object:o,
+    storyLabels:[s.text.replace('The ',''),v.base,o?o.text:p.text],
+    koreanHint:'어휘에서 고른 단어로 만든 반복 습관 문장입니다.',
+    usedVocab:[[s.text,s.ko],[v.base,v.ko]].concat(o?[[o.text,o.ko]]:[[p.text,p.ko]])
+  },{level1:[{tpl:s.text+' ___ '+(o?objectText(o,s):place)+' every day.',choices:distractForms(v,verb),ans:verb,tenseHint:'Simple present\nUse this tense for routines.'}],level2:[{tpl:s.text+' _B0_ _B1_ every day.',blanks:[{choices:distractForms(v,verb),ans:verb},{choices:distractObjects(o?objectText(o,s):place),ans:o?objectText(o,s):place}]}],level3:full});
+}
+function makeSimplePast(grade,subjectKey,verbKey,objKey,placeKey){
+  var s=wordByKey(GEN_WORDS.subjects,subjectKey),v=wordByKey(GEN_WORDS.actions,verbKey),o=objKey?wordByKey(GEN_WORDS.objects,objKey):null,p=GEN_WORDS.places[placeKey];
+  var place=placePhrase(p), full=o?s.text+' '+v.past+' '+objectText(o,s)+' yesterday.':s.text+' '+v.past+' '+place+' yesterday.';
+  return generatedScene({
+    id:sceneAssetId(placeKey,v,o),grade:grade,tense:'past',timeBadge:'YESTERDAY',tbCls:'tb-past',
+    label:'Past Vocabulary',place:placeKey,action:v,object:o,
+    storyLabels:[s.text.replace('The ',''),v.past,o?o.text:p.text],
+    koreanHint:'어휘에서 고른 단어로 만든 과거형 문장입니다.',
+    usedVocab:[[s.text,s.ko],[v.past,v.ko]].concat(o?[[o.text,o.ko]]:[[p.text,p.ko]])
+  },{level1:[{tpl:s.text+' ___ '+(o?objectText(o,s):place)+' yesterday.',choices:distractForms(v,v.past),ans:v.past,tenseHint:'Simple past\nUse the past form for a finished action.'}],level2:[{tpl:s.text+' _B0_ _B1_ yesterday.',blanks:[{choices:distractForms(v,v.past),ans:v.past},{choices:distractObjects(o?objectText(o,s):place),ans:o?objectText(o,s):place}]}],level3:full});
+}
+function makePresentPerfect(grade,subjectKey,verbKey,objKey,placeKey){
+  var s=wordByKey(GEN_WORDS.subjects,subjectKey),v=wordByKey(GEN_WORDS.actions,verbKey),o=wordByKey(GEN_WORDS.objects,objKey),hv=haveNow(s);
+  var full=s.text+' '+hv+' already '+v.pp+' '+objectText(o,s)+'.';
+  return generatedScene({
+    id:sceneAssetId(placeKey,v,o),grade:grade,tense:'perfect',timeBadge:'ALREADY',tbCls:'tb-perfect',
+    label:'Perfect Vocabulary',place:placeKey,action:v,object:o,
+    storyLabels:[s.text.replace('The ',''),hv+' '+v.pp,o.text],
+    koreanHint:'어휘에서 고른 단어로 만든 현재완료 문장입니다.',
+    usedVocab:[[s.text,s.ko],[hv+' '+v.pp,v.ko],[o.text,o.ko],['already','이미']]
+  },{level1:[{tpl:s.text+' '+hv+' already ___ '+objectText(o,s)+'.',choices:distractForms(v,v.pp),ans:v.pp,tenseHint:'Present perfect\nUse have/has + past participle.'}],level2:[{tpl:s.text+' _B0_ already _B1_ '+objectText(o,s)+'.',blanks:[{choices:shuffled([hv,hv==='have'?'has':'have','am']),ans:hv},{choices:distractForms(v,v.pp),ans:v.pp}]}],level3:full});
+}
+function buildGradeScenes(grade){
+  var scenes=[];
+  if(grade===1){
+    scenes.push(makePresentProgressive(1,'dog','run',null,'park'));
+    scenes.push(makePresentProgressive(1,'dog','walk',null,'park'));
+    scenes.push(makePresentProgressive(1,'cat','sleep',null,'bedroom'));
+    scenes.push(makePresentProgressive(1,'i','eat','apple','field'));
+    scenes.push(makePresentProgressive(1,'i','hold','apple','field'));
+  }else if(grade===2){
+    scenes.push(makeSimplePresent(2,'she','read','book','school'));
+    scenes.push(makeSimplePresent(2,'i','write','homework','study'));
+    scenes.push(makeSimplePresent(2,'we','play','soccer','soccer'));
+    scenes.push(makePresentProgressive(2,'she','hold','book','school'));
+    scenes.push(makeSimplePresent(2,'i','read','story','school'));
+  }else if(grade===3){
+    scenes.push(makeSimplePast(3,'she','eat','pizza','dinner'));
+    scenes.push(makeSimplePast(3,'we','play','soccer','soccer'));
+    scenes.push(makeSimplePast(3,'we','kick','ball','soccer'));
+    scenes.push(makeSimplePast(3,'we','walk',null,'rain'));
+    scenes.push(makeSimplePast(3,'i','clean','room','clean_room'));
+  }else if(grade===4){
+    scenes.push(makeSimplePast(4,'we','observe','lion','zoo'));
+    scenes.push(makeSimplePast(4,'i','finish','homework','study'));
+    scenes.push(makeSimplePast(4,'she','read','book','school'));
+    scenes.push(makeSimplePast(4,'we','visit','museum','london'));
+    scenes.push(makeSimplePast(4,'i','hold','apple','field'));
+  }else if(grade===5){
+    scenes.push(makePresentPerfect(5,'she','finish','homework','study'));
+    scenes.push(makePresentPerfect(5,'they','eat','lunch','lunch'));
+    scenes.push(makePresentPerfect(5,'i','visit','London','london'));
+    scenes.push(makePresentPerfect(5,'she','finish','assignment','study'));
+    scenes.push(makePresentPerfect(5,'i','clean','room','clean_room'));
+  }else{
+    scenes.push(makePresentPerfect(6,'we','visit','museum','london'));
+    scenes.push(makePresentPerfect(6,'we','visit','city','london'));
+    scenes.push(makePresentPerfect(6,'she','eat','meal','lunch'));
+    scenes.push(makePresentPerfect(6,'i','finish','homework','study'));
+    scenes.push(makePresentPerfect(6,'i','clean','room','clean_room'));
+  }
+  return shuffled(scenes);
+}
+function sceneList(){
+  if(!RANDOM_SCENE_CACHE[S.grade]) RANDOM_SCENE_CACHE[S.grade]=buildGradeScenes(S.grade);
+  return RANDOM_SCENE_CACHE[S.grade];
+}
+function sceneIllustration(id){
+  var c=SCENE_COMPONENTS[id];
+  if(!c) return '<img src="./scene_webp/'+encodeURIComponent(id)+'.webp?v='+WEBP_SCENE_VER+'" alt="'+esc(id)+'">';
+  var html='<div class="scene-stack">';
+  if(c.bg) html+='<img class="scene-layer bg" src="./layer_assets/bg/'+encodeURIComponent(c.bg)+'.webp?v='+WEBP_SCENE_VER+'" alt="">';
+  if(c.main) html+='<img class="scene-layer main" src="./layer_assets/main/'+encodeURIComponent(c.main)+'.webp?v='+WEBP_SCENE_VER+'" alt="">';
+  (c.props||[]).forEach(function(p){html+='<img class="scene-layer prop" src="./layer_assets/prop/'+encodeURIComponent(p)+'.webp?v='+WEBP_SCENE_VER+'" alt="">';});
+  html+='</div>';
+  return html;
+}
+function startSession(){
+  checkStreak();
+  RANDOM_SCENE_CACHE[S.grade]=buildGradeScenes(S.grade);
+  var sc=sceneList();
+  if(!sc.length){toast('No scenes for this grade.');return;}
+  G.scene=sc[S.sceneIdx%sc.length];
+  G.lv=1;G.step=0;G.blankIdx=0;
+  G.l2ans=[];G.l3words=[];G.l3ans=[];G.l3used=[];
+  G.hints=0;G.wrongs=0;G.sesStars=0;G.sentences=[];
+  document.getElementById('g-streak').textContent=S.streak;
+  document.getElementById('g-stars').textContent=S.stars;
+  var tag=document.getElementById('g-grade-tag');
+  tag.textContent=S.grade+'학년';tag.style.background=GCOL[S.grade-1];
+  renderSceneCard();renderStep();
+  showScr('scr-game');
+}
+function renderSceneCard(){
+  var sc=G.scene;
+  var tbCls=sc.tbCls||'tb-present';
+  var title=sceneTitle(sc);
+  var html='<div class="sc-head"><span class="time-badge '+tbCls+'">'+esc(sc.timeBadge)+'</span><span class="sc-label">'+esc(title)+'</span></div>'+
+    '<div class="scene-ill-wrap"><div class="scene-ill">'+sceneIllustration(sc.id)+'</div></div><div class="scene-tags">';
+  (sc.storyLabels||[]).forEach(function(lbl){html+='<span class="scene-tag">'+esc(lbl)+'</span>';});
+  html+='</div>';
+  if(sc.usedVocab&&sc.usedVocab.length){
+    html+='<details class="used-vocab-box"><summary class="used-vocab-toggle">사용 어휘 보기</summary><div class="used-vocab-list">';
+    sc.usedVocab.forEach(function(item){html+='<div class="used-vocab-chip"><span class="vocab-en">'+esc(item[0])+'</span><span class="vocab-ko">'+esc(item[1]||'')+'</span></div>';});
+    html+='</div></details>';
+  }
+  html+='<div class="ko-hint"><span class="ko-icon">💡</span>'+esc(sc.koreanHint)+'</div>';
+  document.getElementById('scene-card').innerHTML=html;
+}
+
 function init(){
   loadS();checkStreak();renderHome();
   document.getElementById('btn-play').addEventListener('click',startSession);
