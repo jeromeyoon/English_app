@@ -613,8 +613,24 @@ function makeSentence(){
   localMakeSentence();
 }
 
-function speakSentence(){
-  if(!currentSentence||!window.speechSynthesis)return;
+async function speakSentence(){
+  if(!currentSentence)return;
+  try{
+    var resp=await fetch(API_URL+"/tts",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({text:currentSentence,speed:currentSpeed})
+    });
+    if(resp.ok){
+      var blob=await resp.blob();
+      var audioUrl=URL.createObjectURL(blob);
+      var audio=new Audio(audioUrl);
+      audio.onended=function(){URL.revokeObjectURL(audioUrl);};
+      await audio.play();
+      return;
+    }
+  }catch(e){}
+  if(!window.speechSynthesis)return;
   var u=new SpeechSynthesisUtterance(currentSentence);
   u.lang="en-US";u.rate=speedMap[currentSpeed]||0.75;
   window.speechSynthesis.cancel();window.speechSynthesis.speak(u);
