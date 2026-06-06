@@ -177,6 +177,7 @@ my, her, help, take, about, where, soon, sad, every, pencil</textarea>
   <div class="buttons"><button class="danger" id="clearBtn" type="button">저장 문장 지우기</button></div>
 </section>
 </main>
+<script src="generated_sentence_bank.js"></script>
 <script>
 const API_URL = "http://localhost:8000";
 var originalWords = document.getElementById("wordList").value;
@@ -192,6 +193,7 @@ var quizWords = [];
 var quizAnswerWords = [];
 var quizAnswerIndexes = [];
 var quizUsedIndexes = [];
+var cachedSentenceTurn = 0;
 
 var gradeInfo = {
   1:"⭐ 3단어 기초 문장",
@@ -475,7 +477,7 @@ function isAllowedPattern(p,a){
   return true;
 }
 
-function makeSentence(){
+function localMakeSentence(){
   try{
     var a=getAllowedWords(),customWords=syncRecentAddedWords(),ps=gradePatterns[currentGrade],ok=[],okRecent=[];
     for(var i=0;i<ps.length;i++){if(isAllowedPattern(ps[i],a))ok.push(ps[i]);}
@@ -528,6 +530,87 @@ function makeSentence(){
     for(var k=0;k<used.length;k++)html+='<span class="word-chip">'+used[k]+'</span>';
     document.getElementById("usedWords").innerHTML=html;
   }catch(e){document.getElementById("sentence").innerText="오류: "+e.message;}
+}
+
+function renderGeneratedSentence(sentence,usedWords){
+  currentSentence=sentence;
+  document.getElementById("sentence").innerText=sentence;
+  var html="사용 단어: ";
+  for(var i=0;i<usedWords.length;i++){
+    html+='<span class="word-chip">'+usedWords[i]+'</span>';
+  }
+  document.getElementById("usedWords").innerHTML=html;
+}
+
+async function makeSentenceFromGemini(){
+  var words=getAllowedWords();
+  if(!words.length){
+    localMakeSentence();
+    return;
+  }
+  document.getElementById("sentence").innerText="Gemini가 자연스러운 문장을 만드는 중...";
+  document.getElementById("usedWords").innerHTML="";
+  try{
+    var resp=await fetch(API_URL+"/sentence",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({words:words,grade:currentGrade})
+    });
+    var data=await resp.json();
+    if(data.success&&data.sentence){
+      renderGeneratedSentence(data.sentence,data.usedWords||[]);
+      return;
+    }
+  }catch(e){}
+  localMakeSentence();
+}
+
+function getGeneratedSentenceBank(){
+  if(typeof globalThis!=="undefined"&&Array.isArray(globalThis.GENERATED_SENTENCE_BANK))return globalThis.GENERATED_SENTENCE_BANK;
+  if(typeof window!=="undefined"&&Array.isArray(window.GENERATED_SENTENCE_BANK))return window.GENERATED_SENTENCE_BANK;
+  if(typeof GENERATED_SENTENCE_BANK!=="undefined"&&Array.isArray(GENERATED_SENTENCE_BANK))return GENERATED_SENTENCE_BANK;
+  return [];
+}
+
+function cachedSentenceMatches(entry,allowedWords){
+  if(!entry||!entry.sentence)return false;
+  var used=normalizeSentenceTokens(entry.sentence);
+  for(var i=0;i<used.length;i++){
+    if(allowedWords.indexOf(baseWord(used[i]))===-1)return false;
+  }
+  return true;
+}
+
+function findCachedSentence(allowedWords){
+  var bank=getGeneratedSentenceBank(),exact=[],other=[];
+  for(var i=0;i<bank.length;i++){
+    var entry=bank[i];
+    if(!cachedSentenceMatches(entry,allowedWords))continue;
+    if(Number(entry.grade)===currentGrade)exact.push(entry);
+    else other.push(entry);
+  }
+  var pool=exact.length?exact:other;
+  if(!pool.length)return null;
+  return pool[Math.floor(Math.random()*pool.length)];
+}
+
+function makeSentence(){
+  var words=getAllowedWords();
+  if(!words.length){
+    localMakeSentence();
+    return;
+  }
+  var cached=findCachedSentence(words);
+  if(cached){
+    cachedSentenceTurn++;
+    if(cachedSentenceTurn%2===1){
+      renderGeneratedSentence(cached.sentence,cached.usedWords||[]);
+    }else{
+      localMakeSentence();
+    }
+    return;
+  }
+  localMakeSentence();
 }
 
 function speakSentence(){
