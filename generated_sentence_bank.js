@@ -1,1786 +1,277 @@
 globalThis.GENERATED_SENTENCE_BANK = [
-  {
-    "grade": 1,
-    "sentence": "I go to school.",
-    "usedWords": [
-      "i",
-      "go",
-      "to",
-      "school"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "We like school.",
-    "usedWords": [
-      "we",
-      "like",
-      "school"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "It is big.",
-    "usedWords": [
-      "it",
-      "is",
-      "big"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "See a book.",
-    "usedWords": [
-      "see",
-      "a",
-      "book"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "I can play.",
-    "usedWords": [
-      "i",
-      "can",
-      "play"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "Look at me.",
-    "usedWords": [
-      "look",
-      "at",
-      "me"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "What is this?",
-    "usedWords": [
-      "what",
-      "is",
-      "this"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "Is it hot?",
-    "usedWords": [
-      "is",
-      "it",
-      "hot"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "I have a friend.",
-    "usedWords": [
-      "i",
-      "have",
-      "a",
-      "friend"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "He is happy.",
-    "usedWords": [
-      "he",
-      "is",
-      "happy"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "You are good.",
-    "usedWords": [
-      "you",
-      "are",
-      "good"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "They like to play.",
-    "usedWords": [
-      "they",
-      "like",
-      "to",
-      "play"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "Come with me.",
-    "usedWords": [
-      "come",
-      "with",
-      "me"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "Do you see?",
-    "usedWords": [
-      "do",
-      "you",
-      "see"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "What is that?",
-    "usedWords": [
-      "what",
-      "is",
-      "that"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "How are you?",
-    "usedWords": [
-      "how",
-      "are",
-      "you"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "It is cold.",
-    "usedWords": [
-      "it",
-      "is",
-      "cold"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "I need a pencil.",
-    "usedWords": [
-      "i",
-      "need",
-      "a",
-      "pencil"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "Go to your desk.",
-    "usedWords": [
-      "go",
-      "to",
-      "your",
-      "desk"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "I want more.",
-    "usedWords": [
-      "i",
-      "want",
-      "more"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "This is my book.",
-    "usedWords": [
-      "this",
-      "is",
-      "my",
-      "book"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "We are one family.",
-    "usedWords": [
-      "we",
-      "are",
-      "one",
-      "family"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "It is time.",
-    "usedWords": [
-      "it",
-      "is",
-      "time"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "Think about it.",
-    "usedWords": [
-      "think",
-      "about",
-      "it"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "Where is school?",
-    "usedWords": [
-      "where",
-      "is",
-      "school"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "I am sad.",
-    "usedWords": [
-      "i",
-      "am",
-      "sad"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "Play with me.",
-    "usedWords": [
-      "play",
-      "with",
-      "me"
-    ]
-  },
-  {
-    "grade": 1,
-    "sentence": "See the big desk.",
-    "usedWords": [
-      "see",
-      "the",
-      "big",
-      "desk"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "We like to play.",
-    "usedWords": [
-      "we",
-      "like",
-      "to",
-      "play"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "He is my friend.",
-    "usedWords": [
-      "he",
-      "is",
-      "my",
-      "friend"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "What is that book?",
-    "usedWords": [
-      "what",
-      "is",
-      "that",
-      "book"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "How are you now?",
-    "usedWords": [
-      "how",
-      "are",
-      "you",
-      "now"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "I want a pencil.",
-    "usedWords": [
-      "i",
-      "want",
-      "a",
-      "pencil"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "This is a desk.",
-    "usedWords": [
-      "this",
-      "is",
-      "a",
-      "desk"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "Do you like it?",
-    "usedWords": [
-      "do",
-      "you",
-      "like",
-      "it"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "We are a family.",
-    "usedWords": [
-      "we",
-      "are",
-      "a",
-      "family"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "Go to your class.",
-    "usedWords": [
-      "go",
-      "to",
-      "your",
-      "class"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "She is happy now.",
-    "usedWords": [
-      "she",
-      "is",
-      "happy",
-      "now"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "Look at the teacher.",
-    "usedWords": [
-      "look",
-      "at",
-      "the",
-      "teacher"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "The book is big.",
-    "usedWords": [
-      "the",
-      "book",
-      "is",
-      "big"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "Your desk is small.",
-    "usedWords": [
-      "your",
-      "desk",
-      "is",
-      "small"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "We play at home.",
-    "usedWords": [
-      "we",
-      "play",
-      "at",
-      "home"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "Can I play now?",
-    "usedWords": [
-      "can",
-      "i",
-      "play",
-      "now"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "What do you need?",
-    "usedWords": [
-      "what",
-      "do",
-      "you",
-      "need"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "It is cold now.",
-    "usedWords": [
-      "it",
-      "is",
-      "cold",
-      "now"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "She is a student.",
-    "usedWords": [
-      "she",
-      "is",
-      "a",
-      "student"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "Do you know me?",
-    "usedWords": [
-      "do",
-      "you",
-      "know",
-      "me"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "Where is my book?",
-    "usedWords": [
-      "where",
-      "is",
-      "my",
-      "book"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "When can we play?",
-    "usedWords": [
-      "when",
-      "can",
-      "we",
-      "play"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "Take your pencil now.",
-    "usedWords": [
-      "take",
-      "your",
-      "pencil",
-      "now"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "Please come with me.",
-    "usedWords": [
-      "please",
-      "come",
-      "with",
-      "me"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "Is it hot today?",
-    "usedWords": [
-      "is",
-      "it",
-      "hot",
-      "today"
-    ]
-  },
-  {
-    "grade": 2,
-    "sentence": "Tomorrow we go home.",
-    "usedWords": [
-      "tomorrow",
-      "we",
-      "go",
-      "home"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "I go to school now.",
-    "usedWords": [
-      "i",
-      "go",
-      "to",
-      "school",
-      "now"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "We have a big book.",
-    "usedWords": [
-      "we",
-      "have",
-      "a",
-      "big",
-      "book"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "What do you want now?",
-    "usedWords": [
-      "what",
-      "do",
-      "you",
-      "want",
-      "now"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "She is my good friend.",
-    "usedWords": [
-      "she",
-      "is",
-      "my",
-      "good",
-      "friend"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "He can play fast now.",
-    "usedWords": [
-      "he",
-      "can",
-      "play",
-      "fast",
-      "now"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "Look at the big desk.",
-    "usedWords": [
-      "look",
-      "at",
-      "the",
-      "big",
-      "desk"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "Please help me with this.",
-    "usedWords": [
-      "please",
-      "help",
-      "me",
-      "with",
-      "this"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "Do you have a pencil?",
-    "usedWords": [
-      "do",
-      "you",
-      "have",
-      "a",
-      "pencil"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "It is hot now today.",
-    "usedWords": [
-      "it",
-      "is",
-      "hot",
-      "now",
-      "today"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "I am happy today, friend.",
-    "usedWords": [
-      "i",
-      "am",
-      "happy",
-      "today",
-      "friend"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "We come to school again.",
-    "usedWords": [
-      "we",
-      "come",
-      "to",
-      "school",
-      "again"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "The teacher is good now.",
-    "usedWords": [
-      "the",
-      "teacher",
-      "is",
-      "good",
-      "now"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "How many do you want?",
-    "usedWords": [
-      "how",
-      "many",
-      "do",
-      "you",
-      "want"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "He is a student now.",
-    "usedWords": [
-      "he",
-      "is",
-      "a",
-      "student",
-      "now"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "Do you like this book?",
-    "usedWords": [
-      "do",
-      "you",
-      "like",
-      "this",
-      "book"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "She can see a friend.",
-    "usedWords": [
-      "she",
-      "can",
-      "see",
-      "a",
-      "friend"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "I have one small pencil.",
-    "usedWords": [
-      "i",
-      "have",
-      "one",
-      "small",
-      "pencil"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "You look so happy now.",
-    "usedWords": [
-      "you",
-      "look",
-      "so",
-      "happy",
-      "now"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "It is cold today, friend.",
-    "usedWords": [
-      "it",
-      "is",
-      "cold",
-      "today",
-      "friend"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "We like to play often.",
-    "usedWords": [
-      "we",
-      "like",
-      "to",
-      "play",
-      "often"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "What is your book now?",
-    "usedWords": [
-      "what",
-      "is",
-      "your",
-      "book",
-      "now"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "Take your pencil now, please.",
-    "usedWords": [
-      "take",
-      "your",
-      "pencil",
-      "now",
-      "please"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "I often go to school.",
-    "usedWords": [
-      "i",
-      "often",
-      "go",
-      "to",
-      "school"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "We can help your friend.",
-    "usedWords": [
-      "we",
-      "can",
-      "help",
-      "your",
-      "friend"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "My family is big now.",
-    "usedWords": [
-      "my",
-      "family",
-      "is",
-      "big",
-      "now"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "He can get a book.",
-    "usedWords": [
-      "he",
-      "can",
-      "get",
-      "a",
-      "book"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "Do you like school now?",
-    "usedWords": [
-      "do",
-      "you",
-      "like",
-      "school",
-      "now"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "We all need to play.",
-    "usedWords": [
-      "we",
-      "all",
-      "need",
-      "to",
-      "play"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "I think about my family.",
-    "usedWords": [
-      "i",
-      "think",
-      "about",
-      "my",
-      "family"
-    ]
-  },
-  {
-    "grade": 3,
-    "sentence": "Make a big book now.",
-    "usedWords": [
-      "make",
-      "a",
-      "big",
-      "book",
-      "now"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "I go to school now, please.",
-    "usedWords": [
-      "i",
-      "go",
-      "to",
-      "school",
-      "now",
-      "please"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "We are happy to play now.",
-    "usedWords": [
-      "we",
-      "are",
-      "happy",
-      "to",
-      "play",
-      "now"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "What is that big book, teacher?",
-    "usedWords": [
-      "what",
-      "is",
-      "that",
-      "big",
-      "book",
-      "teacher"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "Do you like to play, friend?",
-    "usedWords": [
-      "do",
-      "you",
-      "like",
-      "to",
-      "play",
-      "friend"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "He can see the big school.",
-    "usedWords": [
-      "he",
-      "can",
-      "see",
-      "the",
-      "big",
-      "school"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "She is my friend, you know.",
-    "usedWords": [
-      "she",
-      "is",
-      "my",
-      "friend",
-      "you",
-      "know"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "I want some good book, please.",
-    "usedWords": [
-      "i",
-      "want",
-      "some",
-      "good",
-      "book",
-      "please"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "Can you help me now, please?",
-    "usedWords": [
-      "can",
-      "you",
-      "help",
-      "me",
-      "now",
-      "please"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "The small pencil is on your desk.",
-    "usedWords": [
-      "the",
-      "small",
-      "pencil",
-      "is",
-      "on",
-      "your",
-      "desk"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "We go to school every time.",
-    "usedWords": [
-      "we",
-      "go",
-      "to",
-      "school",
-      "every",
-      "time"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "It is cold now, go home.",
-    "usedWords": [
-      "it",
-      "is",
-      "cold",
-      "now",
-      "go",
-      "home"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "Do you like this big book?",
-    "usedWords": [
-      "do",
-      "you",
-      "like",
-      "this",
-      "big",
-      "book"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "He is happy to play again.",
-    "usedWords": [
-      "he",
-      "is",
-      "happy",
-      "to",
-      "play",
-      "again"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "Look at the school now, friend.",
-    "usedWords": [
-      "look",
-      "at",
-      "the",
-      "school",
-      "now",
-      "friend"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "I want to play with my friend.",
-    "usedWords": [
-      "i",
-      "want",
-      "to",
-      "play",
-      "with",
-      "my",
-      "friend"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "Yesterday, I am bad, friend.",
-    "usedWords": [
-      "yesterday",
-      "i",
-      "am",
-      "bad",
-      "friend"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "We need more time to play.",
-    "usedWords": [
-      "we",
-      "need",
-      "more",
-      "time",
-      "to",
-      "play"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "Where do you go, my friend?",
-    "usedWords": [
-      "where",
-      "do",
-      "you",
-      "go",
-      "my",
-      "friend"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "Do you want a big pencil?",
-    "usedWords": [
-      "do",
-      "you",
-      "want",
-      "a",
-      "big",
-      "pencil"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "I always make my family happy.",
-    "usedWords": [
-      "i",
-      "always",
-      "make",
-      "my",
-      "family",
-      "happy"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "I often think about my school.",
-    "usedWords": [
-      "i",
-      "often",
-      "think",
-      "about",
-      "my",
-      "school"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "Can you take this book, please?",
-    "usedWords": [
-      "can",
-      "you",
-      "take",
-      "this",
-      "book",
-      "please"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "This is a big cold school.",
-    "usedWords": [
-      "this",
-      "is",
-      "a",
-      "big",
-      "cold",
-      "school"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "What is that for, my friend?",
-    "usedWords": [
-      "what",
-      "is",
-      "that",
-      "for",
-      "my",
-      "friend"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "Sometimes, I am sad, my friend.",
-    "usedWords": [
-      "sometimes",
-      "i",
-      "am",
-      "sad",
-      "my",
-      "friend"
-    ]
-  },
-  {
-    "grade": 4,
-    "sentence": "Do you have a big desk?",
-    "usedWords": [
-      "do",
-      "you",
-      "have",
-      "a",
-      "big",
-      "desk"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "I go to school with my friend.",
-    "usedWords": [
-      "i",
-      "go",
-      "to",
-      "school",
-      "with",
-      "my",
-      "friend"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "We play at school every time.",
-    "usedWords": [
-      "we",
-      "play",
-      "at",
-      "school",
-      "every",
-      "time"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "She is a good student today.",
-    "usedWords": [
-      "she",
-      "is",
-      "a",
-      "good",
-      "student",
-      "today"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "He can help me with my book.",
-    "usedWords": [
-      "he",
-      "can",
-      "help",
-      "me",
-      "with",
-      "my",
-      "book"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "What do you want to do now?",
-    "usedWords": [
-      "what",
-      "do",
-      "you",
-      "want",
-      "to",
-      "now"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "It is cold today, so please come.",
-    "usedWords": [
-      "it",
-      "is",
-      "cold",
-      "today",
-      "so",
-      "please",
-      "come"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "I always think about my family.",
-    "usedWords": [
-      "i",
-      "always",
-      "think",
-      "about",
-      "my",
-      "family"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "Please look at your desk, student.",
-    "usedWords": [
-      "please",
-      "look",
-      "at",
-      "your",
-      "desk",
-      "student"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "Your pencil is on the big book.",
-    "usedWords": [
-      "your",
-      "pencil",
-      "is",
-      "on",
-      "the",
-      "big",
-      "book"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "Can you go fast for me now?",
-    "usedWords": [
-      "can",
-      "you",
-      "go",
-      "fast",
-      "for",
-      "me",
-      "now"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "They come to school every time.",
-    "usedWords": [
-      "they",
-      "come",
-      "to",
-      "school",
-      "every",
-      "time"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "I sometimes play with my family.",
-    "usedWords": [
-      "i",
-      "sometimes",
-      "play",
-      "with",
-      "my",
-      "family"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "It is time to go home soon.",
-    "usedWords": [
-      "it",
-      "is",
-      "time",
-      "to",
-      "go",
-      "home",
-      "soon"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "Who is your teacher in class?",
-    "usedWords": [
-      "who",
-      "is",
-      "your",
-      "teacher",
-      "in",
-      "class"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "We often see her at school.",
-    "usedWords": [
-      "we",
-      "often",
-      "see",
-      "her",
-      "at",
-      "school"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "Do you like this small, cold desk?",
-    "usedWords": [
-      "do",
-      "you",
-      "like",
-      "this",
-      "small",
-      "cold",
-      "desk"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "This is from yesterday, or from today?",
-    "usedWords": [
-      "this",
-      "is",
-      "from",
-      "yesterday",
-      "or",
-      "today"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "We go to school, then come home.",
-    "usedWords": [
-      "we",
-      "go",
-      "to",
-      "school",
-      "then",
-      "come",
-      "home"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "How much time do you have?",
-    "usedWords": [
-      "how",
-      "much",
-      "time",
-      "do",
-      "you",
-      "have"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "Go slow now, you have much time.",
-    "usedWords": [
-      "go",
-      "slow",
-      "now",
-      "you",
-      "have",
-      "much",
-      "time"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "I think this is a bad book.",
-    "usedWords": [
-      "i",
-      "think",
-      "this",
-      "is",
-      "a",
-      "bad",
-      "book"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "It is hot today, so go slow.",
-    "usedWords": [
-      "it",
-      "is",
-      "hot",
-      "today",
-      "so",
-      "go",
-      "slow"
-    ]
-  },
-  {
-    "grade": 5,
-    "sentence": "We go to school tomorrow again.",
-    "usedWords": [
-      "we",
-      "go",
-      "to",
-      "school",
-      "tomorrow",
-      "again"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "I go to school with my friend today.",
-    "usedWords": [
-      "i",
-      "go",
-      "to",
-      "school",
-      "with",
-      "my",
-      "friend",
-      "today"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "We are happy to come to class now.",
-    "usedWords": [
-      "we",
-      "are",
-      "happy",
-      "to",
-      "come",
-      "class",
-      "now"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "What do you want to see in the book?",
-    "usedWords": [
-      "what",
-      "do",
-      "you",
-      "want",
-      "to",
-      "see",
-      "in",
-      "the",
-      "book"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "Can I get a big pencil from the teacher?",
-    "usedWords": [
-      "can",
-      "i",
-      "get",
-      "a",
-      "big",
-      "pencil",
-      "from",
-      "the",
-      "teacher"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "He is a good student in your school.",
-    "usedWords": [
-      "he",
-      "is",
-      "a",
-      "good",
-      "student",
-      "in",
-      "your",
-      "school"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "She can help me with my book today.",
-    "usedWords": [
-      "she",
-      "can",
-      "help",
-      "me",
-      "with",
-      "my",
-      "book",
-      "today"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "Look at the small desk in the class now.",
-    "usedWords": [
-      "look",
-      "at",
-      "the",
-      "small",
-      "desk",
-      "in",
-      "class",
-      "now"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "It is hot today, so we need more help.",
-    "usedWords": [
-      "it",
-      "is",
-      "hot",
-      "today",
-      "so",
-      "we",
-      "need",
-      "more",
-      "help"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "I think school is a good time for me.",
-    "usedWords": [
-      "i",
-      "think",
-      "school",
-      "is",
-      "a",
-      "good",
-      "time",
-      "for",
-      "me"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "Tomorrow we go to the big school.",
-    "usedWords": [
-      "tomorrow",
-      "we",
-      "go",
-      "to",
-      "the",
-      "big",
-      "school"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "He can see one good book about his family.",
-    "usedWords": [
-      "he",
-      "can",
-      "see",
-      "one",
-      "good",
-      "book",
-      "about",
-      "his",
-      "family"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "Please come to me, I need your help now.",
-    "usedWords": [
-      "please",
-      "come",
-      "to",
-      "me",
-      "i",
-      "need",
-      "your",
-      "help",
-      "now"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "Do you want to play with me now?",
-    "usedWords": [
-      "do",
-      "you",
-      "want",
-      "to",
-      "play",
-      "with",
-      "me",
-      "now"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "It is cold, so I want my big book.",
-    "usedWords": [
-      "it",
-      "is",
-      "cold",
-      "so",
-      "i",
-      "want",
-      "my",
-      "big",
-      "book"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "She is a happy student from your class.",
-    "usedWords": [
-      "she",
-      "is",
-      "a",
-      "happy",
-      "student",
-      "from",
-      "your",
-      "class"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "I like to go fast with my friend.",
-    "usedWords": [
-      "i",
-      "like",
-      "to",
-      "go",
-      "fast",
-      "with",
-      "my",
-      "friend"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "Who is the teacher of your class?",
-    "usedWords": [
-      "who",
-      "is",
-      "the",
-      "teacher",
-      "of",
-      "your",
-      "class"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "They can help me with the big book.",
-    "usedWords": [
-      "they",
-      "can",
-      "help",
-      "me",
-      "with",
-      "the",
-      "big",
-      "book"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "This is one pencil for your small desk.",
-    "usedWords": [
-      "this",
-      "is",
-      "one",
-      "pencil",
-      "for",
-      "your",
-      "small",
-      "desk"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "Do you want to make a big book for teacher?",
-    "usedWords": [
-      "do",
-      "you",
-      "want",
-      "to",
-      "make",
-      "a",
-      "big",
-      "book",
-      "for",
-      "teacher"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "I sometimes take my book to school with me.",
-    "usedWords": [
-      "i",
-      "sometimes",
-      "take",
-      "my",
-      "book",
-      "to",
-      "school",
-      "with",
-      "me"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "When do we go home from school today?",
-    "usedWords": [
-      "when",
-      "do",
-      "we",
-      "go",
-      "home",
-      "from",
-      "school",
-      "today"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "He is happy to see his family again soon.",
-    "usedWords": [
-      "he",
-      "is",
-      "happy",
-      "to",
-      "see",
-      "his",
-      "family",
-      "again",
-      "soon"
-    ]
-  },
-  {
-    "grade": 6,
-    "sentence": "Please look at the book that I have.",
-    "usedWords": [
-      "please",
-      "look",
-      "at",
-      "the",
-      "book",
-      "that",
-      "i",
-      "have"
-    ]
-  }
+  {"grade":1,"sentence":"I go to school.","usedWords":["i","go","to","school"]},
+  {"grade":1,"sentence":"What is this?","usedWords":["what","is","this"]},
+  {"grade":1,"sentence":"Look at me.","usedWords":["look","at","me"]},
+  {"grade":1,"sentence":"Is it hot?","usedWords":["is","it","hot"]},
+  {"grade":1,"sentence":"I can play.","usedWords":["i","can","play"]},
+  {"grade":1,"sentence":"Come and see.","usedWords":["come","and","see"]},
+  {"grade":1,"sentence":"We like school.","usedWords":["we","like","school"]},
+  {"grade":1,"sentence":"She is good.","usedWords":["she","is","good"]},
+  {"grade":1,"sentence":"I am happy.","usedWords":["i","am","happy"]},
+  {"grade":1,"sentence":"It is big.","usedWords":["it","is","big"]},
+  {"grade":1,"sentence":"I am sad.","usedWords":["i","am","sad"]},
+  {"grade":1,"sentence":"He can go.","usedWords":["he","can","go"]},
+  {"grade":1,"sentence":"It is cold.","usedWords":["it","is","cold"]},
+  {"grade":1,"sentence":"Look at this.","usedWords":["look","at","this"]},
+  {"grade":1,"sentence":"I like it.","usedWords":["i","like","it"]},
+  {"grade":1,"sentence":"She can see.","usedWords":["she","can","see"]},
+  {"grade":1,"sentence":"Who is that?","usedWords":["who","is","that"]},
+  {"grade":1,"sentence":"Yes, I can.","usedWords":["yes","i","can"]},
+  {"grade":1,"sentence":"He is slow.","usedWords":["he","is","slow"]},
+  {"grade":1,"sentence":"I am a student.","usedWords":["i","am","a","student"]},
+  {"grade":1,"sentence":"This is good.","usedWords":["this","is","good"]},
+  {"grade":1,"sentence":"We can play.","usedWords":["we","can","play"]},
+  {"grade":1,"sentence":"I like you.","usedWords":["i","like","you"]},
+  {"grade":1,"sentence":"What is that?","usedWords":["what","is","that"]},
+  {"grade":1,"sentence":"It is bad.","usedWords":["it","is","bad"]},
+  {"grade":1,"sentence":"I see you.","usedWords":["i","see","you"]},
+  {"grade":1,"sentence":"Is she happy?","usedWords":["is","she","happy"]},
+  {"grade":1,"sentence":"He is big.","usedWords":["he","is","big"]},
+  {"grade":1,"sentence":"Come to me.","usedWords":["come","to","me"]},
+  {"grade":1,"sentence":"Use a pencil.","usedWords":["use","a","pencil"]},
+  {"grade":1,"sentence":"This is my desk.","usedWords":["this","is","my","desk"]},
+  {"grade":1,"sentence":"Go home now.","usedWords":["go","home","now"]},
+  {"grade":1,"sentence":"He is sad.","usedWords":["he","is","sad"]},
+  {"grade":1,"sentence":"We are happy.","usedWords":["we","are","happy"]},
+  {"grade":1,"sentence":"She is my teacher.","usedWords":["she","is","my","teacher"]},
+  {"grade":1,"sentence":"She can go fast.","usedWords":["she","can","go","fast"]},
+  {"grade":1,"sentence":"Look at his book.","usedWords":["look","at","his","book"]},
+  {"grade":1,"sentence":"No, I am happy.","usedWords":["no","i","am","happy"]},
+  {"grade":1,"sentence":"They are good.","usedWords":["they","are","good"]},
+  {"grade":1,"sentence":"It is on my desk.","usedWords":["it","is","on","my","desk"]},
+  {"grade":1,"sentence":"Go to class.","usedWords":["go","to","class"]},
+  {"grade":1,"sentence":"I have a book.","usedWords":["i","have","a","book"]},
+  {"grade":1,"sentence":"She is my friend.","usedWords":["she","is","my","friend"]},
+  {"grade":1,"sentence":"I am at home.","usedWords":["i","am","at","home"]},
+  {"grade":1,"sentence":"One, two, three, go!","usedWords":["one","two","three","go"]},
+  {"grade":1,"sentence":"It is so small.","usedWords":["it","is","so","small"]},
+  {"grade":1,"sentence":"I am in class.","usedWords":["i","am","in","class"]},
+  {"grade":1,"sentence":"What is this for?","usedWords":["what","is","this","for"]},
+  {"grade":1,"sentence":"It is time.","usedWords":["it","is","time"]},
+  {"grade":1,"sentence":"I use this.","usedWords":["i","use","this"]},
+  {"grade":2,"sentence":"What time is it?","usedWords":["what","time","is","it"]},
+  {"grade":2,"sentence":"I like your book.","usedWords":["i","like","your","book"]},
+  {"grade":2,"sentence":"She can help me.","usedWords":["she","can","help","me"]},
+  {"grade":2,"sentence":"Do you have it?","usedWords":["do","you","have","it"]},
+  {"grade":2,"sentence":"He is my friend.","usedWords":["he","is","my","friend"]},
+  {"grade":2,"sentence":"Look at the book.","usedWords":["look","at","the","book"]},
+  {"grade":2,"sentence":"I want to go.","usedWords":["i","want","to","go"]},
+  {"grade":2,"sentence":"Can you see me?","usedWords":["can","you","see","me"]},
+  {"grade":2,"sentence":"We go to school.","usedWords":["we","go","to","school"]},
+  {"grade":2,"sentence":"Where is my pencil?","usedWords":["where","is","my","pencil"]},
+  {"grade":2,"sentence":"Come to my home.","usedWords":["come","to","my","home"]},
+  {"grade":2,"sentence":"I need a book.","usedWords":["i","need","a","book"]},
+  {"grade":2,"sentence":"Do you like this?","usedWords":["do","you","like","this"]},
+  {"grade":2,"sentence":"He is at school.","usedWords":["he","is","at","school"]},
+  {"grade":2,"sentence":"I like your class.","usedWords":["i","like","your","class"]},
+  {"grade":2,"sentence":"We play at school.","usedWords":["we","play","at","school"]},
+  {"grade":2,"sentence":"Look at your book.","usedWords":["look","at","your","book"]},
+  {"grade":2,"sentence":"It is so hot.","usedWords":["it","is","so","hot"]},
+  {"grade":2,"sentence":"She is a student.","usedWords":["she","is","a","student"]},
+  {"grade":2,"sentence":"I see your pencil.","usedWords":["i","see","your","pencil"]},
+  {"grade":2,"sentence":"We are at home.","usedWords":["we","are","at","home"]},
+  {"grade":2,"sentence":"Do you want this?","usedWords":["do","you","want","this"]},
+  {"grade":2,"sentence":"I know your teacher.","usedWords":["i","know","your","teacher"]},
+  {"grade":2,"sentence":"He is at home.","usedWords":["he","is","at","home"]},
+  {"grade":2,"sentence":"We want to play.","usedWords":["we","want","to","play"]},
+  {"grade":2,"sentence":"I use a pencil.","usedWords":["i","use","a","pencil"]},
+  {"grade":2,"sentence":"She can come now.","usedWords":["she","can","come","now"]},
+  {"grade":2,"sentence":"Take your book home.","usedWords":["take","your","book","home"]},
+  {"grade":2,"sentence":"I want your help.","usedWords":["i","want","your","help"]},
+  {"grade":2,"sentence":"We see the teacher.","usedWords":["we","see","the","teacher"]},
+  {"grade":2,"sentence":"Who is your friend?","usedWords":["who","is","your","friend"]},
+  {"grade":2,"sentence":"My book is big.","usedWords":["my","book","is","big"]},
+  {"grade":2,"sentence":"I am your friend.","usedWords":["i","am","your","friend"]},
+  {"grade":2,"sentence":"Is she at school?","usedWords":["is","she","at","school"]},
+  {"grade":2,"sentence":"I need your help.","usedWords":["i","need","your","help"]},
+  {"grade":2,"sentence":"He can come now.","usedWords":["he","can","come","now"]},
+  {"grade":2,"sentence":"Look at your desk.","usedWords":["look","at","your","desk"]},
+  {"grade":2,"sentence":"We like to play.","usedWords":["we","like","to","play"]},
+  {"grade":2,"sentence":"Which book do you want?","usedWords":["which","book","do","you","want"]},
+  {"grade":2,"sentence":"Come to school tomorrow please.","usedWords":["come","to","school","tomorrow","please"]},
+  {"grade":2,"sentence":"I am sad about yesterday.","usedWords":["i","am","sad","about","yesterday"]},
+  {"grade":2,"sentence":"Yes, I can help you.","usedWords":["yes","i","can","help","you"]},
+  {"grade":2,"sentence":"Come home soon please.","usedWords":["come","home","soon","please"]},
+  {"grade":2,"sentence":"She is happy every time.","usedWords":["she","is","happy","every","time"]},
+  {"grade":2,"sentence":"I have some time today.","usedWords":["i","have","some","time","today"]},
+  {"grade":2,"sentence":"Do it again please.","usedWords":["do","it","again","please"]},
+  {"grade":2,"sentence":"Is it hot or cold?","usedWords":["is","it","hot","or","cold"]},
+  {"grade":2,"sentence":"I like this so much.","usedWords":["i","like","this","so","much"]},
+  {"grade":2,"sentence":"She can get her book.","usedWords":["she","can","get","her","book"]},
+  {"grade":2,"sentence":"How do you know this?","usedWords":["how","do","you","know","this"]},
+  {"grade":3,"sentence":"What time do we go?","usedWords":["what","time","do","we","go"]},
+  {"grade":3,"sentence":"I need help with this.","usedWords":["i","need","help","with","this"]},
+  {"grade":3,"sentence":"Can you see my book?","usedWords":["can","you","see","my","book"]},
+  {"grade":3,"sentence":"We go to school today.","usedWords":["we","go","to","school","today"]},
+  {"grade":3,"sentence":"I want to go home.","usedWords":["i","want","to","go","home"]},
+  {"grade":3,"sentence":"Do you like your class?","usedWords":["do","you","like","your","class"]},
+  {"grade":3,"sentence":"Where is my book today?","usedWords":["where","is","my","book","today"]},
+  {"grade":3,"sentence":"I want to play with you.","usedWords":["i","want","to","play","with","you"]},
+  {"grade":3,"sentence":"How do you use this?","usedWords":["how","do","you","use","this"]},
+  {"grade":3,"sentence":"It is so hot today.","usedWords":["it","is","so","hot","today"]},
+  {"grade":3,"sentence":"She is a good student.","usedWords":["she","is","a","good","student"]},
+  {"grade":3,"sentence":"I think you are good.","usedWords":["i","think","you","are","good"]},
+  {"grade":3,"sentence":"He can come to my home.","usedWords":["he","can","come","to","my","home"]},
+  {"grade":3,"sentence":"I get to go home.","usedWords":["i","get","to","go","home"]},
+  {"grade":3,"sentence":"Where do you go today?","usedWords":["where","do","you","go","today"]},
+  {"grade":3,"sentence":"I know about your book.","usedWords":["i","know","about","your","book"]},
+  {"grade":3,"sentence":"She is a good friend.","usedWords":["she","is","a","good","friend"]},
+  {"grade":3,"sentence":"Do you know my teacher?","usedWords":["do","you","know","my","teacher"]},
+  {"grade":3,"sentence":"We can all play now.","usedWords":["we","can","all","play","now"]},
+  {"grade":3,"sentence":"I want to use that.","usedWords":["i","want","to","use","that"]},
+  {"grade":3,"sentence":"Look at the big book.","usedWords":["look","at","the","big","book"]},
+  {"grade":3,"sentence":"Who is your class teacher?","usedWords":["who","is","your","class","teacher"]},
+  {"grade":3,"sentence":"I like to go home.","usedWords":["i","like","to","go","home"]},
+  {"grade":3,"sentence":"She can see the book.","usedWords":["she","can","see","the","book"]},
+  {"grade":3,"sentence":"We need to go now.","usedWords":["we","need","to","go","now"]},
+  {"grade":3,"sentence":"What do you think about this?","usedWords":["what","do","you","think","about","this"]},
+  {"grade":3,"sentence":"He is in my class.","usedWords":["he","is","in","my","class"]},
+  {"grade":3,"sentence":"Take a book to school.","usedWords":["take","a","book","to","school"]},
+  {"grade":3,"sentence":"I think she is good.","usedWords":["i","think","she","is","good"]},
+  {"grade":3,"sentence":"We play at school today.","usedWords":["we","play","at","school","today"]},
+  {"grade":3,"sentence":"Can you help me please?","usedWords":["can","you","help","me","please"]},
+  {"grade":3,"sentence":"She is at home now.","usedWords":["she","is","at","home","now"]},
+  {"grade":3,"sentence":"What do you have today?","usedWords":["what","do","you","have","today"]},
+  {"grade":3,"sentence":"I like to use this.","usedWords":["i","like","to","use","this"]},
+  {"grade":3,"sentence":"I think about my family.","usedWords":["i","think","about","my","family"]},
+  {"grade":3,"sentence":"Where is your teacher now?","usedWords":["where","is","your","teacher","now"]},
+  {"grade":3,"sentence":"He can get your book.","usedWords":["he","can","get","your","book"]},
+  {"grade":3,"sentence":"I am at home today.","usedWords":["i","am","at","home","today"]},
+  {"grade":3,"sentence":"I like school most of all.","usedWords":["i","like","school","most","of","all"]},
+  {"grade":3,"sentence":"Come to class and then go.","usedWords":["come","to","class","and","then","go"]},
+  {"grade":3,"sentence":"I like it but it is hot.","usedWords":["i","like","it","but","is","hot"]},
+  {"grade":3,"sentence":"I often go to school.","usedWords":["i","often","go","to","school"]},
+  {"grade":3,"sentence":"I sometimes play at home.","usedWords":["i","sometimes","play","at","home"]},
+  {"grade":3,"sentence":"I need more time today.","usedWords":["i","need","more","time","today"]},
+  {"grade":3,"sentence":"I want to help many of you.","usedWords":["i","want","to","help","many","of","you"]},
+  {"grade":3,"sentence":"Take this book from me.","usedWords":["take","this","book","from","me"]},
+  {"grade":3,"sentence":"I know all of this.","usedWords":["i","know","all","of","this"]},
+  {"grade":3,"sentence":"How do you make this?","usedWords":["how","do","you","make","this"]},
+  {"grade":3,"sentence":"When do you go home?","usedWords":["when","do","you","go","home"]},
+  {"grade":3,"sentence":"I want to know more.","usedWords":["i","want","to","know","more"]},
+  {"grade":4,"sentence":"What time do we go home?","usedWords":["what","time","do","we","go","home"]},
+  {"grade":4,"sentence":"I always need help at school.","usedWords":["i","always","need","help","at","school"]},
+  {"grade":4,"sentence":"Can you take my pencil please?","usedWords":["can","you","take","my","pencil","please"]},
+  {"grade":4,"sentence":"How do you use this pencil?","usedWords":["how","do","you","use","this","pencil"]},
+  {"grade":4,"sentence":"I think she is a good teacher.","usedWords":["i","think","she","is","a","good","teacher"]},
+  {"grade":4,"sentence":"I need to go home now.","usedWords":["i","need","to","go","home","now"]},
+  {"grade":4,"sentence":"I like to play at school.","usedWords":["i","like","to","play","at","school"]},
+  {"grade":4,"sentence":"What do you know about this?","usedWords":["what","do","you","know","about","this"]},
+  {"grade":4,"sentence":"She can see my big book.","usedWords":["she","can","see","my","big","book"]},
+  {"grade":4,"sentence":"We need to take this home.","usedWords":["we","need","to","take","this","home"]},
+  {"grade":4,"sentence":"I want to help my teacher.","usedWords":["i","want","to","help","my","teacher"]},
+  {"grade":4,"sentence":"She is a good student today.","usedWords":["she","is","a","good","student","today"]},
+  {"grade":4,"sentence":"We can all go home now.","usedWords":["we","can","all","go","home","now"]},
+  {"grade":4,"sentence":"I like to get help at school.","usedWords":["i","like","to","get","help","at","school"]},
+  {"grade":4,"sentence":"I know where your family is from.","usedWords":["i","know","where","your","family","is","from"]},
+  {"grade":4,"sentence":"Do you want to come home?","usedWords":["do","you","want","to","come","home"]},
+  {"grade":4,"sentence":"I think you are a good friend.","usedWords":["i","think","you","are","a","good","friend"]},
+  {"grade":4,"sentence":"She can come to my class.","usedWords":["she","can","come","to","my","class"]},
+  {"grade":4,"sentence":"I always want to help you.","usedWords":["i","always","want","to","help","you"]},
+  {"grade":4,"sentence":"How do you know my friend?","usedWords":["how","do","you","know","my","friend"]},
+  {"grade":4,"sentence":"We need to help the student.","usedWords":["we","need","to","help","the","student"]},
+  {"grade":4,"sentence":"I often get help from my teacher.","usedWords":["i","often","get","help","from","my","teacher"]},
+  {"grade":4,"sentence":"Look at this big school today.","usedWords":["look","at","this","big","school","today"]},
+  {"grade":4,"sentence":"Do you think about your family?","usedWords":["do","you","think","about","your","family"]},
+  {"grade":4,"sentence":"She can see my small desk.","usedWords":["she","can","see","my","small","desk"]},
+  {"grade":4,"sentence":"We always like to help you.","usedWords":["we","always","like","to","help","you"]},
+  {"grade":4,"sentence":"I want to use your pencil.","usedWords":["i","want","to","use","your","pencil"]},
+  {"grade":4,"sentence":"What do you know about school?","usedWords":["what","do","you","know","about","school"]},
+  {"grade":4,"sentence":"She is happy to help me.","usedWords":["she","is","happy","to","help","me"]},
+  {"grade":4,"sentence":"I need to take this home.","usedWords":["i","need","to","take","this","home"]},
+  {"grade":4,"sentence":"We can all come home now.","usedWords":["we","can","all","come","home","now"]},
+  {"grade":4,"sentence":"How do you make it fast?","usedWords":["how","do","you","make","it","fast"]},
+  {"grade":4,"sentence":"I want to see your family.","usedWords":["i","want","to","see","your","family"]},
+  {"grade":4,"sentence":"She is in my class today.","usedWords":["she","is","in","my","class","today"]},
+  {"grade":4,"sentence":"What time do you go home?","usedWords":["what","time","do","you","go","home"]},
+  {"grade":4,"sentence":"I often go to school now.","usedWords":["i","often","go","to","school","now"]},
+  {"grade":4,"sentence":"We like to help my friend.","usedWords":["we","like","to","help","my","friend"]},
+  {"grade":4,"sentence":"Do you know how to help?","usedWords":["do","you","know","how","to","help"]},
+  {"grade":4,"sentence":"She is always happy at school.","usedWords":["she","is","always","happy","at","school"]},
+  {"grade":4,"sentence":"I think about my family today.","usedWords":["i","think","about","my","family","today"]},
+  {"grade":4,"sentence":"Look at the good student now.","usedWords":["look","at","the","good","student","now"]},
+  {"grade":4,"sentence":"We can use this in school.","usedWords":["we","can","use","this","in","school"]},
+  {"grade":4,"sentence":"I see my friend at school.","usedWords":["i","see","my","friend","at","school"]},
+  {"grade":4,"sentence":"Where do you want to go?","usedWords":["where","do","you","want","to","go"]},
+  {"grade":4,"sentence":"She can go home with me.","usedWords":["she","can","go","home","with","me"]},
+  {"grade":4,"sentence":"I like to think about this.","usedWords":["i","like","to","think","about","this"]},
+  {"grade":4,"sentence":"How do you get to school?","usedWords":["how","do","you","get","to","school"]},
+  {"grade":4,"sentence":"Take your book home with you.","usedWords":["take","your","book","home","with","you"]},
+  {"grade":4,"sentence":"I sometimes play at home today.","usedWords":["i","sometimes","play","at","home","today"]},
+  {"grade":4,"sentence":"We always come to school on time.","usedWords":["we","always","come","to","school","on","time"]},
+  {"grade":5,"sentence":"What time do we go to school?","usedWords":["what","time","do","we","go","to","school"]},
+  {"grade":5,"sentence":"I always need help from my teacher.","usedWords":["i","always","need","help","from","my","teacher"]},
+  {"grade":5,"sentence":"I often want to play at school.","usedWords":["i","often","want","to","play","at","school"]},
+  {"grade":5,"sentence":"How do you use your pencil today?","usedWords":["how","do","you","use","your","pencil","today"]},
+  {"grade":5,"sentence":"I think she is a good friend.","usedWords":["i","think","she","is","a","good","friend"]},
+  {"grade":5,"sentence":"I want to take this book home today.","usedWords":["i","want","to","take","this","book","home","today"]},
+  {"grade":5,"sentence":"She can always come to my class.","usedWords":["she","can","always","come","to","my","class"]},
+  {"grade":5,"sentence":"Do you know who is in my class?","usedWords":["do","you","know","who","is","in","my","class"]},
+  {"grade":5,"sentence":"I need to get help from you.","usedWords":["i","need","to","get","help","from","you"]},
+  {"grade":5,"sentence":"Where do you go to school today?","usedWords":["where","do","you","go","to","school","today"]},
+  {"grade":5,"sentence":"I think you are a good student.","usedWords":["i","think","you","are","a","good","student"]},
+  {"grade":5,"sentence":"What do you want to do today?","usedWords":["what","do","you","want","to","do","today"]},
+  {"grade":5,"sentence":"She is always happy to help me.","usedWords":["she","is","always","happy","to","help","me"]},
+  {"grade":5,"sentence":"We all need to go home now.","usedWords":["we","all","need","to","go","home","now"]},
+  {"grade":5,"sentence":"I know about your family at home.","usedWords":["i","know","about","your","family","at","home"]},
+  {"grade":5,"sentence":"How do you make it to school?","usedWords":["how","do","you","make","it","to","school"]},
+  {"grade":5,"sentence":"She can see the big book at school.","usedWords":["she","can","see","the","big","book","at","school"]},
+  {"grade":5,"sentence":"I often think about my good friend.","usedWords":["i","often","think","about","my","good","friend"]},
+  {"grade":5,"sentence":"Do you want to use my pencil?","usedWords":["do","you","want","to","use","my","pencil"]},
+  {"grade":5,"sentence":"I sometimes go home to my family.","usedWords":["i","sometimes","go","home","to","my","family"]},
+  {"grade":5,"sentence":"She is a good student in class.","usedWords":["she","is","a","good","student","in","class"]},
+  {"grade":5,"sentence":"What time do you come to school?","usedWords":["what","time","do","you","come","to","school"]},
+  {"grade":5,"sentence":"I always want to help my teacher.","usedWords":["i","always","want","to","help","my","teacher"]},
+  {"grade":5,"sentence":"We need to use this book today.","usedWords":["we","need","to","use","this","book","today"]},
+  {"grade":5,"sentence":"I often need to get help today.","usedWords":["i","often","need","to","get","help","today"]},
+  {"grade":5,"sentence":"How do you help your family at home?","usedWords":["how","do","you","help","your","family","at","home"]},
+  {"grade":5,"sentence":"Look at the big school from home.","usedWords":["look","at","the","big","school","from","home"]},
+  {"grade":5,"sentence":"I know who is in your class.","usedWords":["i","know","who","is","in","your","class"]},
+  {"grade":5,"sentence":"She can get her book from me.","usedWords":["she","can","get","her","book","from","me"]},
+  {"grade":5,"sentence":"We like to go to school now.","usedWords":["we","like","to","go","to","school","now"]},
+  {"grade":5,"sentence":"I think about my teacher at school.","usedWords":["i","think","about","my","teacher","at","school"]},
+  {"grade":5,"sentence":"Do you like to go to school?","usedWords":["do","you","like","to","go","to","school"]},
+  {"grade":5,"sentence":"I want to take your book home.","usedWords":["i","want","to","take","your","book","home"]},
+  {"grade":5,"sentence":"She is always happy about your help.","usedWords":["she","is","always","happy","about","your","help"]},
+  {"grade":5,"sentence":"We can all see who is good.","usedWords":["we","can","all","see","who","is","good"]},
+  {"grade":5,"sentence":"I need to know about your family.","usedWords":["i","need","to","know","about","your","family"]},
+  {"grade":5,"sentence":"How do you play with your friend?","usedWords":["how","do","you","play","with","your","friend"]},
+  {"grade":5,"sentence":"She can always use my small pencil.","usedWords":["she","can","always","use","my","small","pencil"]},
+  {"grade":5,"sentence":"I want to make this good today.","usedWords":["i","want","to","make","this","good","today"]},
+  {"grade":5,"sentence":"We often go to school in time.","usedWords":["we","often","go","to","school","in","time"]},
+  {"grade":6,"sentence":"What time do we have to go to school?","usedWords":["what","time","do","we","have","to","go","school"]},
+  {"grade":6,"sentence":"I sometimes need help from my teacher at home.","usedWords":["i","sometimes","need","help","from","my","teacher","at","home"]},
+  {"grade":6,"sentence":"I always want to play with my good friend.","usedWords":["i","always","want","to","play","with","my","good","friend"]},
+  {"grade":6,"sentence":"How do you use your pencil when you are in class?","usedWords":["how","do","you","use","your","pencil","when","are","in","class"]},
+  {"grade":6,"sentence":"I think we need to come to school more often.","usedWords":["i","think","we","need","to","come","school","more","often"]},
+  {"grade":6,"sentence":"I want to take this big book home today.","usedWords":["i","want","to","take","this","big","book","home","today"]},
+  {"grade":6,"sentence":"She can help me see what is in this book.","usedWords":["she","can","help","me","see","what","is","in","this","book"]},
+  {"grade":6,"sentence":"He is a good student at my school.","usedWords":["he","is","a","good","student","at","my","school"]},
+  {"grade":6,"sentence":"I always get help from my good teacher.","usedWords":["i","always","get","help","from","my","good","teacher"]},
+  {"grade":6,"sentence":"What do you think about your teacher at school?","usedWords":["what","do","you","think","about","your","teacher","at","school"]},
+  {"grade":6,"sentence":"I often need to go home to my family.","usedWords":["i","often","need","to","go","home","my","family"]},
+  {"grade":6,"sentence":"Where do you want to go to school today?","usedWords":["where","do","you","want","to","go","school","today"]},
+  {"grade":6,"sentence":"I always like to see my family at home.","usedWords":["i","always","like","to","see","my","family","at","home"]},
+  {"grade":6,"sentence":"How do you make time to help your friend?","usedWords":["how","do","you","make","time","to","help","your","friend"]},
+  {"grade":6,"sentence":"She can always help me with my school book.","usedWords":["she","can","always","help","me","with","my","school","book"]},
+  {"grade":6,"sentence":"I think you need to come to class today.","usedWords":["i","think","you","need","to","come","class","today"]},
+  {"grade":6,"sentence":"We all need to help the student at school.","usedWords":["we","all","need","to","help","the","student","at","school"]},
+  {"grade":6,"sentence":"I want to know about your family at home.","usedWords":["i","want","to","know","about","your","family","at","home"]},
+  {"grade":6,"sentence":"Do you know how to use this pencil today?","usedWords":["do","you","know","how","to","use","this","pencil","today"]},
+  {"grade":6,"sentence":"What time do you come to get your book?","usedWords":["what","time","do","you","come","to","get","your","book"]},
+  {"grade":6,"sentence":"She is always happy to help me at school.","usedWords":["she","is","always","happy","to","help","me","at","school"]},
+  {"grade":6,"sentence":"I sometimes think about my good friend at school.","usedWords":["i","sometimes","think","about","my","good","friend","at","school"]},
+  {"grade":6,"sentence":"We need to take all of this home today.","usedWords":["we","need","to","take","all","of","this","home","today"]},
+  {"grade":6,"sentence":"How do you know who is in your class?","usedWords":["how","do","you","know","who","is","in","your","class"]},
+  {"grade":6,"sentence":"I often go to school to help the teacher.","usedWords":["i","often","go","to","school","help","the","teacher"]},
+  {"grade":6,"sentence":"Where do you want to take your family today?","usedWords":["where","do","you","want","to","take","your","family","today"]},
+  {"grade":6,"sentence":"She can help me get my book from school.","usedWords":["she","can","help","me","get","my","book","from","school"]},
+  {"grade":6,"sentence":"I think we can all use this at home.","usedWords":["i","think","we","can","all","use","this","at","home"]},
+  {"grade":6,"sentence":"What do you like to do at home today?","usedWords":["what","do","you","like","to","do","at","home","today"]},
+  {"grade":6,"sentence":"She can always come to me when she is sad.","usedWords":["she","can","always","come","to","me","when","is","sad"]},
+  {"grade":6,"sentence":"I want to help your family when they come.","usedWords":["i","want","to","help","your","family","when","they","come"]},
+  {"grade":6,"sentence":"Where do you go to school most of the time?","usedWords":["where","do","you","go","to","school","most","of","the","time"]},
+  {"grade":6,"sentence":"I need to take my pencil to class today.","usedWords":["i","need","to","take","my","pencil","class","today"]},
+  {"grade":6,"sentence":"Do you know that she is a good student?","usedWords":["do","you","know","that","she","is","a","good","student"]},
+  {"grade":6,"sentence":"We sometimes play at school with my good friend.","usedWords":["we","sometimes","play","at","school","with","my","good","friend"]}
 ];
