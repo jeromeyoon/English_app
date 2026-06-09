@@ -74,6 +74,7 @@ button:active{opacity:.8;transform:scale(.97)}
 .danger{background:#ff6b6b;color:white}
 
 textarea{width:100%;min-height:130px;border:1.5px solid #ddd;border-radius:14px;padding:12px;font-size:14px;line-height:1.6;font-family:inherit;-webkit-appearance:none;appearance:none}
+.word-updated{margin:-4px 0 10px;font-size:12px;font-weight:800;color:#666;text-align:right}
 .history-list{font-size:18px;line-height:2;font-weight:700}
 .notice{background:#fff7d6;border:1.5px solid #f3d56b;border-radius:12px;padding:12px;margin-bottom:14px;font-size:13px}
 h2{margin-top:0;font-size:18px}h3{font-size:15px;margin-bottom:8px}
@@ -158,6 +159,7 @@ h2{margin-top:0;font-size:18px}h3{font-size:15px;margin-bottom:8px}
   • 2글자 이상 단어만 인식 (a, I 같은 1글자는 제외)<br>
   • 중복 자동 제거<br>
   • 특수문자 제거 (알파벳만 추출)</div>
+  <div class="word-updated" id="wordUpdatedAt"></div>
   <textarea id="wordList" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false"></textarea>
   <div class="buttons"><button class="secondary" id="resetBtn" type="button">단어 목록 초기화</button></div>
 </section>
@@ -173,6 +175,7 @@ h2{margin-top:0;font-size:18px}h3{font-size:15px;margin-bottom:8px}
 <script>
 const API_URL = "http://localhost:8000";
 document.getElementById("wordList").value = DEFAULT_WORDS;
+document.getElementById("wordUpdatedAt").innerText = "단어 업데이트: " + (typeof WORDS_UPDATED_AT !== "undefined" ? WORDS_UPDATED_AT : "알 수 없음");
 var originalWords = DEFAULT_WORDS;
 var currentGrade = 1;
 var currentSentence = "";

@@ -1,5 +1,6 @@
 // Edit the default word list here.
 // Use commas between English words. Two or more letters is recommended.
+var WORDS_UPDATED_AT = "2026-06-10";
 var DEFAULT_WORDS = `a, me, go, am, and, which, now, big, one, school,
 the, we, come, are, but, how, today, small, two, teacher,
 I, he, see, can, or, what, tomorrow, good, three, class,
