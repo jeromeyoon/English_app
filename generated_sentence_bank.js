@@ -65,11 +65,13 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 1,
-    "sentence": "She is good.",
+    "sentence": "She is a good friend.",
     "usedWords": [
       "she",
       "is",
-      "good"
+      "a",
+      "good",
+      "friend"
     ]
   },
   {
@@ -265,9 +267,10 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 1,
-    "sentence": "It is on top.",
+    "sentence": "The book is on top.",
     "usedWords": [
-      "it",
+      "the",
+      "book",
       "is",
       "on",
       "top"
@@ -440,12 +443,12 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 1,
-    "sentence": "She is so good.",
+    "sentence": "She is my friend.",
     "usedWords": [
       "she",
       "is",
-      "so",
-      "good"
+      "my",
+      "friend"
     ]
   },
   {
@@ -722,12 +725,12 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 2,
-    "sentence": "Your teacher is so good.",
+    "sentence": "Your teacher is very good.",
     "usedWords": [
       "your",
       "teacher",
       "is",
-      "so",
+      "very",
       "good"
     ]
   },
@@ -777,13 +780,13 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 2,
-    "sentence": "The hen is at home.",
+    "sentence": "The hen is on the farm.",
     "usedWords": [
       "the",
       "hen",
       "is",
-      "at",
-      "home"
+      "on",
+      "farm"
     ]
   },
   {
@@ -799,13 +802,14 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 2,
-    "sentence": "I get help from you.",
+    "sentence": "I get help from my friend.",
     "usedWords": [
       "i",
       "get",
       "help",
       "from",
-      "you"
+      "my",
+      "friend"
     ]
   },
   {
@@ -832,13 +836,15 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 2,
-    "sentence": "I see mud on top.",
+    "sentence": "I see mud on top of it.",
     "usedWords": [
       "i",
       "see",
       "mud",
       "on",
-      "top"
+      "top",
+      "of",
+      "it"
     ]
   },
   {
@@ -934,13 +940,14 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 2,
-    "sentence": "Tomorrow I come to class.",
+    "sentence": "I will come to class tomorrow.",
     "usedWords": [
-      "tomorrow",
       "i",
+      "will",
       "come",
       "to",
-      "class"
+      "class",
+      "tomorrow"
     ]
   },
   {
@@ -980,10 +987,12 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 2,
-    "sentence": "I go, then you come.",
+    "sentence": "I go first, and then you come.",
     "usedWords": [
       "i",
       "go",
+      "first",
+      "and",
       "then",
       "you",
       "come"
@@ -991,12 +1000,13 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 2,
-    "sentence": "I want this for you.",
+    "sentence": "I want to give this to you.",
     "usedWords": [
       "i",
       "want",
+      "to",
+      "give",
       "this",
-      "for",
       "you"
     ]
   },
@@ -1076,14 +1086,13 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 3,
-    "sentence": "She can make my family so happy.",
+    "sentence": "She can make my family happy.",
     "usedWords": [
       "she",
       "can",
       "make",
       "my",
       "family",
-      "so",
       "happy"
     ]
   },
@@ -1141,12 +1150,12 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 3,
-    "sentence": "She is always good to my friend.",
+    "sentence": "She is always kind to my friend.",
     "usedWords": [
       "she",
       "is",
       "always",
-      "good",
+      "kind",
       "to",
       "my",
       "friend"
@@ -1154,7 +1163,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 3,
-    "sentence": "I think we need to help more.",
+    "sentence": "I think we need to help more often.",
     "usedWords": [
       "i",
       "think",
@@ -1162,7 +1171,8 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "need",
       "to",
       "help",
-      "more"
+      "more",
+      "often"
     ]
   },
   {
@@ -1229,41 +1239,39 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 3,
-    "sentence": "That big van is so fast today.",
+    "sentence": "That big van is moving fast today.",
     "usedWords": [
       "that",
       "big",
       "van",
       "is",
-      "so",
+      "moving",
       "fast",
       "today"
     ]
   },
   {
     "grade": 3,
-    "sentence": "I see mud on top of that.",
+    "sentence": "I see mud by the dam.",
     "usedWords": [
       "i",
       "see",
       "mud",
-      "on",
-      "top",
-      "of",
-      "that"
+      "by",
+      "the",
+      "dam"
     ]
   },
   {
     "grade": 3,
-    "sentence": "The jet is so fast and big.",
+    "sentence": "The jet is big and fast.",
     "usedWords": [
       "the",
       "jet",
       "is",
-      "so",
-      "fast",
+      "big",
       "and",
-      "big"
+      "fast"
     ]
   },
   {
@@ -1397,11 +1405,10 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 3,
-    "sentence": "We need your help with this now.",
+    "sentence": "We need help with this now.",
     "usedWords": [
       "we",
       "need",
-      "your",
       "help",
       "with",
       "this",
@@ -1410,29 +1417,28 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 3,
-    "sentence": "I see a hen on top of that.",
+    "sentence": "I see a hen on the top step.",
     "usedWords": [
       "i",
       "see",
       "a",
       "hen",
       "on",
+      "the",
       "top",
-      "of",
-      "that"
+      "step"
     ]
   },
   {
     "grade": 3,
-    "sentence": "The big dam is so cold now.",
+    "sentence": "The big dam holds back water.",
     "usedWords": [
       "the",
       "big",
       "dam",
-      "is",
-      "so",
-      "cold",
-      "now"
+      "holds",
+      "back",
+      "water"
     ]
   },
   {
@@ -1462,7 +1468,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 3,
-    "sentence": "Where is my good friend from school?",
+    "sentence": "Where is my good friend from class?",
     "usedWords": [
       "where",
       "is",
@@ -1470,7 +1476,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "good",
       "friend",
       "from",
-      "school"
+      "class"
     ]
   },
   {
@@ -1539,13 +1545,12 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 3,
-    "sentence": "We come to school more often now.",
+    "sentence": "We come to school often now.",
     "usedWords": [
       "we",
       "come",
       "to",
       "school",
-      "more",
       "often",
       "now"
     ]
@@ -1565,10 +1570,12 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 3,
-    "sentence": "I go, then you come home today.",
+    "sentence": "I go first, and then you come home today.",
     "usedWords": [
       "i",
       "go",
+      "first",
+      "and",
       "then",
       "you",
       "come",
@@ -1603,26 +1610,24 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 3,
-    "sentence": "I have two of this for you.",
+    "sentence": "I have two books for you.",
     "usedWords": [
       "i",
       "have",
       "two",
-      "of",
-      "this",
+      "books",
       "for",
       "you"
     ]
   },
   {
     "grade": 3,
-    "sentence": "I need three of this now.",
+    "sentence": "I need three pencils now.",
     "usedWords": [
       "i",
       "need",
       "three",
-      "of",
-      "this",
+      "pencils",
       "now"
     ]
   },
@@ -1641,7 +1646,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 3,
-    "sentence": "We go home soon and we play.",
+    "sentence": "We go home soon and play.",
     "usedWords": [
       "we",
       "go",
@@ -1684,7 +1689,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 4,
-    "sentence": "She can always help you with your book at school.",
+    "sentence": "She can always help you with your book.",
     "usedWords": [
       "she",
       "can",
@@ -1693,14 +1698,12 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "you",
       "with",
       "your",
-      "book",
-      "at",
-      "school"
+      "book"
     ]
   },
   {
     "grade": 4,
-    "sentence": "We need to think about how to help your friend.",
+    "sentence": "We need to think about how to help our friend.",
     "usedWords": [
       "we",
       "need",
@@ -1709,29 +1712,29 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "about",
       "how",
       "help",
-      "your",
+      "our",
       "friend"
     ]
   },
   {
     "grade": 4,
-    "sentence": "I think school is where you make a good friend.",
+    "sentence": "I think school is a good place to make a friend.",
     "usedWords": [
       "i",
       "think",
       "school",
       "is",
-      "where",
-      "you",
-      "make",
       "a",
       "good",
+      "place",
+      "to",
+      "make",
       "friend"
     ]
   },
   {
     "grade": 4,
-    "sentence": "Where do you go when it is so hot today?",
+    "sentence": "Where do you go when it is hot today?",
     "usedWords": [
       "where",
       "do",
@@ -1740,18 +1743,16 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "when",
       "it",
       "is",
-      "so",
       "hot",
       "today"
     ]
   },
   {
     "grade": 4,
-    "sentence": "She can sometimes help the student who needs it most.",
+    "sentence": "She can help the student who needs it most.",
     "usedWords": [
       "she",
       "can",
-      "sometimes",
       "help",
       "the",
       "student",
@@ -1810,13 +1811,13 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 4,
-    "sentence": "Please help me take your big book home from school.",
+    "sentence": "Please help me take my big book home from school.",
     "usedWords": [
       "please",
       "help",
       "me",
       "take",
-      "your",
+      "my",
       "big",
       "book",
       "home",
@@ -1826,7 +1827,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 4,
-    "sentence": "What time do we come to class to help the student?",
+    "sentence": "What time do we come to class today?",
     "usedWords": [
       "what",
       "time",
@@ -1835,22 +1836,19 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "come",
       "to",
       "class",
-      "help",
-      "the",
-      "student"
+      "today"
     ]
   },
   {
     "grade": 4,
-    "sentence": "I think she is the most happy student in class.",
+    "sentence": "I think she is the happiest student in class.",
     "usedWords": [
       "i",
       "think",
       "she",
       "is",
       "the",
-      "most",
-      "happy",
+      "happiest",
       "student",
       "in",
       "class"
@@ -1906,23 +1904,22 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 4,
-    "sentence": "She always help your family when they need to get help.",
+    "sentence": "She always helps her family when they need help.",
     "usedWords": [
       "she",
       "always",
-      "help",
-      "your",
+      "helps",
+      "her",
       "family",
       "when",
       "they",
       "need",
-      "to",
-      "get"
+      "help"
     ]
   },
   {
     "grade": 4,
-    "sentence": "It is always good to help your family at home.",
+    "sentence": "It is always good to help your family.",
     "usedWords": [
       "it",
       "is",
@@ -1931,14 +1928,12 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "to",
       "help",
       "your",
-      "family",
-      "at",
-      "home"
+      "family"
     ]
   },
   {
     "grade": 4,
-    "sentence": "Please take this big book from my desk to your teacher.",
+    "sentence": "Please take this big book from my desk to the teacher.",
     "usedWords": [
       "please",
       "take",
@@ -1949,13 +1944,13 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "my",
       "desk",
       "to",
-      "your",
+      "the",
       "teacher"
     ]
   },
   {
     "grade": 4,
-    "sentence": "I sometimes think about my school and my good teacher.",
+    "sentence": "I sometimes think about my school and my teacher.",
     "usedWords": [
       "i",
       "sometimes",
@@ -1964,7 +1959,6 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "my",
       "school",
       "and",
-      "good",
       "teacher"
     ]
   },
@@ -1985,7 +1979,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 4,
-    "sentence": "I want to know how my friend is at school.",
+    "sentence": "I want to know how my friend is doing at school.",
     "usedWords": [
       "i",
       "want",
@@ -1995,6 +1989,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "my",
       "friend",
       "is",
+      "doing",
       "at",
       "school"
     ]
@@ -2017,13 +2012,12 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 4,
-    "sentence": "I think it is so good to help at school.",
+    "sentence": "I think it is good to help at school.",
     "usedWords": [
       "i",
       "think",
       "it",
       "is",
-      "so",
       "good",
       "to",
       "help",
@@ -2082,7 +2076,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 4,
-    "sentence": "Your teacher can help you use your book and your pencil.",
+    "sentence": "Your teacher can help you use your book and pencil.",
     "usedWords": [
       "your",
       "teacher",
@@ -2113,23 +2107,23 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 4,
-    "sentence": "I always help the student at my desk in class.",
+    "sentence": "I always help the student next to me in class.",
     "usedWords": [
       "i",
       "always",
       "help",
       "the",
       "student",
-      "at",
-      "my",
-      "desk",
+      "next",
+      "to",
+      "me",
       "in",
       "class"
     ]
   },
   {
     "grade": 4,
-    "sentence": "We want to go home and help your family today.",
+    "sentence": "We want to go home and help our family today.",
     "usedWords": [
       "we",
       "want",
@@ -2138,44 +2132,41 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "home",
       "and",
       "help",
-      "your",
+      "our",
       "family",
       "today"
     ]
   },
   {
     "grade": 4,
-    "sentence": "I see a big van and a jet at school.",
+    "sentence": "I see a big van near the school.",
     "usedWords": [
       "i",
       "see",
       "a",
       "big",
       "van",
-      "and",
-      "jet",
-      "at",
+      "near",
+      "the",
       "school"
     ]
   },
   {
     "grade": 4,
-    "sentence": "The jet is so fast and the van is slow now.",
+    "sentence": "The jet is fast, and the van is slow.",
     "usedWords": [
       "the",
       "jet",
       "is",
-      "so",
       "fast",
       "and",
       "van",
-      "slow",
-      "now"
+      "slow"
     ]
   },
   {
     "grade": 4,
-    "sentence": "We go to see the big dam from your school.",
+    "sentence": "We go to see the big dam after school.",
     "usedWords": [
       "we",
       "go",
@@ -2184,41 +2175,39 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "the",
       "big",
       "dam",
-      "from",
-      "your",
+      "after",
       "school"
     ]
   },
   {
     "grade": 4,
-    "sentence": "She can see the mud on top of the dam now.",
+    "sentence": "She can see mud on top of the dam now.",
     "usedWords": [
       "she",
       "can",
       "see",
-      "the",
       "mud",
       "on",
       "top",
       "of",
+      "the",
       "dam",
       "now"
     ]
   },
   {
     "grade": 4,
-    "sentence": "I see a hen on top and it is small.",
+    "sentence": "I see a small hen on the top step.",
     "usedWords": [
       "i",
       "see",
       "a",
+      "small",
       "hen",
       "on",
+      "the",
       "top",
-      "and",
-      "it",
-      "is",
-      "small"
+      "step"
     ]
   },
   {
@@ -2239,7 +2228,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 4,
-    "sentence": "What time do we go home and see your family?",
+    "sentence": "What time do we go home today?",
     "usedWords": [
       "what",
       "time",
@@ -2247,22 +2236,18 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "we",
       "go",
       "home",
-      "and",
-      "see",
-      "your",
-      "family"
+      "today"
     ]
   },
   {
     "grade": 4,
-    "sentence": "I think we need to make a good time at school.",
+    "sentence": "I think we can have a good time at school.",
     "usedWords": [
       "i",
       "think",
       "we",
-      "need",
-      "to",
-      "make",
+      "can",
+      "have",
       "a",
       "good",
       "time",
@@ -2272,7 +2257,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 4,
-    "sentence": "Please help me take this big book to your teacher now.",
+    "sentence": "Please help me take this big book to the teacher now.",
     "usedWords": [
       "please",
       "help",
@@ -2282,7 +2267,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "big",
       "book",
       "to",
-      "your",
+      "the",
       "teacher",
       "now"
     ]
@@ -2304,7 +2289,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 4,
-    "sentence": "We often go home and help your family with so much.",
+    "sentence": "We often go home and help our family.",
     "usedWords": [
       "we",
       "often",
@@ -2312,16 +2297,13 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "home",
       "and",
       "help",
-      "your",
-      "family",
-      "with",
-      "so",
-      "much"
+      "our",
+      "family"
     ]
   },
   {
     "grade": 4,
-    "sentence": "I know you are a good student at your school.",
+    "sentence": "I know you are a good student.",
     "usedWords": [
       "i",
       "know",
@@ -2329,15 +2311,12 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "are",
       "a",
       "good",
-      "student",
-      "at",
-      "your",
-      "school"
+      "student"
     ]
   },
   {
     "grade": 4,
-    "sentence": "Can you help me get this book from your desk now?",
+    "sentence": "Can you help me get this book from the desk now?",
     "usedWords": [
       "can",
       "you",
@@ -2347,14 +2326,14 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "this",
       "book",
       "from",
-      "your",
+      "the",
       "desk",
       "now"
     ]
   },
   {
     "grade": 4,
-    "sentence": "I want to think about how to help your family now.",
+    "sentence": "I want to think about how to help my family now.",
     "usedWords": [
       "i",
       "want",
@@ -2363,40 +2342,37 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "about",
       "how",
       "help",
-      "your",
+      "my",
       "family",
       "now"
     ]
   },
   {
     "grade": 4,
-    "sentence": "We always play at home when it is so hot today.",
+    "sentence": "We play at home when it is hot today.",
     "usedWords": [
       "we",
-      "always",
       "play",
       "at",
       "home",
       "when",
       "it",
       "is",
-      "so",
       "hot",
       "today"
     ]
   },
   {
     "grade": 4,
-    "sentence": "She sometimes need to take your book to the class.",
+    "sentence": "She sometimes needs to take her book to class.",
     "usedWords": [
       "she",
       "sometimes",
-      "need",
+      "needs",
       "to",
       "take",
-      "your",
+      "her",
       "book",
-      "the",
       "class"
     ]
   },
@@ -2418,7 +2394,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 4,
-    "sentence": "Do you know how to use this book for your class?",
+    "sentence": "Do you know how to use this book in class?",
     "usedWords": [
       "do",
       "you",
@@ -2428,8 +2404,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "use",
       "this",
       "book",
-      "for",
-      "your",
+      "in",
       "class"
     ]
   },
@@ -2450,16 +2425,13 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 4,
-    "sentence": "I think your family is so good and happy at home.",
+    "sentence": "I think your family is happy at home.",
     "usedWords": [
       "i",
       "think",
       "your",
       "family",
       "is",
-      "so",
-      "good",
-      "and",
       "happy",
       "at",
       "home"
@@ -2467,7 +2439,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 5,
-    "sentence": "I always want to help my friend at school and at home.",
+    "sentence": "I always want to help my friend at school.",
     "usedWords": [
       "i",
       "always",
@@ -2477,9 +2449,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "my",
       "friend",
       "at",
-      "school",
-      "and",
-      "home"
+      "school"
     ]
   },
   {
@@ -2499,7 +2469,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 5,
-    "sentence": "We need to come to school every time so we can know more.",
+    "sentence": "We need to come to school every day to learn more.",
     "usedWords": [
       "we",
       "need",
@@ -2507,16 +2477,14 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "come",
       "school",
       "every",
-      "time",
-      "so",
-      "can",
-      "know",
+      "day",
+      "learn",
       "more"
     ]
   },
   {
     "grade": 5,
-    "sentence": "Where do you go when it is so hot and you want help?",
+    "sentence": "Where do you go when it is hot outside?",
     "usedWords": [
       "where",
       "do",
@@ -2525,16 +2493,13 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "when",
       "it",
       "is",
-      "so",
       "hot",
-      "and",
-      "want",
-      "help"
+      "outside"
     ]
   },
   {
     "grade": 5,
-    "sentence": "I think you need to come to class every time to know more.",
+    "sentence": "I think you need to come to class every day to learn more.",
     "usedWords": [
       "i",
       "think",
@@ -2544,8 +2509,8 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "come",
       "class",
       "every",
-      "time",
-      "know",
+      "day",
+      "learn",
       "more"
     ]
   },
@@ -2584,7 +2549,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 5,
-    "sentence": "Can you help me take this book from my desk to your teacher?",
+    "sentence": "Can you help me take this book from my desk to the teacher?",
     "usedWords": [
       "can",
       "you",
@@ -2597,13 +2562,13 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "my",
       "desk",
       "to",
-      "your",
+      "the",
       "teacher"
     ]
   },
   {
     "grade": 5,
-    "sentence": "He wants to know how to use every book in the school.",
+    "sentence": "He wants to know how to use the books at school.",
     "usedWords": [
       "he",
       "wants",
@@ -2611,10 +2576,9 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "know",
       "how",
       "use",
-      "every",
-      "book",
-      "in",
       "the",
+      "books",
+      "at",
       "school"
     ]
   },
@@ -2638,7 +2602,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 5,
-    "sentence": "We always come to school and take your book to the desk.",
+    "sentence": "We always come to school and put our books on the desk.",
     "usedWords": [
       "we",
       "always",
@@ -2646,16 +2610,17 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "to",
       "school",
       "and",
-      "take",
-      "your",
-      "book",
+      "put",
+      "our",
+      "books",
+      "on",
       "the",
       "desk"
     ]
   },
   {
     "grade": 5,
-    "sentence": "Do you know where your teacher and your family go on time?",
+    "sentence": "Do you know where your teacher goes after school?",
     "usedWords": [
       "do",
       "you",
@@ -2663,40 +2628,34 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "where",
       "your",
       "teacher",
-      "and",
-      "family",
-      "go",
-      "on",
-      "time"
+      "goes",
+      "after",
+      "school"
     ]
   },
   {
     "grade": 5,
-    "sentence": "It is so good to help your family at home all the time.",
+    "sentence": "It is good to help your family at home.",
     "usedWords": [
       "it",
       "is",
-      "so",
       "good",
       "to",
       "help",
       "your",
       "family",
       "at",
-      "home",
-      "all",
-      "the",
-      "time"
+      "home"
     ]
   },
   {
     "grade": 5,
-    "sentence": "She can take your big book from the desk and go to class.",
+    "sentence": "She can take her big book from the desk and go to class.",
     "usedWords": [
       "she",
       "can",
       "take",
-      "your",
+      "her",
       "big",
       "book",
       "from",
@@ -2710,24 +2669,22 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 5,
-    "sentence": "I always want to help my student and my friend at school.",
+    "sentence": "I want to help my friend at school today.",
     "usedWords": [
       "i",
-      "always",
       "want",
       "to",
       "help",
       "my",
-      "student",
-      "and",
       "friend",
       "at",
-      "school"
+      "school",
+      "today"
     ]
   },
   {
     "grade": 5,
-    "sentence": "We need to know how to get more help from your teacher.",
+    "sentence": "We need to know how to get help from our teacher.",
     "usedWords": [
       "we",
       "need",
@@ -2735,16 +2692,15 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "know",
       "how",
       "get",
-      "more",
       "help",
       "from",
-      "your",
+      "our",
       "teacher"
     ]
   },
   {
     "grade": 5,
-    "sentence": "I think you need to help your family and friend at home.",
+    "sentence": "I think you need to help your family at home.",
     "usedWords": [
       "i",
       "think",
@@ -2754,8 +2710,6 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "help",
       "your",
       "family",
-      "and",
-      "friend",
       "at",
       "home"
     ]
@@ -2779,7 +2733,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 5,
-    "sentence": "I often think about how to make my school so good for all.",
+    "sentence": "I often think about how to make my school better for all.",
     "usedWords": [
       "i",
       "often",
@@ -2790,15 +2744,14 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "make",
       "my",
       "school",
-      "so",
-      "good",
+      "better",
       "for",
       "all"
     ]
   },
   {
     "grade": 5,
-    "sentence": "We all need to help every student in your class at school.",
+    "sentence": "We all need to help every student in our class.",
     "usedWords": [
       "we",
       "all",
@@ -2808,23 +2761,17 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "every",
       "student",
       "in",
-      "your",
-      "class",
-      "at",
-      "school"
+      "our",
+      "class"
     ]
   },
   {
     "grade": 5,
-    "sentence": "What do you think about how to use your time at school?",
+    "sentence": "How do you use your time at school?",
     "usedWords": [
-      "what",
+      "how",
       "do",
       "you",
-      "think",
-      "about",
-      "how",
-      "to",
       "use",
       "your",
       "time",
@@ -2834,7 +2781,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 5,
-    "sentence": "I want to make my teacher and my family so happy today.",
+    "sentence": "I want to make my teacher and family happy today.",
     "usedWords": [
       "i",
       "want",
@@ -2844,44 +2791,38 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "teacher",
       "and",
       "family",
-      "so",
       "happy",
       "today"
     ]
   },
   {
     "grade": 5,
-    "sentence": "Please help me get your big pencil from the desk to class.",
+    "sentence": "Please help me get my big pencil from the desk.",
     "usedWords": [
       "please",
       "help",
       "me",
       "get",
-      "your",
+      "my",
       "big",
       "pencil",
       "from",
       "the",
-      "desk",
-      "to",
-      "class"
+      "desk"
     ]
   },
   {
     "grade": 5,
-    "sentence": "She can sometimes see a big van and a fast jet at school.",
+    "sentence": "She can see a big van near the school.",
     "usedWords": [
       "she",
       "can",
-      "sometimes",
       "see",
       "a",
       "big",
       "van",
-      "and",
-      "fast",
-      "jet",
-      "at",
+      "near",
+      "the",
       "school"
     ]
   },
@@ -3001,7 +2942,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 5,
-    "sentence": "We sometimes think about how to make your class more happy today.",
+    "sentence": "We sometimes think about how to make our class happier.",
     "usedWords": [
       "we",
       "sometimes",
@@ -3010,16 +2951,14 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "how",
       "to",
       "make",
-      "your",
+      "our",
       "class",
-      "more",
-      "happy",
-      "today"
+      "happier"
     ]
   },
   {
     "grade": 5,
-    "sentence": "I want to get a good book from your desk at school.",
+    "sentence": "I want to get a good book from the desk at school.",
     "usedWords": [
       "i",
       "want",
@@ -3029,7 +2968,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "good",
       "book",
       "from",
-      "your",
+      "the",
       "desk",
       "at",
       "school"
@@ -3052,7 +2991,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 5,
-    "sentence": "We all need to know how to use your book at home.",
+    "sentence": "We all need to know how to use our books at home.",
     "usedWords": [
       "we",
       "all",
@@ -3061,8 +3000,8 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "know",
       "how",
       "use",
-      "your",
-      "book",
+      "our",
+      "books",
       "at",
       "home"
     ]
@@ -3087,7 +3026,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 5,
-    "sentence": "Please help me take this pencil from your desk to my class.",
+    "sentence": "Please help me take this pencil to my class.",
     "usedWords": [
       "please",
       "help",
@@ -3095,9 +3034,6 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "take",
       "this",
       "pencil",
-      "from",
-      "your",
-      "desk",
       "to",
       "my",
       "class"
@@ -3105,9 +3041,8 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 5,
-    "sentence": "What do you think about your family when you are at school?",
+    "sentence": "Do you think about your family when you are at school?",
     "usedWords": [
-      "what",
       "do",
       "you",
       "think",
@@ -3140,13 +3075,13 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 5,
-    "sentence": "Can you help me get more time to play at home today?",
+    "sentence": "Can you help me find more time to play at home today?",
     "usedWords": [
       "can",
       "you",
       "help",
       "me",
-      "get",
+      "find",
       "more",
       "time",
       "to",
@@ -3248,12 +3183,11 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 6,
-    "sentence": "I think we always need to know how to help every student at your school.",
+    "sentence": "I think we need to know how to help every student at school.",
     "usedWords": [
       "i",
       "think",
       "we",
-      "always",
       "need",
       "to",
       "know",
@@ -3262,13 +3196,12 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "every",
       "student",
       "at",
-      "your",
       "school"
     ]
   },
   {
     "grade": 6,
-    "sentence": "Can you please help me get your big book from the desk and take it home?",
+    "sentence": "Can you please help me get my big book from the desk?",
     "usedWords": [
       "can",
       "you",
@@ -3276,21 +3209,17 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "help",
       "me",
       "get",
-      "your",
+      "my",
       "big",
       "book",
       "from",
       "the",
-      "desk",
-      "and",
-      "take",
-      "it",
-      "home"
+      "desk"
     ]
   },
   {
     "grade": 6,
-    "sentence": "She wants to help every student in your class feel happy.",
+    "sentence": "She wants to help every student in her class feel happy.",
     "usedWords": [
       "she",
       "wants",
@@ -3299,7 +3228,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "every",
       "student",
       "in",
-      "your",
+      "her",
       "class",
       "feel",
       "happy"
@@ -3307,7 +3236,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 6,
-    "sentence": "I often think about how to help your family when they are sad at home.",
+    "sentence": "I often think about how to help my family when they are sad.",
     "usedWords": [
       "i",
       "often",
@@ -3316,19 +3245,17 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "how",
       "to",
       "help",
-      "your",
+      "my",
       "family",
       "when",
       "they",
       "are",
-      "sad",
-      "at",
-      "home"
+      "sad"
     ]
   },
   {
     "grade": 6,
-    "sentence": "Where do you go when it is hot and your family wants to go home?",
+    "sentence": "Where do you go when it is cold outside?",
     "usedWords": [
       "where",
       "do",
@@ -3337,18 +3264,13 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "when",
       "it",
       "is",
-      "hot",
-      "and",
-      "your",
-      "family",
-      "wants",
-      "to",
-      "home"
+      "cold",
+      "outside"
     ]
   },
   {
     "grade": 6,
-    "sentence": "I always want to help every student in my class and make school so good today.",
+    "sentence": "I always want to help every student in my class.",
     "usedWords": [
       "i",
       "always",
@@ -3359,56 +3281,38 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "student",
       "in",
       "my",
-      "class",
-      "and",
-      "make",
-      "school",
-      "so",
-      "good",
-      "today"
+      "class"
     ]
   },
   {
     "grade": 6,
-    "sentence": "We need to use every book in your school to know more and get so much.",
+    "sentence": "We need to use our books at school to learn more.",
     "usedWords": [
       "we",
       "need",
       "to",
       "use",
-      "every",
-      "book",
-      "in",
-      "your",
+      "our",
+      "books",
+      "at",
       "school",
-      "know",
-      "more",
-      "and",
-      "get",
-      "so",
-      "much"
+      "learn",
+      "more"
     ]
   },
   {
     "grade": 6,
-    "sentence": "I think that your teacher is always good to every student when they need it most.",
+    "sentence": "I think our teacher is kind to every student.",
     "usedWords": [
       "i",
       "think",
-      "that",
-      "your",
+      "our",
       "teacher",
       "is",
-      "always",
-      "good",
+      "kind",
       "to",
       "every",
-      "student",
-      "when",
-      "they",
-      "need",
-      "it",
-      "most"
+      "student"
     ]
   },
   {
@@ -3430,7 +3334,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 6,
-    "sentence": "What time do we need to come to school and help every student at your desk?",
+    "sentence": "What time do we need to come to class today?",
     "usedWords": [
       "what",
       "time",
@@ -3439,14 +3343,8 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "need",
       "to",
       "come",
-      "school",
-      "and",
-      "help",
-      "every",
-      "student",
-      "at",
-      "your",
-      "desk"
+      "class",
+      "today"
     ]
   },
   {
@@ -3486,26 +3384,23 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 6,
-    "sentence": "I want to think about what time we need to come to class and help.",
+    "sentence": "I want to know what time we need to come to class.",
     "usedWords": [
       "i",
       "want",
       "to",
-      "think",
-      "about",
+      "know",
       "what",
       "time",
       "we",
       "need",
       "come",
-      "class",
-      "and",
-      "help"
+      "class"
     ]
   },
   {
     "grade": 6,
-    "sentence": "Do you know how to make your teacher and your family so happy at school today?",
+    "sentence": "Do you know how to make your teacher happy today?",
     "usedWords": [
       "do",
       "you",
@@ -3515,12 +3410,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "make",
       "your",
       "teacher",
-      "and",
-      "family",
-      "so",
       "happy",
-      "at",
-      "school",
       "today"
     ]
   },
@@ -3558,12 +3448,11 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 6,
-    "sentence": "I think you always need to use your pencil and your book at school.",
+    "sentence": "I think you need to use your pencil and book at school.",
     "usedWords": [
       "i",
       "think",
       "you",
-      "always",
       "need",
       "to",
       "use",
@@ -3577,7 +3466,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 6,
-    "sentence": "Can you help me take the big book from the desk today?",
+    "sentence": "Can you help me take the big book today?",
     "usedWords": [
       "can",
       "you",
@@ -3587,21 +3476,19 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "the",
       "big",
       "book",
-      "from",
-      "desk",
       "today"
     ]
   },
   {
     "grade": 6,
-    "sentence": "She wants every student in your class to have a good time.",
+    "sentence": "She wants every student in her class to have a good time.",
     "usedWords": [
       "she",
       "wants",
       "every",
       "student",
       "in",
-      "your",
+      "her",
       "class",
       "to",
       "have",
@@ -3691,7 +3578,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 6,
-    "sentence": "She wants to help the small hen, and she needs help today.",
+    "sentence": "She wants to help the small hen today.",
     "usedWords": [
       "she",
       "wants",
@@ -3700,8 +3587,6 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "the",
       "small",
       "hen",
-      "and",
-      "needs",
       "today"
     ]
   },
@@ -3726,23 +3611,17 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 6,
-    "sentence": "We need to help every good student in your class and make your school so happy.",
+    "sentence": "We need to help every student in our class.",
     "usedWords": [
       "we",
       "need",
       "to",
       "help",
       "every",
-      "good",
       "student",
       "in",
-      "your",
-      "class",
-      "and",
-      "make",
-      "school",
-      "so",
-      "happy"
+      "our",
+      "class"
     ]
   },
   {
@@ -3765,7 +3644,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 6,
-    "sentence": "Do you know what to do when your family and friend need help at home?",
+    "sentence": "Do you know what to do when your family needs help at home?",
     "usedWords": [
       "do",
       "you",
@@ -3775,9 +3654,7 @@ globalThis.GENERATED_SENTENCE_BANK = [
       "when",
       "your",
       "family",
-      "and",
-      "friend",
-      "need",
+      "needs",
       "help",
       "at",
       "home"
@@ -3785,13 +3662,12 @@ globalThis.GENERATED_SENTENCE_BANK = [
   },
   {
     "grade": 6,
-    "sentence": "She often comes to your school and helps the students.",
+    "sentence": "She often comes to school and helps the students.",
     "usedWords": [
       "she",
       "often",
       "comes",
       "to",
-      "your",
       "school",
       "and",
       "helps",
